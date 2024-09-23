@@ -237,30 +237,7 @@ select {
   padding-right: 30px; /* Espacio para la flecha */
 }
   </style>
-   <script>
-    async function cargarNombres() {
-        const apiUrl = 'https://script.google.com/macros/s/AKfycbxoIDbXJhjjK6J5pNkpcXD2pTueAzifCXcejg9mhMg8qFPo_pJWDYwloOMf6lTPn8XD/exec?action=getNames';
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error('Error en la solicitud');
-            }
-            const nombres = await response.json();
-            const select = document.getElementById('nombre');
-            nombres.forEach(nombre => {
-                const option = document.createElement('option');
-                option.value = nombre;
-                option.textContent = nombre;
-                select.appendChild(option);
-            });
-        } catch (error) {
-            console.error('Error al cargar los nombres:', error);
-        }
-    }
-
-    window.onload = cargarNombres;
-    
-</script>
+   
 </head>
 <body>
 
