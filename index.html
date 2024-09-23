@@ -315,6 +315,7 @@ select {
       let grupo;
       let faceta;
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${Key}`;
+      const CLIENT_ID='871593758016-uu4ubnracah4e9duaa271ofrajif3dgl.apps.googleusercontent.com';
 
       fetch(url)
           .then(response => response.json())
@@ -372,8 +373,8 @@ function onApiLoad() {
 
 async function initClient() {
     await gapi.client.init({
-        apiKey: 'YOUR_API_KEY', // Opcional, no requerido para OAuth
-        clientId: 'YOUR_CLIENT_ID', // Tu ID de cliente
+        apiKey: Key, // Opcional, no requerido para OAuth
+        clientId: CLIENT_ID, // Tu ID de cliente
         scope: 'https://www.googleapis.com/auth/spreadsheets', // Alcance necesario
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4']
     });
