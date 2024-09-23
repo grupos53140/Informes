@@ -337,15 +337,15 @@ select {
           });
 
  // URL base sin parámetros adicionales
-const sheetId = "12AhQg1rVBLM7-kOrqaHYK7wrA7ew...";
-const range = "PUB!A1:G";  // Asegúrate de especificar el rango de datos relevante
-const apiKey = "AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0";
-const urlreq = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
+//const sheetId = "12AhQg1rVBLM7-kOrqaHYK7wrA7ew...";
+//const range = "PUB!A1:G";  // Asegúrate de especificar el rango de datos relevante
+//const apiKey = "AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0";
+//const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 
 
 // Hacer la consulta a la API de Google Sheets para obtener el rango completo de datos
     try {
-        const response = await fetch(urlreq);
+        const response = await fetch(url);
         const datos = await response.json();
 
         // Asegúrate de que los datos sean válidos
