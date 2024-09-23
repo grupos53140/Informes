@@ -349,8 +349,8 @@ select {
     const datos = await response.json();
 
     // Asumiendo que los datos devueltos contienen 'grupo' y 'faceta'
-    const grupo = datos.values[1][0]; // Ajusta según la estructura de tu respuesta
-    const faceta = datos.values[1][6]; // Ajusta según la estructura de tu respuesta
+    grupo = datos.values[1][0]; // Ajusta según la estructura de tu respuesta
+    faceta = datos.values[1][6]; // Ajusta según la estructura de tu respuesta
 
     // Maneja 'grupo' y 'faceta' como necesites
 });
