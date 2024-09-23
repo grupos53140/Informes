@@ -405,7 +405,7 @@ function getAccessToken() {
 
 
 // Evento para enviar el formulario
-async function enviarDatos(data) {
+/*async function enviarDatos(data) {
     //const API_KEY = Key;
     //const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q';
     //const RANGE = 'INFORMES!A:G'; // Cambia el rango según sea necesario
@@ -429,6 +429,29 @@ async function enviarDatos(data) {
         console.error('Error al enviar datos:', response.statusText);
     }
 }
+
+*/
+
+
+async function enviarDatos(data) {
+    const accessToken = getAccessToken();
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/INFORMES:append?valueInputOption=RAW`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ values: [data] }), // Asegúrate de que 'data' sea un array
+    });
+
+    const result = await response.json();
+    console.log(result);
+}
+
+
+
 
 // Ejemplo de cómo usarlo al enviar el formulario
 document.getElementById('myInform').addEventListener('submit', async (event) => {
