@@ -402,6 +402,41 @@ async function enviarDatos(data) {
     }
 }
 */
+async function enviarDatos(data) {
+    const urlsend =apiUrl;// 'https://script.google.com/macros/s/YOUR_WEB_APP_URL/exec'; // Cambia la URL
+
+    try {
+        const response = await fetch(urlsend, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                grupo: data.grupo,
+                faceta: data.faceta,
+                nombre: data.nombre,
+                participa: data.participa,
+                estudios: data.estudios,
+                horas: data.horas,
+                comentarios: data.comentarios
+            })
+        });
+
+        // Verifica el estado de la respuesta
+        console.log('Estado de la respuesta:', response.status);  // Agrega esta línea para verificar el estado
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Datos enviados:', result);
+            alert('Datos enviados correctamente');
+        } else {
+            console.error('Error al enviar datos. Estado:', response.statusText);
+            alert('Error al enviar los datos. Inténtalo de nuevo.');
+        }
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        alert('Error en la solicitud. Inténtalo de nuevo.');
+    }
+}
 
   </script>
 </body>
