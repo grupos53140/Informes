@@ -337,42 +337,46 @@ select {
           .catch(error => {
               console.error('Error al obtener los datos:', error);
           });
-    
-</script>
 
-<script>
-// Evento para obtener grupo y faceta al seleccionar un nombre
-
+ // Evento para obtener grupo y faceta al seleccionar un nombre
 document.getElementById('nombre').addEventListener('change', async (event) => {
     const nombreSeleccionado = event.target.value;
 
-
     // Aquí deberías hacer la consulta a tu hoja de Google Sheets
-    const response = await fetch(`${apiUrl}?nombre=${nombre}`); // Cambiado a comillas invertidas
+    const response = await fetch(`${apiUrl}`); // URL de tu API para obtener los datos
     const datos = await response.json();
 
-    // Asumiendo que los datos devueltos contienen 'grupo' y 'faceta'
-    const grupo = datos.grupo; // Ajusta según la estructura de tu respuesta
-    const faceta = datos.faceta; // Ajusta según la estructura de tu respuesta
+    // Busca el grupo y faceta basados en el nombre seleccionado
+    const row = datos.values.find(row => row[0] === nombreSeleccionado); // Suponiendo que el nombre está en la primera columna
 
-    // Aquí puedes hacer lo que necesites con 'grupo' y 'faceta'
+    if (row) {
+        const grupo = row[1]; // Suponiendo que 'Grupo' está en la segunda columna
+        const faceta = row[2]; // Suponiendo que 'Faceta' está en la tercera columna
+
+        // Guarda estos valores en variables globales
+        window.grupoSeleccionado = grupo;
+        window.facetaSeleccionada = faceta;
+
+        console.log('Grupo:', grupo);
+        console.log('Faceta:', faceta);
+    }
 });
 
-
-    document.getElementById('myInform').addEventListener('submit', async (event) => {
+// Evento para enviar el formulario
+document.getElementById('myInform').addEventListener('submit', async (event) => {
     event.preventDefault(); // Prevenir el envío por defecto
 
     const data = {
         nombre: document.getElementById('nombre').value,
-        grupo: document.getElementById('grupo').value,
-        faceta: document.getElementById('faceta').value,
+        grupo: window.grupoSeleccionado, // Usa la variable guardada
+        faceta: window.facetaSeleccionada, // Usa la variable guardada
         participa: document.getElementById('participa').value,
         estudios: document.getElementById('estudios').value,
         horas: document.getElementById('horas').value,
         comentarios: document.getElementById('comentarios').value,
     };
 
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzPsXJ9S5XCwmXjWJn2X43q8c3upqAabJIIyxsIbu-a97Lr8uVq4fdx8RJH47IkC2da/exec', {
+    const response = await fetch('https://script.google.com/macros/s/AKfycby1hylH-p8jo5dlRgAZ5KZYcaOs9-qBl24oeyRQaebNd5tHSjueUOmn1rKltEipazc/exec', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -383,6 +387,7 @@ document.getElementById('nombre').addEventListener('change', async (event) => {
     const result = await response.text();
     console.log(result); // Para verificar el resultado
 });
+
 
   </script>
 </body>
