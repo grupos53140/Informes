@@ -312,8 +312,8 @@ select {
       const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // Reemplaza con el ID de tu hoja
       const apiUrl='https://script.google.com/macros/s/AKfycby1hylH-p8jo5dlRgAZ5KZYcaOs9-qBl24oeyRQaebNd5tHSjueUOmn1rKltEipazc/exec';
       const RANGE = 'PUB!A1:G'; // Cambia el rango según lo que necesites
-      //const grupo='';
-      //const faceta='';
+      let grupo;
+      let faceta;
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${Key}`;
 
       fetch(url)
@@ -350,8 +350,8 @@ document.getElementById('nombre').addEventListener('change', async (event) => {
 
         // Verifica que se haya encontrado la fila correcta
         if (fila) {
-            const grupo = fila[0];  // Ajusta según la estructura de tu hoja
-            const faceta = fila[6]; // Ajusta según la estructura de tu hoja
+            grupo = fila[0];  // Ajusta según la estructura de tu hoja
+            faceta = fila[6]; // Ajusta según la estructura de tu hoja
 
             // Maneja 'grupo' y 'faceta' como necesites
             console.log('Grupo:', grupo);
@@ -394,7 +394,7 @@ async function enviarDatos(data) {
 // Ejemplo de cómo usarlo al enviar el formulario
 document.getElementById('myInform').addEventListener('submit', async (event) => {
     event.preventDefault(); // Prevenir el envío por defecto
-
+  
     const data = {        
         grupo: grupo, // Usa la variable que guarda el grupo
         faceta: faceta, // Usa la variable que guarda la faceta
