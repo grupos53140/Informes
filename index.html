@@ -237,6 +237,29 @@ select {
   padding-right: 30px; /* Espacio para la flecha */
 }
   </style>
+   <script>
+    async function cargarNombres() {
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbxGFmksC0Ztrd2pIRvzDW_tYBEQAQu7GAgg_uMJdm71cCLcl29FR4iVIS-xNM3mHFgv/exec?action=getNombres';
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            const nombres = await response.json();
+            const select = document.getElementById('nombre');
+            nombres.forEach(nombre => {
+                const option = document.createElement('option');
+                option.value = nombre;
+                option.textContent = nombre;
+                select.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error al cargar los nombres:', error);
+        }
+    }
+
+    window.onload = cargarNombres;
+</script>
 </head>
 <body>
 
@@ -326,6 +349,8 @@ async function cargarNombres() {
     });
 }
 
+// Cargar los nombres al cargar la página
+window.onload = cargarNombres;
 
 // Evento para obtener grupo y faceta al seleccionar un nombre
 
@@ -345,8 +370,7 @@ document.getElementById('nombre').addEventListener('change', async (event) => {
 });
 
 
-// Cargar los nombres al cargar la página
-window.onload = cargarNombres;
+
 
 
     document.getElementById('myInform').addEventListener('submit', async (event) => {
