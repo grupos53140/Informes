@@ -392,10 +392,10 @@ async function enviarDatos(data) {
 document.getElementById('myInform').addEventListener('submit', async (event) => {
     event.preventDefault(); // Prevenir el envío por defecto
 
-    const data = {
-        nombre: document.getElementById('nombre').value,
+    const data = {        
         grupo: grupo, // Usa la variable que guarda el grupo
         faceta: faceta, // Usa la variable que guarda la faceta
+        nombre: document.getElementById('nombre').value,
         participa: document.getElementById('participa').value,
         estudios: document.getElementById('estudios').value,
         horas: document.getElementById('horas').value,
