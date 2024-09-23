@@ -310,6 +310,24 @@ select {
     </div>
   </footer>
 
+  <script>
+    const API_KEY = 'TU_API_KEY'; // Reemplaza con tu API Key
+    const SPREADSHEET_ID = 'ID_DE_TU_HOJA_DE_CÁLCULO'; // Reemplaza con el ID de tu hoja
+    const RANGE = 'PUB!A1:C'; // Cambia el rango según lo que necesites
+
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Procesa los datos como necesites
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
+</script>
+
 <script>
 const apiUrl = 'https://script.google.com/macros/s/AKfycbxoIDbXJhjjK6J5pNkpcXD2pTueAzifCXcejg9mhMg8qFPo_pJWDYwloOMf6lTPn8XD/exec';
 
