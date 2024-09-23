@@ -389,8 +389,9 @@ async function enviarDatos(data) {
             horas: data.horas,
             comentarios: data.comentarios
         })
-    });
-
+        
+          });
+          console.log('datos en response',response);
     if (response.ok) {
         const result = await response.json();
         console.log('Datos enviados:', result);
