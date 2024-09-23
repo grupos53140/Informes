@@ -396,47 +396,6 @@ document.getElementById('nombre').addEventListener('change', (event) => {
 }
 
 */
-
-
-async function enviarDatos(data) {
-    const accessToken = getAccessToken();
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/INFORMES:append?valueInputOption=RAW`;
-
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ values: [data] }), // Asegúrate de que 'data' sea un array
-    });
-
-    const result = await response.json();
-    console.log(result);
-}
-
-
-
-
-// Ejemplo de cómo usarlo al enviar el formulario
-document.getElementById('myInform').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevenir el envío por defecto
-  
-    const data = {        
-        grupo: grupo, // Usa la variable que guarda el grupo
-        faceta: faceta, // Usa la variable que guarda la faceta
-        nombre: document.getElementById('nombre').value,
-        participa: document.getElementById('participa').value,
-        estudios: document.getElementById('estudios').value,
-        horas: document.getElementById('horas').value,
-        comentarios: document.getElementById('comentarios').value,
-    };
-
-    await enviarDatos(data); // Llama a la función para enviar datos
-});
-
-
-
   </script>
 </body>
 </html>
