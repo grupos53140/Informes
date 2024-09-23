@@ -348,11 +348,11 @@ document.getElementById('nombre').addEventListener('change', async (event) => {
     const datos = await response.json();
 
     // Busca el grupo y faceta basados en el nombre seleccionado
-    const row = datos.values.find(row => row[0] === nombreSeleccionado); // Suponiendo que el nombre está en la primera columna
+    const row = datos.values.find(row => row[1] === nombreSeleccionado); // Suponiendo que el nombre está en la primera columna
 
     if (row) {
-        const grupo = row[1]; // Suponiendo que 'Grupo' está en la segunda columna
-        const faceta = row[2]; // Suponiendo que 'Faceta' está en la tercera columna
+        const grupo = row[0]; // Suponiendo que 'Grupo' está en la segunda columna
+        const faceta = row[6]; // Suponiendo que 'Faceta' está en la tercera columna
 
         // Guarda estos valores en variables globales
         window.grupoSeleccionado = grupo;
