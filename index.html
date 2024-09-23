@@ -379,9 +379,10 @@ document.getElementById('myInform').addEventListener('submit', async (event) => 
 
 // Función para enviar datos
 async function enviarDatos(data) {
-    const urlenv = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/INFORMES!A:G:append?valueInputOption=USER_ENTERED&key=${Key}`;
+  //https://script.google.com/macros/s/AKfycbyMEflyB-zvs72j3XTmGAGj3aDQHquXRH89-7Uuaeo8qSoMoG3zs9Uev24fsEzhgq9N/exec
+    const urlsend = 'https://script.google.com/macros/s/AKfycbyMEflyB-zvs72j3XTmGAGj3aDQHquXRH89-7Uuaeo8qSoMoG3zs9Uev24fsEzhgq9N/exec'; // Reemplaza con la URL de tu Web App
 
-    const response = await fetch(urlenv, {
+    const response = await fetch(urlsend, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
