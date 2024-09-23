@@ -340,27 +340,18 @@ select {
           });
 
  // Evento para obtener grupo y faceta al seleccionar un nombre
-document.getElementById('nombre').addEventListener('change', async (event) => {
+ document.getElementById('nombre').addEventListener('change', async (event) => {
     const nombreSeleccionado = event.target.value;
 
-    // Aquí deberías hacer la consulta a tu hoja de Google Sheets
-    const response = await fetch(`${apiUrl}`); // URL de tu API para obtener los datos
+    // Aquí harías otra consulta a la API de Google Sheets para obtener grupo y faceta
+    const response = await fetch(`${url}&valorNombre=${nombreSeleccionado}`);
     const datos = await response.json();
 
-    // Busca el grupo y faceta basados en el nombre seleccionado
-    const row = datos.values.find(row => row[1] === nombreSeleccionado); // Suponiendo que el nombre está en la primera columna
+    // Asumiendo que los datos devueltos contienen 'grupo' y 'faceta'
+    const grupo = datos.values[0][0]; // Ajusta según la estructura de tu respuesta
+    const faceta = datos.values[0][6]; // Ajusta según la estructura de tu respuesta
 
-    if (row) {
-        const grupo = row[0]; // Suponiendo que 'Grupo' está en la segunda columna
-        const faceta = row[6]; // Suponiendo que 'Faceta' está en la tercera columna
-
-        // Guarda estos valores en variables globales
-        window.grupoSeleccionado = grupo;
-        window.facetaSeleccionada = faceta;
-
-        console.log('Grupo:', grupo);
-        console.log('Faceta:', faceta);
-    }
+    // Maneja 'grupo' y 'faceta' como necesites
 });
 
 // Evento para enviar el formulario
