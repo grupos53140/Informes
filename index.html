@@ -321,11 +321,11 @@ select {
       const Key = 'AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0'; // Reemplaza con tu API Key
       const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // Reemplaza con el ID de tu hoja
       const apiUrl='https://script.google.com/macros/s/AKfycbzpVHMm4XydyD9SVuMsJnCgBR4BgnOW07GwKB8j-eXmc5tvG9G7Lj0uzBoI5zVVFf25/exec';
-      const RANGE = 'PUB!A1:G'; // Cambia el rango según lo que necesites
-      let grupo;
-      let faceta;
+      const RANGE = 'PUB!A1:G'; // Cambia el rango según lo que necesites  
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${Key}`;
       const CLIENT_ID='871593758016-uu4ubnracah4e9duaa271ofrajif3dgl.apps.googleusercontent.com';
+      let grupo;
+      let faceta;
 
       let dataMapping = {}; // Objeto para almacenar el nombre con su grupo y faceta
 
