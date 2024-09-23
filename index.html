@@ -336,41 +336,33 @@ select {
               console.error('Error al obtener los datos:', error);
           });
 
- // URL base sin parámetros adicionales
-//const sheetId = "12AhQg1rVBLM7-kOrqaHYK7wrA7ew...";
-//const range = "PUB!A1:G";  // Asegúrate de especificar el rango de datos relevante
-//const apiKey = "AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0";
-//const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
+ // Evento para obtener grupo y faceta al seleccionar un nombre
+document.getElementById('nombre').addEventListener('change', async (event) => {
+    const nombreSeleccionado = event.target.value;
 
-
-// Hacer la consulta a la API de Google Sheets para obtener el rango completo de datos
     try {
+        // Aquí harías otra consulta a la API de Google Sheets para obtener grupo y faceta
         const response = await fetch(url);
         const datos = await response.json();
 
-        // Asegúrate de que los datos sean válidos
-        if (datos && datos.values && datos.values.length > 0) {
-            // Buscar el nombre seleccionado en los datos obtenidos
-            const filaEncontrada = datos.values.find(fila => fila[0] === nombreSeleccionado);
+        // Busca el nombre seleccionado en los datos
+        const fila = datos.values.find(fila => fila[1] === nombreSeleccionado);
 
-            if (filaEncontrada) {
-                // Asumiendo que la estructura de la fila es: [Grupo, Nombre,C, D, E, F, Faceta]
-                const grupo = filaEncontrada[0];
-                const faceta = filaEncontrada[6];
+        // Verifica que se haya encontrado la fila correcta
+        if (fila) {
+            grupo = fila[0];  // Ajusta según la estructura de tu hoja
+            faceta = fila[6]; // Ajusta según la estructura de tu hoja
 
-                console.log('Grupo:', grupo);
-                console.log('Faceta:', faceta);
-
-                // Aquí puedes manejar los valores de 'grupo' y 'faceta' como necesites
-            } else {
-                console.error('Nombre no encontrado en los datos');
-            }
+            // Maneja 'grupo' y 'faceta' como necesites
+            console.log('Grupo:', grupo);
+            console.log('Faceta:', faceta);
         } else {
-            console.error('No se encontraron datos en la hoja');
-          }
-      } catch (error) {
-        console.error('Error al consultar la API:', error);
+            console.error('No se encontró el nombre seleccionado en los datos.');
+        }
+    } catch (error) {
+        console.error('Error al obtener los datos:', error);
     }
+});
 
 
 // Evento para enviar el formulario
