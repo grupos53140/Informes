@@ -366,7 +366,7 @@ document.getElementById('nombre').addEventListener('change', async (event) => {
 });
 
 
-//Define una funcion para inicialiar una Biblioteca
+//Define una funcion para inicialiar una Biblioteca gapi
 function onApiLoad() {
     gapi.load('client:auth2', initClient);
 }
@@ -380,6 +380,22 @@ async function initClient() {
     });
 }
 
+
+//Autenticación de usuario
+async function authenticate() {
+    try {
+        await gapi.auth2.getAuthInstance().signIn();
+        console.log('Usuario autenticado');
+    } catch (error) {
+        console.error('Error en la autenticación:', error);
+    }
+}
+
+//Obtener el Topken de acceso
+function getAccessToken() {
+    const user = gapi.auth2.getAuthInstance().currentUser.get();
+    return user.getAuthResponse().access_token;
+}
 
 
 
