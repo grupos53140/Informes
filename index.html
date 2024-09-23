@@ -373,26 +373,8 @@ document.getElementById('nombre').addEventListener('change', (event) => {
 });
 
 // Evento para enviar el formulario
-document.getElementById('myInform').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Previene el envío por defecto del formulario
-
-    const data = {
-        grupo,
-        faceta,
-        nombre: document.getElementById('nombre').value,
-        participa: document.getElementById('participa').checked,
-        estudios: document.getElementById('estudios').value,
-        horas: document.getElementById('horas').value,
-        comentarios: document.getElementById('comentarios').value,
-    };
-
-    await enviarDatos(data);
-});
-
-// Función para enviar datos
 async function enviarDatos(data) {
-  //Url de Web App de AppScript Deploy
-    const urlsend = 'https://script.google.com/macros/s/AKfycbwB346E2hK-HJ3moIcskmWqk01eeLCu7iR--TsrB_7YDoMMafyuGTcVKiN9d3tDJc2g/exec'; // Reemplaza con la URL de tu Web App
+    const urlsend = 'https://script.google.com/macros/s/AKfycbwB346E2hK-HJ3moIcskmWqk01eeLCu7iR--TsrB_7YDoMMafyuGTcVKiN9d3tDJc2g/exec'; // URL de tu Web App
 
     const response = await fetch(urlsend, {
         method: 'POST',
@@ -400,7 +382,13 @@ async function enviarDatos(data) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            values: [[data.grupo, data.faceta, data.nombre, data.participa, data.estudios, data.horas, data.comentarios]]
+            grupo: data.grupo,
+            faceta: data.faceta,
+            nombre: data.nombre,
+            participa: data.participa,
+            estudios: data.estudios,
+            horas: data.horas,
+            comentarios: data.comentarios
         })
     });
 
