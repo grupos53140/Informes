@@ -189,9 +189,12 @@
     input[type="submit"]:hover {
       background-color: var(--color-blue-600);
     }
-    fieldset{
+    fieldset#fnombre{
       margin: auto;
       width:auto;
+
+    }
+    legend#lnombre{
 
     }
    footer {
@@ -253,8 +256,8 @@ select {
         <!-- CAMPO DROPDOWN NOMBRE -->
         <div class="form-group">
 	        <div id="nombreContainer" class="form-item">
-            <fieldset>
-              <legend>NOMBRE:</legend>
+            <fieldset id="fnombre">
+              <legend id="lnombre">NOMBRE:</legend>
               <select id="nombre" name="nombre" autocomplete="on">
 	              <!--
                 Los nombres se llenaran aqui         
