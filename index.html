@@ -340,20 +340,42 @@ select {
               console.error('Error al obtener los datos:', error);
           });
 
- // Evento para obtener grupo y faceta al seleccionar un nombre
- document.getElementById('nombre').addEventListener('change', async (event) => {
-    const nombreSeleccionado = event.target.value;
+ // URL base sin parámetros adicionales
+const sheetId = "12AhQg1rVBLM7-kOrqaHYK7wrA7ew...";
+const range = "PUB!A1:G";  // Asegúrate de especificar el rango de datos relevante
+const apiKey = "AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0";
+const urlsql = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 
-    // Aquí harías otra consulta a la API de Google Sheets para obtener grupo y faceta
-    const response = await fetch(`${url}&valorNombre=${nombreSeleccionado}`);
-    const datos = await response.json();
 
-    // Asumiendo que los datos devueltos contienen 'grupo' y 'faceta'
-    grupo = datos.values[1][0]; // Ajusta según la estructura de tu respuesta
-    faceta = datos.values[1][6]; // Ajusta según la estructura de tu respuesta
+// Hacer la consulta a la API de Google Sheets para obtener el rango completo de datos
+    try {
+        const response = await fetch(urlsql);
+        const datos = await response.json();
 
-    // Maneja 'grupo' y 'faceta' como necesites
-});
+        // Asegúrate de que los datos sean válidos
+        if (datos && datos.values && datos.values.length > 0) {
+            // Buscar el nombre seleccionado en los datos obtenidos
+            const filaEncontrada = datos.values.find(fila => fila[0] === nombreSeleccionado);
+
+            if (filaEncontrada) {
+                // Asumiendo que la estructura de la fila es: [Grupo, Nombre,C, D, E, F, Faceta]
+                const grupo = filaEncontrada[0];
+                const faceta = filaEncontrada[6];
+
+                console.log('Grupo:', grupo);
+                console.log('Faceta:', faceta);
+
+                // Aquí puedes manejar los valores de 'grupo' y 'faceta' como necesites
+            } else {
+                console.error('Nombre no encontrado en los datos');
+            }
+        } else {
+            console.error('No se encontraron datos en la hoja');
+          }
+      } catch (error) {
+        console.error('Error al consultar la API:', error);
+    }
+
 
 // Evento para enviar el formulario
 async function enviarDatos(data) {
@@ -361,23 +383,15 @@ async function enviarDatos(data) {
     const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q';
     const RANGE = 'INFORMES!A:G'; // Cambia el rango según sea necesario
 
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}:append?valueInputOption=USER_ENTERED&key=${API_KEY}`;
+    const urlenv = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}:append?valueInputOption=USER_ENTERED&key=${API_KEY}`;
 
-    const response = await fetch(url, {
+    const response = await fetch(urlenv, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            values: [[                
-                data.grupo,                
-                data.faceta,
-                data.nombre,
-                data.participa,                
-                data.estudios,
-                data.horas,
-                data.comentarios
-            ]]
+            values: [[data.grupo, data.faceta, data.nombre, data.participa, data.estudios, data.horas, data.comentarios]]
         })
     });
 
