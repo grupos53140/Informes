@@ -314,7 +314,7 @@ const apiUrl = 'https://script.google.com/macros/s/AKfycbxGFmksC0Ztrd2pIRvzDW_tY
 
 // Función para cargar los nombres al dropdown
 async function cargarNombres() {
-    const response = await fetch(apiUrl + '?action=getNombres'); // Asegúrate de ajustar la API para que acepte esta solicitud
+    const response = await fetch(apiUrl + '?action=getNames'); // Asegúrate de ajustar la API para que acepte esta solicitud
     const nombres = await response.json();
 
     const select = document.getElementById('nombre');
