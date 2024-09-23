@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <title>Formulario de Registro</title>
+  <base target="_top">
+  <style>
+    :root {
+    --color-blue-50: #f3f6fb;
+    --color-blue-100: #e7edf6;
+    --color-blue-150: #dbe5f1;
+    --color-blue-200: #cedced;
+    --color-blue-300: #a9c1df;
+    --color-blue-400: #84a6d1;
+    --color-blue-500: #5f8bc3;
+    --color-blue-600: #4171ae;
+    --color-blue-700: #386195;
+    --color-blue-800: #2a4970;
+    --color-blue-900: #213957;
+    --color-blue-1000: #18293f;
+    --color-gray-0: #ffffff;
+    --color-gray-50: #f8f8f7;
+    --color-gray-100: #f0f0ef;
+    --color-gray-150: #e7e6e4;
+    --color-gray-200: #d5d4d2;
+    --color-gray-300: #bab7b5;
+    --color-gray-400: #a29d9a;
+    --color-gray-500: #8b8684;
+    --color-gray-600: #74706d;
+    --color-gray-700: #615d5c;
+    --color-gray-800: #4d4947;
+    --color-gray-900: #373433;
+    --color-gray-1000: #222020;
+    --color-green-50: #dff8ef;
+    --color-green-100: #c3f1cf;
+    --color-green-150: #8ce5a2;
+    --color-green-200: #62db81;
+    --color-green-300: #39d25f;
+    --color-green-400: #2bbe50;
+    --color-green-500: #28b04a;
+    --color-green-600: #25a244;
+    --color-green-700: #1f8639;
+    --color-green-800: #1b7933;
+    --color-green-900: #155d27;
+    --color-green-1000: #0f411b;
+    --color-jw-blue-50: #dee7f1;
+    --color-jw-blue-100: #8ba3cc;
+    --color-jw-blue-200: #7f9ac6;
+    --color-jw-blue-300: #7491c1;
+    --color-jw-blue-400: #6888bc;
+    --color-jw-blue-500: #5c7eb7;
+    --color-jw-blue-600: #5075b2;
+    --color-jw-blue-700: #4a6da7;
+    --color-jw-blue-800: #45659b;
+    --color-jw-blue-900: #405e8f;
+    --color-jw-blue-1000: #103245;
+    --color-orange-50: #ffefe3;
+    --color-orange-100: #ffddc1;
+    --color-orange-150: #ffca9f;
+    --color-orange-200: #ffb77d;
+    --color-orange-300: #ffa55b;
+    --color-orange-400: #ff9239;
+    --color-orange-500: #ff7f17;
+    --color-orange-600: #ff7606;
+    --color-orange-700: #f46e00;
+    --color-orange-800: #e36600;
+    --color-orange-900: #c15700;
+    --color-orange-1000: #9f4700;
+    --color-red-50: #fce7e9;
+    --color-red-100: #f8c9cd;
+    --color-red-150: #f29ca4;
+    --color-red-200: #eb5f6c;
+    --color-red-300: #e53243;
+    --color-red-400: #ca1a2a;
+    --color-red-500: #bb1827;
+    --color-red-600: #ac1624;
+    --color-red-700: #9d1421;
+    --color-red-800: #8e121e;
+    --color-red-900: #700e17;
+    --color-red-1000: #520a11;
+    --color-yellow-50: #fff7da;
+    --color-yellow-100: #fff0b8;
+    --color-yellow-150: #ffeda7;
+    --color-yellow-200: #ffe685;
+    --color-yellow-300: #ffdf63;
+    --color-yellow-400: #ffdb52;
+    --color-yellow-500: #ffd430;
+    --color-yellow-600: #ebba00;
+    --color-yellow-700: #c99f00;
+    --color-yellow-800: #a78400;
+    --color-yellow-900: #856a00;
+    --color-yellow-1000: #634f00;
+    }
+    html {
+    font-family: NotoSans, Arial, "Arial Unicode MS", sans-serif;
+    }
+    body {
+      background-color: var(--color-gray-150);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      margin: 0;
+      position: relative;
+      padding-bottom: 60px; /* Para que el contenido no se solape con el footer */
+    }
+   .form-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      border: 0.5px solid var(--color-gray-50);
+   }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }    
+    .form-group {
+      display: flex;
+      flex-direction: column; /* Para que los contenedores de cada campo queden uno debajo de otro */
+      gap: 15px; /* Espacio entre los campos */
+      margin-bottom: 5px;
+    }
+    .form-item {
+      display: flex;
+      align-items: center; /* Alinea las etiquetas con los campos verticalmente */
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      margin-top: 10px;	
+      min-width: 100px; /* Ancho mínimo para las etiquetas */
+      margin-right: 10px; /* Espacio entre la etiqueta y el campo */
+      /*font-weight: bold;  Opción: hacer las etiquetas más visibles */
+    }
+    input[type="text"], 
+      select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--color-gray-200);
+      /*border-radius: 5px;*/
+      font-size: 12px;
+      box-sizing: border-box; /* Asegura que el padding no sobrepase el tamaño */
+    }
+    input[type="text"], textarea {
+      flex-grow: 1; /* Para que los campos crezcan según el espacio disponible */
+      padding: 8px; /* Añadir un poco de relleno para mejorar el aspecto */
+      font-size: 12px;
+      width: -webkit-fill-available;
+      border: 1px solid #ccc;
+      height: 50px;
+    }
+    input[type="text"], select, textarea :focus {
+      border-color: var(--color-gray-200); /* Cambia a tu color preferido */
+      outline: none; /* Opcional, elimina el borde por defecto del navegador */
+    }
+    input[type="checkbox"] {
+     /* width: 100%;*/
+      transform:scale(1.5);  
+      margin-top: 10px; 
+    }
+    .form-group-inline {
+      display: flex;
+      align-items: center;
+      margin: 20px;
+      flex-direction: column; 
+      text-align: center;	
+    }
+    .form-group-inline label {
+      margin: 0;
+    }
+    .form-group-inline {
+      margin-left: 10px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      background-color: var(--color-blue-500);
+      color: white;
+      padding: 10px;
+      border: none;
+      /*border-radius: 5px;*/
+      cursor: pointer;
+      font-size: 12px;
+    }
+    input[type="submit"]:hover {
+      background-color: var(--color-blue-600);
+    }
+   footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #f5f5f5;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #888;
+      border-top: 1px solid #ccc;
+    }
+    footer a {
+      color: #2d4a94;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    select {
+      appearance: none; /* Elimina el estilo por defecto del select */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      border: 1px solid #ccc; /* Borde estándar */
+      padding: 10px;
+      font-size: 12px;
+      border-radius: 0px; /* Bordes rectos */
+      background-color: white;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><polygon points="0,0 5,6 10,0" style="fill: %23cccccc;"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 18px; /* Tamaño de la flecha */
+ }
+
+/* Ajusta el tamaño de la flecha y la posición del padding para que no se superponga al texto */
+select:focus {
+  border-color: #4CAF50; /* Color del borde al enfocar */
+  outline: none;
+}
+
+/* Asegurarse de que el padding derecho no tape la flecha */
+select {
+  padding-right: 30px; /* Espacio para la flecha */
+}
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>INFORME DE PREDICACION</h2>
+    <form id="myInform">
+
+      <!-- CAMPO DROPDOWN NOMBRE -->
+      <div class="form-group">
+	<div id="nombreContainer" class="form-item">
+        <label for="nombre">NOMBRE:</label>
+        <select id="nombre" name="nombre" autocomplete="on">
+	  <!--
+          Los nombres se llenaran aqui         
+	  <option value="Jorge">Jorge</option>
+          <option value="Ana">Ana</option>
+          <option value="Luis">Luis</option>
+          <option value="María">María</option>
+          --> 
+        </select>
+      </div>
+     </div>
+
+
+     <!-- CAMPO CHECKBOX PARTICIPA -->
+<div class="form-group-inline">
+  <label for="stay-logged-in" >PARTICIPA</label>
+  <input type="checkbox" name="participa" id="participa">
+</div>
+
+
+      <div class="form-group">
+	<!-- CAMPO ESTUDIO -->
+	<div id="estudiosContainer" class="form-item">
+      	<label for="estudios">ESTUDIOS:</label>
+      	<input type="text" id="estudios" name="estudios" placeholder="Ingresa tus estudios" maxlength="5">
+
+	<!-- CAMPO HORAS -->
+    	</div><div id="horasContainer" class="form-item hidden">
+      	<label for="horas">HORAS:</label>
+      	<input type="text" id="horas" name="horas" placeholder="Ingresa las horas" maxlength="5">
+    	</div>
+
+	<!-- CAMPO CREDITO -->
+    	<div id="creditoContainer" class="form-item hidden">
+      	<label for="credito">CREDITO:</label>
+      	<input type="text" id="credito" name="credito" placeholder="Creditos">
+    	</div>
+
+	<!-- CAMPO COMENTARIOS -->
+    	<div id="comentariosContainer">
+      	<label for="comentarios">COMENTARIOS:</label>
+      	<textarea id="comentarios" name="comentarios" rows="4" placeholder="Ingresa tus comentarios"></textarea>
+    	</div>
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="form-group">
+        <input type="submit" value="Enviar">
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    <div>© 2024 Dataia - Data e Inteligencia Artificial.</div>
+    <div>
+      <a href="#">DATAIA:CO</a> | 
+      <a href="#">Condiciones de uso</a> | 
+      <a href="#">Política de privacidad</a>
+    </div>
+  </footer>
+
+<script>
+const apiUrl = 'https://script.google.com/macros/s/AKfycbzPsXJ9S5XCwmXjWJn2X43q8c3upqAabJIIyxsIbu-a97Lr8uVq4fdx8RJH47IkC2da/exec';
+
+// Función para cargar los nombres al dropdown
+async function cargarNombres() {
+    const response = await fetch(apiUrl + '?action=getNombres'); // Asegúrate de ajustar la API para que acepte esta solicitud
+    const nombres = await response.json();
+
+    const select = document.getElementById('nombre');
+    nombres.forEach(nombre => {
+        const option = document.createElement('option');
+        option.value = nombre; // O el identificador correspondiente
+        option.textContent = nombre;
+        select.appendChild(option);
+    });
+}
+
+
+// Evento para obtener grupo y faceta al seleccionar un nombre
+
+document.getElementById('nombre').addEventListener('change', async (event) => {
+    const nombreSeleccionado = event.target.value;
+
+
+    // Aquí deberías hacer la consulta a tu hoja de Google Sheets
+    const response = await fetch(`${apiUrl}?nombre=${nombreSeleccionado}`); // Cambiado a comillas invertidas
+    const datos = await response.json();
+
+    // Asumiendo que los datos devueltos contienen 'grupo' y 'faceta'
+    const grupo = datos.grupo; // Ajusta según la estructura de tu respuesta
+    const faceta = datos.faceta; // Ajusta según la estructura de tu respuesta
+
+    // Aquí puedes hacer lo que necesites con 'grupo' y 'faceta'
+});
+
+
+// Cargar los nombres al cargar la página
+window.onload = cargarNombres;
+
+
+    document.getElementById('myInform').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevenir el envío por defecto
+
+    const data = {
+        nombre: document.getElementById('nombre').value,
+        grupo: document.getElementById('grupo').value,
+        faceta: document.getElementById('faceta').value,
+        participa: document.getElementById('participa').value,
+        estudios: document.getElementById('estudios').value,
+        horas: document.getElementById('horas').value,
+        comentarios: document.getElementById('comentarios').value,
+    };
+
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzPsXJ9S5XCwmXjWJn2X43q8c3upqAabJIIyxsIbu-a97Lr8uVq4fdx8RJH47IkC2da/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    const result = await response.text();
+    console.log(result); // Para verificar el resultado
+});
+
+  </script>
+</body>
+</html>
