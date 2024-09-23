@@ -297,9 +297,9 @@ select {
   </div>
 
   <footer>
-    <div>© 2024 Dataia - Data e Inteligencia Artificial.</div>
+    <div>©2024 EL JARDIN | TOL-53140.</div>
     <div>
-      <a href="#">DATAIA:CO</a> | 
+      <a href="#">El JARDIN</a> | 
       <a href="#">Condiciones de uso</a> | 
       <a href="#">Política de privacidad</a>
     </div>
@@ -359,43 +359,6 @@ document.getElementById('nombre').addEventListener('change', (event) => {
         console.error('No se encontró el nombre seleccionado en los datos.');
     }
 });
-
-
-
-
-
-
-
-
-
-
-// Evento para enviar el formulario
-/*async function enviarDatos(data) {
-    //const API_KEY = Key;
-    //const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q';
-    //const RANGE = 'INFORMES!A:G'; // Cambia el rango según sea necesario
-
-    const urlenv = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}:append?valueInputOption=USER_ENTERED&key=${Key}`;
-
-    const response = await fetch(urlenv, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            values: [[data.grupo, data.faceta, data.nombre, data.participa, data.estudios, data.horas, data.comentarios]]
-        })
-    });
-
-    if (response.ok) {
-        const result = await response.json();
-        console.log('Datos enviados:', result);
-    } else {
-        console.error('Error al enviar datos:', response.statusText);
-    }
-}
-
-*/
 
 // Evento para enviar el formulario
 document.getElementById('myInform').addEventListener('submit', async (event) => {
