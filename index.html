@@ -319,7 +319,7 @@ select {
    
       const Key = 'AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0'; // Reemplaza con tu API Key
       const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // Reemplaza con el ID de tu hoja
-      const apiUrl='https://script.google.com/macros/s/AKfycby1hylH-p8jo5dlRgAZ5KZYcaOs9-qBl24oeyRQaebNd5tHSjueUOmn1rKltEipazc/exec';
+      const apiUrl='https://script.google.com/macros/s/AKfycbzpVHMm4XydyD9SVuMsJnCgBR4BgnOW07GwKB8j-eXmc5tvG9G7Lj0uzBoI5zVVFf25/exec';
       const RANGE = 'PUB!A1:G'; // Cambia el rango según lo que necesites
       let grupo;
       let faceta;
@@ -372,7 +372,7 @@ document.getElementById('nombre').addEventListener('change', (event) => {
 
 // Evento para enviar el formulario
 async function enviarDatos(data) {
-    const urlsend = 'https://script.google.com/macros/s/AKfycbzfouROMxD8kLGwocpasVh5CPSwWBSGa7VR1nFWPuVQPmnOufXnX1Vcp5_49jNOLOyD/exec'; // URL de tu Web App
+    const urlsend = apiUrl; // URL de tu Web App
 
     const response = await fetch(urlsend, {
         method: 'POST',
