@@ -311,43 +311,36 @@ select {
   </footer>
 
   <script>
-    const API_KEY = 'TU_API_KEY'; // Reemplaza con tu API Key
-    const SPREADSHEET_ID = 'ID_DE_TU_HOJA_DE_CÁLCULO'; // Reemplaza con el ID de tu hoja
-    const RANGE = 'PUB!A1:C'; // Cambia el rango según lo que necesites
+    document.addEventListener('DOMContentLoaded', () => {
+      const API_KEY = 'AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0'; // Reemplaza con tu API Key
+      const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // Reemplaza con el ID de tu hoja
+      const RANGE = 'PUB!A1:G'; // Cambia el rango según lo que necesites
 
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            // Procesa los datos como necesites
-        })
-        .catch(error => {
-            console.error('Error al obtener los datos:', error);
-        });
+      fetch(url)
+          .then(response => response.json())
+          .then(data => {
+              console.log(data);
+             // Procesa los datos como necesites
+          
+                const names = data.values.map(row => row[1]); // Asumiendo que los nombres están en la primera columna
+                const select = document.getElementById('nombreSelect');
+  
+                names.forEach(name => {
+                  const option = document.createElement('option');
+                  option.value = name;
+                  option.textContent = name;
+                  select.appendChild(option);
+                });
+              })
+          .catch(error => {
+              console.error('Error al obtener los datos:', error);
+          });
+    });
 </script>
 
 <script>
-const apiUrl = 'https://script.google.com/macros/s/AKfycbxoIDbXJhjjK6J5pNkpcXD2pTueAzifCXcejg9mhMg8qFPo_pJWDYwloOMf6lTPn8XD/exec';
-
-// Función para cargar los nombres al dropdown
-async function cargarNombres() {
-    const response = await fetch(apiUrl + '?action=getNames'); // Asegúrate de ajustar la API para que acepte esta solicitud
-    const nombres = await response.json();
-
-    const select = document.getElementById('nombre');
-    nombres.forEach(nombre => {
-        const option = document.createElement('option');
-        option.value = nombre; // O el identificador correspondiente
-        option.textContent = nombre;
-        select.appendChild(option);
-    });
-}
-
-// Cargar los nombres al cargar la página
-window.onload = cargarNombres;
-
 // Evento para obtener grupo y faceta al seleccionar un nombre
 
 document.getElementById('nombre').addEventListener('change', async (event) => {
@@ -364,9 +357,6 @@ document.getElementById('nombre').addEventListener('change', async (event) => {
 
     // Aquí puedes hacer lo que necesites con 'grupo' y 'faceta'
 });
-
-
-
 
 
     document.getElementById('myInform').addEventListener('submit', async (event) => {
