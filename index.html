@@ -319,7 +319,7 @@ select {
    
       const Key = 'AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0'; // Reemplaza con tu API Key
       const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // Reemplaza con el ID de tu hoja
-      const apiUrl='https://script.google.com/macros/s/AKfycbzpVHMm4XydyD9SVuMsJnCgBR4BgnOW07GwKB8j-eXmc5tvG9G7Lj0uzBoI5zVVFf25/exec';
+      const apiUrl='https://script.google.com/macros/s/AKfycbyLgdYtFau8AIusIndzQDNNt363ymBcLMIcvPPRk_Uioo2nYcbVsmeGBDnD_bRpRiqz/exec';
       const RANGE = 'PUB!A1:G'; // Cambia el rango según lo que necesites  
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${Key}`;
       const CLIENT_ID='871593758016-uu4ubnracah4e9duaa271ofrajif3dgl.apps.googleusercontent.com';
@@ -400,7 +400,7 @@ async function enviarDatos(data) {
         alert('Error al enviar los datos. Inténtalo de nuevo.');
     }
 }
-*/
+
 
 function gapiLoaded() {
         gapi.load('client', initializeGapiClient);
@@ -442,6 +442,46 @@ async function enviarDatos(data) {
     } catch (error) {
         console.error('Error en la solicitud:', error);
         alert('Error en la solicitud. Inténtalo de nuevo.');
+    }
+        
+}
+*/
+
+document.getElementById('myInform').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Previene el envío por defecto del formulario
+
+    const data = {
+        grupo,
+        faceta,
+        nombre: document.getElementById('nombre').value,
+        participa: document.getElementById('participa').checked,
+        estudios: document.getElementById('estudios').value,
+        horas: document.getElementById('horas').value,
+        comentarios: document.getElementById('comentarios').value,
+    };
+
+    await enviarDatos(data);
+});
+
+// Función para enviar datos
+async function enviarDatos(data) {
+    const urlsend = 'https://script.google.com/macros/s/AKfycbyLgdYtFau8AIusIndzQDNNt363ymBcLMIcvPPRk_Uioo2nYcbVsmeGBDnD_bRpRiqz/exec'; // Reemplaza con la URL de tu Web App
+
+    const response = await fetch(urlsend, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data) // Aquí se envían los datos como JSON
+    });
+
+    if (response.ok) {
+        const result = await response.json();
+        console.log('Datos enviados:', result);
+        alert('Datos enviados correctamente');
+    } else {
+        console.error('Error al enviar datos:', response.statusText);
+        alert('Error al enviar los datos. Inténtalo de nuevo.');
     }
 }
 
