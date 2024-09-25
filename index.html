@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
  
   <title>Formulario de Registro</title>
-  <base target="_top">
   <style>
     :root {
     --color-blue-50: #f3f6fb;
@@ -402,6 +401,13 @@ async function enviarDatos(data) {
     }
 }
 */
+
+function gapiLoaded() {
+        gapi.load('client', initializeGapiClient);
+      }
+
+
+
 
 async function enviarDatos(data) {
     const urlsend =apiUrl;// 'https://script.google.com/macros/s/YOUR_WEB_APP_URL/exec'; // Cambia la URL
