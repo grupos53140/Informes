@@ -319,7 +319,7 @@ select {
   <script>
 
     // Carga la biblioteca de cliente de Google
-    //'115640384285373586496'//
+  
     function loadClient() {
           gapi.load("client:auth2", initClient);
     }
@@ -453,7 +453,40 @@ document.getElementById('nombre').addEventListener('change', (event) => {
 
         document.addEventListener("DOMContentLoaded", handleClientLoad);
 
+
+
+
+
+
+
+        const data = {
+  Id: 10,
+  Name: "Jack Doe",
+  Age: 97,
+  "Created at": new Date(),
+};
+
+// Add one line to the sheet
+fetch("https://sheet.best/api/sheets/cf969697-682a-40e3-bad4-d54803eeeacf", {
+  method: "POST",
+  mode: "cors",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(data),
+})
+  .then((r) => r.json())
+  .then((data) => {
+    // The response comes here
+    console.log(data);
+  })
+  .catch((error) => {
+    // Errors are reported there
+    console.log(error);
+  });Interval
+
   </script>
+  
   <script async defer src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
 </body>
 </html>
