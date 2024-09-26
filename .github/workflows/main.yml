@@ -14,9 +14,10 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Run script to update Google Sheets
-      env:
-        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+    env:
+      CLIENT_EMAIL: ${{ secrets.GOOGLE_CLIENT_ID }}
+      PRIVATE_KEY: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+
       run: |
         # Obtener un token de acceso usando el CLIENT_EMAIL y PRIVATE_KEY
         TOKEN=$(curl -s -X POST -H "Content-Type: application/json" \
