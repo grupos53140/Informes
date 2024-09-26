@@ -1,29 +1,42 @@
-name: Google Sheets API Interaction
+name: Google Sheets Update
 
 on:
   push:
     branches:
-      - main
+      - main  # Cambia a la rama que estás usando
 
 jobs:
-  run-google-sheets:
+  update-sheets:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3  # Verifica el código fuente
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'  # O '18' si es compatible
+    - name: Run script to update Google Sheets
+      env:
+        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      run: |
+        # Obtener un token de acceso usando el CLIENT_EMAIL y PRIVATE_KEY
+        TOKEN=$(curl -s -X POST -H "Content-Type: application/json" \
+        -d '{
+          "iss": "'"$CLIENT_EMAIL"'",
+          "scope": "https://www.googleapis.com/auth/spreadsheets",
+          "aud": "https://oauth2.googleapis.com/token",
+          "exp": '"$(( $(date +%s) + 3600 ))"',
+          "iat": $(date +%s)
+        }' https://www.googleapis.com/oauth2/v4/token | jq -r .access_token)
 
-      # Elimina el paso npm install ya que no usas npm
-      # - name: Install dependencies
-      #   run: npm install
-
-      - name: Run script to interact with Google Sheets
-        run: |
-          node script.js  # Cambia "script.js" al nombre de tu archivo principal
-        env:
-          CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
+        # Usar el token de acceso para actualizar Google Sheets
+        curl -X POST \
+          -H "Authorization: Bearer $TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "range": "INFORMES!C1:G",  # Cambia el rango según sea necesario
+            "majorDimension": "ROWS",
+            "values": [
+              [data.get('nombre'), data.get('participa'), data.get('estudios'), data.get('horas'),data.get('credito'), data.get('comentarios']  # Cambia estos valores según sea necesario
+            ]
+          }' \
+          "https://sheets.googleapis.com/v4/spreadsheets/12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q/values:append?valueInputOption=RAW"
