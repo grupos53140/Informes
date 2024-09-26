@@ -317,6 +317,12 @@ select {
   </footer>
 
   <script>
+
+    // Carga la biblioteca de cliente de Google
+    function loadClient() {
+          gapi.load("client:auth2", initClient);
+    }
+
    
       const API_KEY = 'AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0'; // Reemplaza con tu API Key
       const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // Reemplaza con el ID de tu hoja
@@ -397,6 +403,8 @@ document.getElementById('nombre').addEventListener('change', (event) => {
             }, (error) => {
                 console.error(JSON.stringify(error, null, 2));
             });
+            console.log("funcion initClient");
+
         }
 
         function updateSigninStatus(isSignedIn) {
@@ -416,6 +424,7 @@ document.getElementById('nombre').addEventListener('change', (event) => {
             } else {
                 gapi.auth2.getAuthInstance().signIn();
             }
+            console.log("funcion updateSigningStatus");
         }
 
         function appendData(data) {
@@ -438,6 +447,7 @@ document.getElementById('nombre').addEventListener('change', (event) => {
                 console.error('Error:', err);
                 alert('Error al enviar datos');
             });
+            console.log("funcion appendData");
         }
 
         document.addEventListener("DOMContentLoaded", handleClientLoad);
