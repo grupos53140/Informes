@@ -300,7 +300,7 @@ select {
 
       <!-- Botón de envío -->
       <div class="form-group">
-        <input type="submit" value="Enviar">
+        <input type="submit" id="submitBtn" value="Enviar">
       </div>
     </fieldset>  
     </form>
@@ -319,7 +319,7 @@ select {
    
       const Key = 'AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0'; // Reemplaza con tu API Key
       const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // Reemplaza con el ID de tu hoja
-      const apiUrl='https://script.google.com/macros/s/AKfycbyLgdYtFau8AIusIndzQDNNt363ymBcLMIcvPPRk_Uioo2nYcbVsmeGBDnD_bRpRiqz/exec';
+      const apiUrl='https://script.google.com/macros/s/AKfycbxNE4JY5h3PYJGydjz_F-dBRq3XbjHUhGYNsh1A5VtJeH-ZYflqvU-OlqybuTaIILN3/exec';
       const RANGE = 'PUB!A1:G'; // Cambia el rango según lo que necesites  
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${Key}`;
       const CLIENT_ID='871593758016-uu4ubnracah4e9duaa271ofrajif3dgl.apps.googleusercontent.com';
@@ -369,6 +369,51 @@ document.getElementById('nombre').addEventListener('change', (event) => {
         console.error('No se encontró el nombre seleccionado en los datos.');
     }
 });
+
+
+//Codigo para enviar datos
+document.getElementById('myInform').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que se recargue la página al enviar el formulario
+
+    const nombre = document.getElementById('nombre').value;
+    const participa = document.getElementById('participa').checked ? 'Sí' : 'No';
+    const estudios = document.getElementById('estudios').value;
+    const horas = document.getElementById('horas').value;
+    const credito = document.getElementById('credito').value;
+    const comentarios = document.getElementById('comentarios').value;
+
+    const datos = {
+        nombre: nombre,
+        grupo: grupo,
+        faceta: faceta,
+        participa: participa,
+        estudios: estudios,
+        horas: horas,
+        credito: credito,
+        comentarios: comentarios
+    };
+
+    console.log("Datos a enviar:", datos);
+
+    fetch(apiUrl, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Respuesta del servidor:', data);
+        alert('Datos enviados correctamente');
+    })
+    .catch(error => {
+        console.error('Error al enviar los datos:', error);
+        alert('Hubo un problema al enviar los datos.');
+    });
+});
+
 
   </script>
 </body>
