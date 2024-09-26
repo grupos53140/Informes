@@ -13,11 +13,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Run script to update Google Sheets
-    env:
-      CLIENT_EMAIL: ${{ secrets.GOOGLE_CLIENT_ID }}
-      PRIVATE_KEY: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+    - name: Install jq
+      run: sudo apt-get install jq
 
+    - name: Run script to update Google Sheets
+      env:
+        CLIENT_EMAIL: ${{ secrets.GOOGLE_CLIENT_ID }}
+        PRIVATE_KEY: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+  
       run: |
         # Obtener un token de acceso usando el CLIENT_EMAIL y PRIVATE_KEY
         TOKEN=$(curl -s -X POST -H "Content-Type: application/json" \
@@ -34,10 +37,10 @@ jobs:
           -H "Authorization: Bearer $TOKEN" \
           -H "Content-Type: application/json" \
           -d '{
-            "range": "INFORMES!C1:G",  # Cambia el rango según sea necesario
+            "range": "INFORMES!A2:G",  # Cambia el rango según sea necesario
             "majorDimension": "ROWS",
             "values": [
-              [data.get('nombre'), data.get('participa'), data.get('estudios'), data.get('horas'),data.get('credito'), data.get('comentarios']  # Cambia estos valores según sea necesario
+              [data.nombre, data.participa, data.estudios, data.horas, data.credito, data.comentarios]  # Cambia estos valores según sea necesario
             ]
           }' \
           "https://sheets.googleapis.com/v4/spreadsheets/12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q/values:append?valueInputOption=RAW"
