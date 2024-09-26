@@ -3,7 +3,7 @@ name: Google Sheets API Interaction
 on:
   push:
     branches:
-      - main  # Ejecuta el flujo en cada push a la rama principal
+      - main
 
 jobs:
   run-google-sheets:
@@ -11,19 +11,19 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Usa la versión más reciente
+        uses: actions/checkout@v3  # Verifica el código fuente
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3  # Asegúrate de instalar Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Puedes usar '18' si es compatible
+          node-version: '16'  # O '18' si es compatible
 
-      - name: Install dependencies
-        run: npm install
+      # Elimina el paso npm install ya que no usas npm
+      # - name: Install dependencies
+      #   run: npm install
 
       - name: Run script to interact with Google Sheets
         run: |
-          node script.js
+          node script.js  # Cambia "script.js" al nombre de tu archivo principal
         env:
           CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
