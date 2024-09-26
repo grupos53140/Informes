@@ -401,7 +401,7 @@ document.getElementById('nombre').addEventListener('change', (event) => {
                     'Authorization': `Bearer ${token}`, // Debes gestionar el token OAuth2
                 },
                 body: JSON.stringify({
-                    range: 'INFORMES!A1',
+                    range: 'INFORMES!C1:G',
                     majorDimension: 'ROWS',
                     values: values
                 })
