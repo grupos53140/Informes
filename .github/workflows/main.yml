@@ -1,0 +1,29 @@
+name: Google Sheets API Interaction
+
+on:
+  push:
+    branches:
+      - main  # Este flujo se ejecuta cuando haces push a la rama principal
+
+jobs:
+  run-google-sheets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run script to interact with Google Sheets
+        run: |
+          node script.js
+        env:
+          CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
