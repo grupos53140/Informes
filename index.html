@@ -386,7 +386,7 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(datos)
+        body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(data => {
