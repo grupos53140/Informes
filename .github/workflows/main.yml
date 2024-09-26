@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Actualiza la acción a la versión 3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3  # Ya estás en v3, pero asegúrate de usar la versión correcta
         with:
-          node-version: '16'
+          node-version: '16'  # O usa '18' si tu código lo soporta
 
       - name: Install dependencies
         run: npm install
