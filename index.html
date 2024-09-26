@@ -242,6 +242,7 @@ select {
   padding-right: 30px; /* Espacio para la flecha */
 }
   </style>
+  <script async defer src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
 
@@ -317,11 +318,11 @@ select {
 
   <script>
    
-      const Key = 'AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0'; // Reemplaza con tu API Key
+      const API_KEY = 'AIzaSyAT7hAN5SWKEzXfLW1cEw0-7lYjw-pNOG0'; // Reemplaza con tu API Key
       const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // Reemplaza con el ID de tu hoja
       const apiUrl='https://script.google.com/macros/s/AKfycbxNE4JY5h3PYJGydjz_F-dBRq3XbjHUhGYNsh1A5VtJeH-ZYflqvU-OlqybuTaIILN3/exec';
       const RANGE = 'PUB!A1:G'; // Cambia el rango según lo que necesites  
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${Key}`;
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
       const CLIENT_ID='871593758016-uu4ubnracah4e9duaa271ofrajif3dgl.apps.googleusercontent.com';
       let grupo;
       let faceta;
@@ -371,34 +372,75 @@ document.getElementById('nombre').addEventListener('change', (event) => {
 });
 
 
-//Codigo para enviar datos
-document.getElementById('myInform').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita que se recargue la página al enviar el formulario
+///////////////////////////////////////////////////////////////////////////////////
 
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries()); // Convertir a objeto
+/*const CLIENT_ID = 'TU_CLIENT_ID_AQUI';
+        const API_KEY = 'TU_API_KEY_AQUI';
+*/        
+        const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+        const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
-    console.log("Datos a enviar:", data);
+        function handleClientLoad() {
+            gapi.load("client:auth2", initClient);
+        }
 
-    fetch(apiUrl, {
-        method: 'POST',
-        body:JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Respuesta del servidor:', data);
-        alert('Datos enviados correctamente');
-    })
-    .catch(error => {
-        console.error('Error al enviar los datos:', error);
-        alert('Hubo un problema al enviar los datos.');
-    });
-});
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+            }).then(() => {
+                // Comprobar si el usuario ya está autenticado
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            }, (error) => {
+                console.error(JSON.stringify(error, null, 2));
+            });
+        }
 
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                document.getElementById('myInform').onsubmit = function (e) {
+                    e.preventDefault();
+                    const formData = {
+                        nombre: this.nombre.value,
+                        participa: this.participa.value,
+                        estudios:this.estudios.value,
+                        horas:this.horas.value,
+                        credito:this.credito.value,
+                        comentario: this.comentario.value
+                    };
+                    appendData(formData);
+                };
+            } else {
+                gapi.auth2.getAuthInstance().signIn();
+            }
+        }
+
+        function appendData(data) {
+            const spreadsheetId = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // ID de tu hoja de cálculo
+            const range = 'INFORMES!A2'; // Rango donde quieres escribir
+            const valueInputOption = 'RAW';
+            const resource = {
+                values: [[data.nombre, data.participa, data.estudios, data.horas, data.credito, data.comentario]]
+            };
+
+            gapi.client.sheets.spreadsheets.values.append({
+                spreadsheetId: spreadsheetId,
+                range: range,
+                valueInputOption: valueInputOption,
+                resource: resource
+            }).then((response) => {
+                console.log(response);
+                alert('Datos enviados con éxito');
+            }, (err) => {
+                console.error('Error:', err);
+                alert('Error al enviar datos');
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", handleClientLoad);
 
   </script>
 </body>
