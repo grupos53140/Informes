@@ -93,7 +93,7 @@
     --color-yellow-1000: #634f00;
     }
     html {
-    font-family: NotoSans, Arial, "Arial Unicode MS", sans-serif;
+      font-family: NotoSans, Arial, sans-serif;
     }
     body {
       background-color: var(--color-gray-150);
@@ -102,78 +102,35 @@
       align-items: center;
       height: 90vh;
       margin: 0;
-      position: relative;
-      padding-bottom: 60px; /* Para que el contenido no se solape con el footer */
+      padding-bottom: 60px;
     }
-   .form-container {
+    .form-container {
       background-color: white;
       padding: 20px;
       border-radius: 5px;
-      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
       width: 350px;
-      border: 0.5px solid var(--color-gray-50);
-   }
-    .form-container{
-      text-align: center;
-      margin-bottom: 20px;
-      margin-top: 10px;
-    }    
+    }
     .form-group {
       display: flex;
-      flex-direction: column; /* Para que los contenedores de cada campo queden uno debajo de otro */
-      gap: 15px; /* Espacio entre los campos */
+      flex-direction: column;
+      gap: 15px;
       margin-bottom: 5px;
-    }
-    .form-item {
-      display: flex;
-      align-items: center; /* Alinea las etiquetas con los campos verticalmente */
     }
     label {
       display: block;
-      margin-bottom: 10px;
-      margin-top: 10px;	
-      min-width: 100px; /* Ancho mínimo para las etiquetas */
-      margin-right: 10px; /* Espacio entre la etiqueta y el campo */
-      /*font-weight: bold;  Opción: hacer las etiquetas más visibles */
+      margin: 10px 0;
+      min-width: 100px;
     }
-    input[type="text"], 
-      select {
+    input[type="text"], select, textarea {
       width: 100%;
       padding: 10px;
       border: 1px solid var(--color-gray-200);
-      /*border-radius: 5px;*/
       font-size: 12px;
-      box-sizing: border-box; /* Asegura que el padding no sobrepase el tamaño */
-    }
-    input[type="text"], textarea {
-      flex-grow: 1; /* Para que los campos crezcan según el espacio disponible */
-      padding: 8px; /* Añadir un poco de relleno para mejorar el aspecto */
-      font-size: 12px;
-      width: -webkit-fill-available;
-      border: 1px solid #ccc;
-      height: 50px;
-    }
-    input[type="text"], select, textarea :focus {
-      border-color: var(--color-gray-200); /* Cambia a tu color preferido */
-      outline: none; /* Opcional, elimina el borde por defecto del navegador */
     }
     input[type="checkbox"] {
-     /* width: 100%;*/
-      transform:scale(1.5);  
-      margin-top: 10px; 
-    }
-    .form-group-inline {
-      display: flex;
-      align-items: center;
-      margin: 20px;
-      flex-direction: column; 
-      text-align: center;	
-    }
-    .form-group-inline label {
-      margin: 0;
-    }
-    .form-group-inline {
-      margin-left: 10px;
+      transform: scale(1.5);
+      margin-top: 10px;
     }
     input[type="submit"] {
       width: 100%;
@@ -181,30 +138,19 @@
       color: white;
       padding: 10px;
       border: none;
-      /*border-radius: 5px;*/
       cursor: pointer;
       font-size: 12px;
     }
     input[type="submit"]:hover {
       background-color: var(--color-blue-600);
     }
-    fieldset#fParticipa{
-      margin: auto;
-      width:auto;
-
-    }
-    
-   footer {
+    footer {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
       background-color: #f5f5f5;
       padding: 10px 20px;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       font-size: 10px;
       color: #888;
       border-top: 1px solid #ccc;
@@ -216,107 +162,51 @@
     footer a:hover {
       text-decoration: underline;
     }
-    select {
-      appearance: none; /* Elimina el estilo por defecto del select */
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      border: 1px solid #ccc; /* Borde estándar */
-      padding: 10px;
-      font-size: 12px;
-      border-radius: 0px; /* Bordes rectos */
-      background-color: white;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><polygon points="0,0 5,6 10,0" style="fill: %23cccccc;"/></svg>');
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      background-size: 18px; /* Tamaño de la flecha */
- }
-
-/* Ajusta el tamaño de la flecha y la posición del padding para que no se superponga al texto */
-select:focus {
-  border-color: #4CAF50; /* Color del borde al enfocar */
-  outline: none;
-}
-
-/* Asegurarse de que el padding derecho no tape la flecha */
-select {
-  padding-right: 30px; /* Espacio para la flecha */
-}
   </style>
-
-
-
-
-<script src="https://apis.google.com/js/api.js"></script>
-
-
+  <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
-
   <div class="form-container">
-    
     <form id="myInform">
       <fieldset>
         <legend>INFORME DE SERVICIO</legend>
-        <!-- CAMPO DROPDOWN NOMBRE -->
         <div class="form-group">
-	        <div id="nombreContainer" class="form-item">
-            
-              <select id="nombre" name="nombre" autocomplete="on">
-	              <!--
-                Los nombres se llenaran aqui         
-	              --> 
-              </select>
-            
-          </div>
+          <label for="nombre">NOMBRE:</label>
+          <select id="nombre" name="nombre" autocomplete="on">
+            <!-- Los nombres se llenarán aquí -->
+          </select>
         </div>
-
-
-     <!-- CAMPO CHECKBOX PARTICIPA -->
-<div class="form-group-inline">
-  <fieldset id="fparticipa">
-    <legend id="lparticipa">PARTICIPA:</legend>
-      <input type="checkbox" name="participa" id="participa">
-  </fieldset>
-</div>
-
-
-  <div class="form-group">
-	<!-- CAMPO ESTUDIO -->
-	<div id="estudiosContainer" class="form-item">
-      	<label for="estudios">ESTUDIOS:</label>
-      	<input type="text" id="estudios" name="estudios" placeholder="Ingresa tus estudios" maxlength="5">
-  </div>
-	<!-- CAMPO HORAS -->
-  <div id="horasContainer" class="form-item hidden">
-      	<label for="horas">HORAS:</label>
-      	<input type="text" id="horas" name="horas" placeholder="Ingresa las horas" maxlength="5">
-  </div>
-
-	<!-- CAMPO CREDITO -->
-  <div id="creditoContainer" class="form-item hidden">
-      	<label for="credito">CREDITO:</label>
-      	<input type="text" id="credito" name="credito" placeholder="Creditos">
-  </div>
-
-	<!-- CAMPO COMENTARIOS -->
-    	<div id="comentariosContainer">
-      	<label for="comentarios">COMENTARIOS:</label>
-      	<textarea id="comentarios" name="comentarios" rows="4" placeholder="Ingresa tus comentarios"></textarea>
-    	</div>
-  </div>
-
-      <!-- Botón de envío -->
-      <div class="form-group">
-        <input type="submit" id="submitBtn" value="Enviar">
-      </div>
-    </fieldset>  
+        <div class="form-group-inline">
+          <fieldset id="fparticipa">
+            <legend id="lparticipa">PARTICIPA:</legend>
+            <input type="checkbox" name="participa" id="participa">
+          </fieldset>
+        </div>
+        <div class="form-group">
+          <label for="estudios">ESTUDIOS:</label>
+          <input type="text" id="estudios" name="estudios" placeholder="Ingresa tus estudios" maxlength="5">
+        </div>
+        <div class="form-group hidden">
+          <label for="horas">HORAS:</label>
+          <input type="text" id="horas" name="horas" placeholder="Ingresa las horas" maxlength="5">
+        </div>
+        <div class="form-group hidden">
+          <label for="credito">CREDITO:</label>
+          <input type="text" id="credito" name="credito" placeholder="Creditos">
+        </div>
+        <div class="form-group">
+          <label for="comentarios">COMENTARIOS:</label>
+          <textarea id="comentarios" name="comentarios" rows="4" placeholder="Ingresa tus comentarios"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="submit" id="submitBtn" value="Enviar">
+        </div>
+      </fieldset>
     </form>
-    <!-- Contenedor para mostrar la respuesta de la API -->
     <div id="response"></div>
   </div>
-
   <footer>
-    <div>©2024 EL JARDIN </div>
+    <div>©2024 EL JARDIN</div>
     <div>
       <a href="#">TOL-53140</a> | 
       <a href="#">Condiciones de uso</a> | 
@@ -324,51 +214,77 @@ select {
     </div>
   </footer>
   <script>
-    const API_KEY = 'AIzaSyAtIlpym0Y0608nJq7ZglhQxfCFbgjsEmw'; // Reemplaza esto con tu API Key
-    const SPREADSHEET_ID = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q'; // Reemplaza esto con tu ID de hoja de cálculo
-    const SHEET_NAME = 'INFORMES'; // Reemplaza esto con el nombre de la hoja (ej: "Hoja1")
+    const CLIENT_ID = 'TU_CLIENT_ID';
+    const REDIRECT_URI = 'https://grupos53140.github.io/informes/';
+    const SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+
+    function authenticate() {
+      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=token&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}`;
+      window.location.href = authUrl;
+    }
+
+    function getAccessToken() {
+      const hash = window.location.hash;
+      const params = new URLSearchParams(hash.substring(1));
+      return params.get('access_token');
+    }
+
+    function appendToSheet(token, values) {
+      const sheetId = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q';
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/INFORMES!A2:G:append?valueInputOption=RAW`;
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          values: [values],
+        }),
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    }
 
     const start = () => {
-        gapi.client.init({
-            'apiKey': API_KEY,
-            'discoveryDocs': ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-        }).then(() => {
-            document.getElementById('myInform').onsubmit = (e) => {
-                e.preventDefault();
-                const nombre = document.getElementById('nombre').value;
-                const participa = document.getElementById('participa').checked ? 'Sí' : 'No';
-                const estudios = document.getElementById('estudios').value;
-                const horas = document.getElementById('horas').value;
-                const credito = document.getElementById('credito').value;
-                const comentarios = document.getElementById('comentarios').value;
-                const data = [[nombre, participa, estudios, horas, credito, comentarios]]; // Estructura de datos para enviar
+      gapi.client.init({
+        'apiKey': 'TU_API_KEY',
+        'discoveryDocs': ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+      }).then(() => {
+        document.getElementById('myInform').onsubmit = (e) => {
+          e.preventDefault();
+          const nombre = document.getElementById('nombre').value;
+          const participa = document.getElementById('participa').checked ? 'Sí' : 'No';
+          const estudios = document.getElementById('estudios').value;
+          const horas = document.getElementById('horas').value;
+          const credito = document.getElementById('credito').value;
+          const comentarios = document.getElementById('comentarios').value;
+          const data = [nombre, participa, estudios, horas, credito, comentarios];
 
-                // Añadir datos a la hoja de cálculo
-                return gapi.client.sheets.spreadsheets.values.append({
-                    spreadsheetId: SPREADSHEET_ID,
-                    range: SHEET_NAME + '!A2:G', // Cambia el rango si es necesario
-                    valueInputOption: 'RAW',
-                    resource: {
-                        values: data,
-                    },
-                }).then((response) => {
-                    const result = response.result;
-                    document.getElementById('response').innerText = `${result.updates.updatedCells} celdas actualizadas.`;
-                }, (err) => {
-                    console.error(err);
-                    document.getElementById('response').innerText = 'Error al enviar los datos.';
-                });
-            };
-        }).catch((err) => {
-            console.error('Error al inicializar la API:', err);
-        });
+          // Añadir datos a la hoja de cálculo
+          gapi.client.sheets.spreadsheets.values.append({
+            spreadsheetId: '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q',
+            range: 'INFORMES!A2:G',
+            valueInputOption: 'RAW',
+            resource: {
+              values: [data],
+            },
+          }).then((response) => {
+            const result = response.result;
+            document.getElementById('response').innerText = `${result.updates.updatedCells} celdas actualizadas.`;
+          }, (err) => {
+            console.error(err);
+            document.getElementById('response').innerText = 'Error al enviar los datos.';
+          });
+        };
+      }).catch((err) => {
+        console.error('Error al inicializar la API:', err);
+      });
     };
 
     gapi.load('client', start);
-</script>
-
-  
-  
-  <!-- <script async defer src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>-->
+  </script>
 </body>
 </html>
