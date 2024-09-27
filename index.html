@@ -336,7 +336,7 @@ select {
             document.getElementById('myInform').onsubmit = (e) => {
                 e.preventDefault();
                 const nombre = document.getElementById('nombre').value;
-                const participa = document.getElementById('participa').value;
+                const participa = document.getElementById('participa').checked ? 'Sí' : 'No';
                 const estudios = document.getElementById('estudios').value;
                 const horas = document.getElementById('horas').value;
                 const credito = document.getElementById('credito').value;
