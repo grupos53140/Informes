@@ -335,14 +335,18 @@ select {
         }).then(() => {
             document.getElementById('myInform').onsubmit = (e) => {
                 e.preventDefault();
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const data = [[name, email]]; // Estructura de datos para enviar
+                const nombre = document.getElementById('nombre').value;
+                const participa = document.getElementById('participa').value;
+                const estudios = document.getElementById('estudios').value;
+                const horas = document.getElementById('horas').value;
+                const credito = document.getElementById('credito').value;
+                const comentarios = document.getElementById('comentarios').value;
+                const data = [[nombre, participa, estudios, horas, credito, comentarios]]; // Estructura de datos para enviar
 
                 // Añadir datos a la hoja de cálculo
                 return gapi.client.sheets.spreadsheets.values.append({
                     spreadsheetId: SPREADSHEET_ID,
-                    range: SHEET_NAME + '!A1:B1', // Cambia el rango si es necesario
+                    range: SHEET_NAME + '!A2:G', // Cambia el rango si es necesario
                     valueInputOption: 'RAW',
                     resource: {
                         values: data,
