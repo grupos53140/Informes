@@ -6,7 +6,7 @@
  
   <title>Formulario de Registro</title>
   <style>
-    :root {
+      :root {
     --color-blue-50: #f3f6fb;
     --color-blue-100: #e7edf6;
     --color-blue-150: #dbe5f1;
@@ -44,17 +44,17 @@
     --color-green-800: #1b7933;
     --color-green-900: #155d27;
     --color-green-1000: #0f411b;
-    --color-jardin-blue-50: #dee7f1;
-    --color-jardin-blue-100: #8ba3cc;
-    --color-jardin-blue-200: #7f9ac6;
-    --color-jardin-blue-300: #7491c1;
-    --color-jardin-blue-400: #6888bc;
-    --color-jardin-blue-500: #5c7eb7;
-    --color-jardin-blue-600: #5075b2;
-    --color-jardin-blue-700: #4a6da7;
-    --color-jardin-blue-800: #45659b;
-    --color-jardin-blue-900: #405e8f;
-    --color-jardin-blue-1000: #103245;
+    --color-jw-blue-50: #dee7f1;
+    --color-jw-blue-100: #8ba3cc;
+    --color-jw-blue-200: #7f9ac6;
+    --color-jw-blue-300: #7491c1;
+    --color-jw-blue-400: #6888bc;
+    --color-jw-blue-500: #5c7eb7;
+    --color-jw-blue-600: #5075b2;
+    --color-jw-blue-700: #4a6da7;
+    --color-jw-blue-800: #45659b;
+    --color-jw-blue-900: #405e8f;
+    --color-jw-blue-1000: #103245;
     --color-orange-50: #ffefe3;
     --color-orange-100: #ffddc1;
     --color-orange-150: #ffca9f;
@@ -93,7 +93,7 @@
     --color-yellow-1000: #634f00;
     }
     html {
-      font-family: NotoSans, Arial, sans-serif;
+    font-family: NotoSans, Arial, "Arial Unicode MS", sans-serif;
     }
     body {
       background-color: var(--color-gray-150);
@@ -102,35 +102,78 @@
       align-items: center;
       height: 90vh;
       margin: 0;
-      padding-bottom: 60px;
+      position: relative;
+      padding-bottom: 60px; /* Para que el contenido no se solape con el footer */
     }
-    .form-container {
+   .form-container {
       background-color: white;
       padding: 20px;
       border-radius: 5px;
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
       width: 350px;
-    }
+      border: 0.5px solid var(--color-gray-50);
+   }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }    
     .form-group {
       display: flex;
-      flex-direction: column;
-      gap: 15px;
+      flex-direction: column; /* Para que los contenedores de cada campo queden uno debajo de otro */
+      gap: 15px; /* Espacio entre los campos */
       margin-bottom: 5px;
+    }
+    .form-item {
+      display: flex;
+      align-items: center; /* Alinea las etiquetas con los campos verticalmente */
     }
     label {
       display: block;
-      margin: 10px 0;
-      min-width: 100px;
+      margin-bottom: 10px;
+      margin-top: 10px;	
+      min-width: 100px; /* Ancho mínimo para las etiquetas */
+      margin-right: 10px; /* Espacio entre la etiqueta y el campo */
+      /*font-weight: bold;  Opción: hacer las etiquetas más visibles */
     }
-    input[type="text"], select, textarea {
+    input[type="text"], 
+      select {
       width: 100%;
       padding: 10px;
       border: 1px solid var(--color-gray-200);
+      /*border-radius: 5px;*/
       font-size: 12px;
+      box-sizing: border-box; /* Asegura que el padding no sobrepase el tamaño */
+    }
+    input[type="text"], textarea {
+      flex-grow: 1; /* Para que los campos crezcan según el espacio disponible */
+      padding: 8px; /* Añadir un poco de relleno para mejorar el aspecto */
+      font-size: 12px;
+      width: -webkit-fill-available;
+      border: 1px solid #ccc;
+      height: 50px;
+    }
+    input[type="text"], select, textarea :focus {
+      border-color: var(--color-gray-200); /* Cambia a tu color preferido */
+      outline: none; /* Opcional, elimina el borde por defecto del navegador */
     }
     input[type="checkbox"] {
-      transform: scale(1.5);
-      margin-top: 10px;
+     /* width: 100%;*/
+      transform:scale(1.5);  
+      margin-top: 10px; 
+    }
+    .form-group-inline {
+      display: flex;
+      align-items: center;
+      margin: 20px;
+      flex-direction: column; 
+      text-align: center;	
+    }
+    .form-group-inline label {
+      margin: 0;
+    }
+    .form-group-inline {
+      margin-left: 10px;
     }
     input[type="submit"] {
       width: 100%;
@@ -138,20 +181,25 @@
       color: white;
       padding: 10px;
       border: none;
+      /*border-radius: 5px;*/
       cursor: pointer;
       font-size: 12px;
     }
     input[type="submit"]:hover {
       background-color: var(--color-blue-600);
     }
-    footer {
+   footer {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
       background-color: #f5f5f5;
       padding: 10px 20px;
-      font-size: 10px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
       color: #888;
       border-top: 1px solid #ccc;
     }
@@ -162,6 +210,32 @@
     footer a:hover {
       text-decoration: underline;
     }
+    select {
+      appearance: none; /* Elimina el estilo por defecto del select */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      border: 1px solid #ccc; /* Borde estándar */
+      padding: 10px;
+      font-size: 12px;
+      border-radius: 0px; /* Bordes rectos */
+      background-color: white;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><polygon points="0,0 5,6 10,0" style="fill: %23cccccc;"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 18px; /* Tamaño de la flecha */
+ }
+
+/* Ajusta el tamaño de la flecha y la posición del padding para que no se superponga al texto */
+select:focus {
+  border-color: #4CAF50; /* Color del borde al enfocar */
+  outline: none;
+}
+
+/* Asegurarse de que el padding derecho no tape la flecha */
+select {
+  padding-right: 30px; /* Espacio para la flecha */
+}
+  
   </style>
   <script src="https://apis.google.com/js/api.js"></script>
 </head>
