@@ -313,8 +313,8 @@ select {
   <script>
     
   // Variables para guardar los valores de grupo y faceta
-  let grupo = "";
-  let faceta = "";
+  let grupo = {};
+  let faceta = {};
 
   // Obtener y llenar el dropdown con los nombres
   fetch('https://script.google.com/macros/s/AKfycbwslF2yXRFI5bdQjxh7mhFiFrtwL6l-rVtSkaEb5Cez1WrjLrUZ-MODKFuczu_HAP17/exec')
@@ -400,7 +400,7 @@ select {
 /*
     var facetas = {}; // Para almacenar la faceta de cada nombre
     var grupo={};     //Paara alamcenar el grtupo de cada nombre
-
+*/
     function populateDropdown(names) {
       var select = document.getElementById('nombre');
       select.innerHTML = '';
@@ -412,7 +412,7 @@ select {
       });
       checkFaceta();
     }
-
+*/
     function checkFaceta() {
       var name = document.getElementById('nombre').value;
       if (facetas[name] === 'PUB') {
@@ -426,6 +426,8 @@ select {
       }
     }
 
+
+/*
     function submitData() {
       var name = document.getElementById('nombre').value;
       var estudios = document.getElementById('estudios').value;
