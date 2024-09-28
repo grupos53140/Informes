@@ -247,7 +247,7 @@ select {
         <div class="form-group">
           <label for="nombre">NOMBRE:</label>
           <select id="nombre" name="nombre" onchange="checkFaceta()">
-            <!-- <option value="" disabled selected>Elige aquí tu nombre</option>-->
+            <option value="" disabled selected>Elige aquí tu nombre</option>
             <!-- Los nombres se llenarán aquí -->
           </select>
         </div>
@@ -302,18 +302,34 @@ select {
         option.text = nombre;
         dropdown.add(option);
       });
+      checkFaceta();
     });
 
     // Escuchar cuando el usuario elige un nombre
-    document.getElementById('nombre').addEventListener('change', function() {
-      const selectedName = this.value;
-      fetch(`https://script.google.com/macros/s/AKfycbxlmZlcecKD-RFN26ACZUlX9KbO3nkwrNRna23g__t9xqGY_vSJY58LzldL6H2rIvyA/exec?nombre=${selectedName}`)
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById('grupo').textContent = data.grupo;
-          document.getElementById('faceta').textContent = data.faceta;
-        });
-    });
+   
+      document.getElementById('nombre').addEventListener('change', function() {
+        const selectedName = this.value;
+        fetch(`https://script.google.com/macros/s/AKfycbxlmZlcecKD-RFN26ACZUlX9KbO3nkwrNRna23g__t9xqGY_vSJY58LzldL6H2rIvyA/exec?nombre=${selectedName}`)
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('grupo').textContent = data.grupo;
+            document.getElementById('faceta').textContent = data.faceta;
+          });
+      });
+
+      function checkFaceta() {
+      var name = document.getElementById('nombre').value;
+      if (facetas[name] === 'PUB') {
+        document.getElementById('horasContainer').classList.add('hidden');
+        document.getElementById('creditoContainer').classList.add('hidden');
+        } else {
+        document.getElementById('horasContainer').classList.remove('hidden');  
+        document.getElementById('creditoContainer').classList.remove('hidden');  
+        document.getElementById('estudiosContainer').classList.remove('hidden');
+        document.getElementById('comentariosContainer').classList.remove('hidden');
+      }
+    }
+  
 
 /*
     document.getElementById('myInform').onsubmit = function(event) {
@@ -338,7 +354,7 @@ select {
     */
 
 
-
+/*
     var facetas = {}; // Para almacenar la faceta de cada nombre
     var grupo={};     //Paara alamcenar el grtupo de cada nombre
 
@@ -400,7 +416,7 @@ select {
       populateDropdown(response.names);
       getFacetas(response.facetas);
     }).getNombre();
-
+*/
   </script>
     
 </body>
