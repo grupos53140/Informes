@@ -328,14 +328,14 @@ select {
       event.preventDefault(); // Prevent default form submission
 
       const formData = {
+        grupo: selectedGrupo,  // Send the grupo variable
+        faceta: selectedFaceta, // Send the faceta variable
         nombre: document.getElementById('nombre').value,
+        participa: document.getElementById('participa').checked,
         estudios: document.getElementById('estudios').value,
         horas: document.getElementById('horas').value,
         credito: document.getElementById('credito').value,
-        comentarios: document.getElementById('comentarios').value,
-        participa: document.getElementById('participa').checked,
-        grupo: selectedGrupo,  // Send the grupo variable
-        faceta: selectedFaceta // Send the faceta variable
+        comentarios: document.getElementById('comentarios').value               
       };
 
       // POST request
