@@ -332,12 +332,14 @@ select {
         console.log("Faceta:", faceta);
 
         // Aquí no se actualiza el HTML, solo se guardan en variables
-        checkFaceta(faceta);
+        
       });
+      checkFaceta(faceta);
   }  
 
-  function checkFaceta(name) {
-      if (facet === 'PUB') {
+  function checkFaceta(namefacet) {
+        console.log("nameFacet:", namefacet)
+      if (namefacet === 'PUB') {
         document.getElementById('horasContainer').classList.add('hidden');
         document.getElementById('creditoContainer').classList.add('hidden');
         } else {
