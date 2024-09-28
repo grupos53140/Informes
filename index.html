@@ -296,8 +296,6 @@ select {
   // Variables para guardar los valores de grupo y faceta
   let grupo = "";
   let faceta = "";
-  var facetas = {};  // Para almacenar la faceta de cada nombre
-
 
   // Obtener y llenar el dropdown con los nombres
   fetch('https://script.google.com/macros/s/AKfycbwslF2yXRFI5bdQjxh7mhFiFrtwL6l-rVtSkaEb5Cez1WrjLrUZ-MODKFuczu_HAP17/exec')
@@ -334,13 +332,12 @@ select {
         console.log("Faceta:", faceta);
 
         // Aquí no se actualiza el HTML, solo se guardan en variables
-        checkFaceta();
+        checkFaceta(faceta);
       });
   }  
 
-  function checkFaceta() {
-      var name = document.getElementById('nombre').value;
-      if (facetas[name] === 'PUB') {
+  function checkFaceta(name) {
+      if (facet === 'PUB') {
         document.getElementById('horasContainer').classList.add('hidden');
         document.getElementById('creditoContainer').classList.add('hidden');
         } else {
