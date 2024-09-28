@@ -288,7 +288,7 @@ select {
     </div>
   </footer>
   <script>
-    const URL_WEB='https://script.google.com/macros/s/AKfycbz0EV2amvI1dz-d3U6YJvR5jU68G_IyoHSSt1UTw1cgSm2NoaMbBUbCFYisLoNX3wf1/exec';
+    const URL_WEB='https://script.google.com/macros/s/AKfycbyfkdZM7pGiTTqx-nc3KzyR2DAjUfDgCV514isMMgzXsSkWHHQMTQmOOOlBFMaN7cE8/exec';
     //const dropDownURL='https://script.google.com/macros/s/AKfycbza0Yew86VM6safBOGg6IFeCX57aiEAbcVTb1OkxaS-eBPiQ3L6idLGA8W7mWiyagw8/exec';
 /*
     let selectedGrupo = '';
@@ -323,7 +323,10 @@ select {
           });
       });
     });
+*/
 
+
+//ENVIAR FORMULARIO
     document.getElementById('myInform').onsubmit = function(event) {
       event.preventDefault(); // Prevent default form submission
 
@@ -337,7 +340,7 @@ select {
         credito: document.getElementById('credito').value,
         comentarios: document.getElementById('comentarios').value               
       };
-*/
+
       // POST request
       fetch(URL_WEB, {
         method: 'POST',
