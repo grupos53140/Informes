@@ -322,7 +322,7 @@ select {
   
 
   // Obtener y llenar el dropdown con los nombres
-  fetch('https://script.google.com/macros/s/AKfycbwslF2yXRFI5bdQjxh7mhFiFrtwL6l-rVtSkaEb5Cez1WrjLrUZ-MODKFuczu_HAP17/exec')
+  fetch('https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec')
     .then(response => response.json())
     .then(data => {
       const dropdown = document.getElementById('nombre');
@@ -339,7 +339,7 @@ select {
       const selectedName = this.value;
 
     // Realizar la consulta para obtener grupo y faceta basados en el nombre
-    fetch(`https://script.google.com/macros/s/AKfycbwslF2yXRFI5bdQjxh7mhFiFrtwL6l-rVtSkaEb5Cez1WrjLrUZ-MODKFuczu_HAP17/exec?nombre=${selectedName}`)
+    fetch(`https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec?nombre=${selectedName}`)
     .then(response => response.json())
       .then(data => {
         // Guardar los valores de grupo y faceta en las variables
@@ -358,22 +358,6 @@ select {
       });
   });
 
-  /*
-    var facetas = {}; // Para almacenar la faceta de cada nombre
-    var grupo={};     //Paara alamcenar el grtupo de cada nombre
-
-    function populateDropdown(names) {
-      var select = document.getElementById('nombre');
-      select.innerHTML = '';
-      names.forEach(function(name) {
-        var option = document.createElement('option');
-        option.value = name;
-        option.text = name;
-        select.appendChild(option);
-      });
-      checkFaceta();
-    }
-*/
     function checkFaceta(faceta) {
       if (faceta === 'PUB') {
         document.getElementById('horasContainer').classList.add('hidden');
@@ -423,6 +407,47 @@ select {
       getFacetas(response.facetas);
     }).getNombre();
 */
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ENVIAR LOS DATOS DEL FORMULARIO
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+document.getElementById('myInform').addEventListener('submit', function(event) {
+  event.preventDefault(); // Evitar que el formulario se envíe de manera convencional
+
+  // Obtener los valores del formulario
+  const nombre = document.getElementById('nombre').value;
+  const participa = document.getElementById('participa').checked ? "Sí" : "No";
+  const estudios = document.getElementById('estudios').value;
+  const horas = document.getElementById('horas').value;
+  const credito = document.getElementById('credito').value;
+  const comentarios = document.getElementById('comentarios').value;
+
+  // Enviar los datos al AppScript usando fetch
+  fetch('https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      'nombre': nombre,
+      'grupo': grupo,
+      'faceta': faceta,
+      'participa': participa,
+      'estudios': estudios,
+      'horas': horas,
+      'credito': credito,
+      'comentarios': comentarios,
+    })
+  })
+  .then(response => response.text())  // Leer la respuesta del AppScript
+  .then(result => {
+    console.log(result);  // Mostrar el resultado en la consola
+    document.getElementById('response').textContent = result;  // Mostrar mensaje de éxito en la página
+  })
+  .catch(error => console.error('Error al enviar:', error));
+});
+
   </script>
     
 </body>
