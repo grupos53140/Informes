@@ -304,6 +304,12 @@ select {
           <input type="submit" id="submitBtn" value="Enviar">
         </div>
       </fieldset>
+      <div id="thankYouMessage" style="display: none; text-align: center;">
+        <img src="https://example.com/checkmark.png" alt="Chulito Azul" style="width: 100px; height: 100px;">
+        <h2>¡Recibimos tu informe!</h2>
+        <p>Muchas gracias por tu registro.</p>
+      </div>
+      
     </form>
     <div id="response"></div>
   </div>
@@ -444,8 +450,17 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
   .then(result => {
     console.log(result);  // Mostrar el resultado en la consola
     document.getElementById('response').textContent = result;  // Mostrar mensaje de éxito en la página
+
+    // Limpiar el formulario
+    document.getElementById('myInform').reset();  // Esto limpia todos los campos del formulario
+    // Ocultar el formulario y mostrar el mensaje de agradecimiento
+    document.getElementById('myInform').style.display = 'none';
+    document.getElementById('thankYouMessage').style.display = 'block';
+
   })
+  
   .catch(error => console.error('Error al enviar:', error));
+  
 });
 
   </script>
