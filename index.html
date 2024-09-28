@@ -288,6 +288,7 @@ select {
     </div>
   </footer>
   <script>
+    const URL_WEB='https://script.google.com/macros/s/AKfycbxW6l5hcTi6hhAsgFgq-Mc0AAGRWhlY91RUkSm3VCvxCI-Uiv3Lo35sSEAxRsI8oi4P/exec';
     document.getElementById('myInform').onsubmit = function(event) {
       event.preventDefault(); // Evita el envío normal del formulario
       
@@ -295,7 +296,7 @@ select {
       var formData = new FormData(this);
       
       // Hacer una solicitud POST al script de Google Apps
-      fetch('TU_URL_DEL_SCRIPT', {
+      fetch(URL_WEB, {
         method: 'POST',
         body: formData
       })
