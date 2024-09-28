@@ -305,7 +305,7 @@ select {
         </div>
       </fieldset>
       <div id="thankYouMessage" style="display: none; text-align: center;">
-        <img src="https://example.com/checkmark.png" alt="Chulito Azul" style="width: 100px; height: 100px;">
+        <img src="https://" alt="Chulito Azul" style="width: 100px; height: 100px;">
         <h2>¡Recibimos tu informe!</h2>
         <p>Muchas gracias por tu registro.</p>
       </div>
@@ -376,45 +376,6 @@ select {
       }
     }
     
-
-
-/*
-    function submitData() {
-      var name = document.getElementById('nombre').value;
-      var estudios = document.getElementById('estudios').value;
-      var horas = document.getElementById('horas').value;
-      var credito = document.getElementById('credito').value;
-      var comentarios = document.getElementById('comentarios').value;
-
-      if (name === '') {
-        alert('Por favor, Ingresa o elige tu nombre.');
-        return;
-      }
-
-      google.script.run.submitForm({
-        name: name,
-        estudios: estudios,
-        horas: horas,
-        credito:credito,
-        comentarios: comentarios
-      });
-
-      google.script.host.close();
-    }
-
-    function getFacetas(names) {
-      names.forEach(function(name) {
-        facetas[name.name] = name.faceta;  // Asumimos que 'name' tiene propiedades 'name' y 'faceta'
-      });
-    }
-
-    google.script.run.withSuccessHandler(function(response) {
-      populateDropdown(response.names);
-      getFacetas(response.facetas);
-    }).getNombre();
-*/
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ENVIAR LOS DATOS DEL FORMULARIO
 //////////////////////////////////////////////////////////////////////////////////////////////////////
