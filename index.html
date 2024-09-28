@@ -424,10 +424,10 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
   // Obtener los valores del formulario
   const nombre = document.getElementById('nombre').value;
   const participa = document.getElementById('participa').checked ? "Sí" : "No";
-  const estudios = document.getElementById('estudios').value;
-  const horas = document.getElementById('horas').value;
-  const credito = document.getElementById('credito').value;
-  const comentarios = document.getElementById('comentarios').value;
+  const estudios = document.getElementById('estudios').value || "0";
+  const horas = document.getElementById('horas').value || "0";
+  const credito = document.getElementById('credito').value || "0";
+  const comentarios = document.getElementById('comentarios').value || "--";
 
   // Enviar los datos al AppScript usando fetch
   fetch('https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec', {
