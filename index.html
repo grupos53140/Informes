@@ -251,6 +251,9 @@ select {
             <!-- Los nombres se llenarán aquí -->
           </select>
         </div>
+        <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
+        <p>Grupo: <span id="grupo"></span></p>
+        <p>Faceta: <span id="faceta"></span></p>
         <div class="form-group-inline">
           <fieldset id="fparticipa">
             <legend id="lparticipa">PARTICIPA:</legend>
@@ -290,7 +293,7 @@ select {
   </footer>
   <script>
     //CONSULTA NOMBRES PARA LISTAR EN EL DROPDOWN
-    fetch('https://script.google.com/macros/s/AKfycbwNAS5195z-vQR77OaxhKIZu9EuAzV4hRINk9QA7i4xg1TIRXhYalSMyl9-tasywEU5/exec')
+    fetch('https://script.google.com/macros/s/AKfycbwHCx_RtZYwuf5GmPO9I4hz6luGJIEF0zGrn56sOKniQN4CQNqRhwY7JS19kRh8J8wY/exec')
     .then(response => response.json())
     .then(data => {
       const dropdown = document.getElementById('nombre');
@@ -299,6 +302,17 @@ select {
         option.text = nombre;
         dropdown.add(option);
       });
+    });
+
+    // Escuchar cuando el usuario elige un nombre
+    document.getElementById('nombre').addEventListener('change', function() {
+      const selectedName = this.value;
+      fetch(`https://script.google.com/macros/s/AKfycbwHCx_RtZYwuf5GmPO9I4hz6luGJIEF0zGrn56sOKniQN4CQNqRhwY7JS19kRh8J8wY/exec?nombre=${selectedName}`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('grupo').textContent = data.grupo;
+          document.getElementById('faceta').textContent = data.faceta;
+        });
     });
 
 /*
