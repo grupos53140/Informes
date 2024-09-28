@@ -289,8 +289,42 @@ select {
   </footer>
   <script>
     const URL_WEB='https://script.google.com/macros/s/AKfycbwSWJUiuxpT67MJd6mEUjraDo2jN46H_7nSpqWHnRCczISBuuoChtps5SjNmkRvJPs1/exec';
-    const dropDown='https://script.google.com/macros/s/AKfycbxaYOc18XSewL2YBtOKdE5PS4PxU2cdTJnTWlZ8_244y6zmn-5SHN5fd2fPeUVGoNEE/exec';
-// Cargar los nombres al dropdown al cargar la página
+   
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropDown='https://script.google.com/macros/s/AKfycbxaYOc18XSewL2YBtOKdE5PS4PxU2cdTJnTWlZ8_244y6zmn-5SHN5fd2fPeUVGoNEE/exec';
+      // Llenar el dropdown de nombres
+      fetch(dropDown)
+        .then(response => response.json())
+        .then(data => {
+          let nombreSelect = document.getElementById('nombre');
+          data.forEach(item => {
+            let option = document.createElement('option');
+            option.value = item.NOMBRE;
+            option.textContent = item.NOMBRE;
+            nombreSelect.appendChild(option);
+          });
+        });
+
+      // Actualizar grupo y faceta al seleccionar nombre
+      document.getElementById('nombre').addEventListener('change', function() {
+        const selectedName = this.value;
+
+        fetch(dropDown)
+          .then(response => response.json())
+          .then(data => {
+            const selectedData = data.find(item => item.NOMBRE === selectedName);
+            if (selectedData) {
+              document.getElementById('grupo').value = selectedData.GRUPO;
+              document.getElementById('faceta').value = selectedData.FACETA;
+            }
+          });
+      });
+
+
+
+    /*
+    // Cargar los nombres al dropdown al cargar la página
         window.onload = function() {
           fetch(dropDown)
             .then(response => response.json())
@@ -306,7 +340,7 @@ select {
             .catch(error => console.error('Error al cargar nombres:', error));
         };
 
-   
+   */
     document.getElementById('myInform').onsubmit = function(event) {
       event.preventDefault(); // Evita el envío normal del formulario
       
