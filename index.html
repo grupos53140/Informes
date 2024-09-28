@@ -246,14 +246,14 @@ select {
         <legend>INFORME DE SERVICIO</legend>
         <div class="form-group">
           <label for="nombre">NOMBRE:</label>
-          <select id="nombre" name="nombre" onchange="grupoFaceta()">
+          <select id="nombre" name="nombre">
             <option value="" disabled selected>Elige aquí tu nombre</option>
             <!-- Los nombres se llenarán aquí -->
           </select>
         </div>
         <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
-        <p>Grupo: <span id="grupo"></span>Faceta: <span id="faceta"></span></p>
-        
+        <p>Grupo: <span id="grupo"></span></p>
+        <p>Faceta: <span id="faceta"></span></p>
         <div class="form-group-inline">
           <fieldset id="fparticipa">
             <legend id="lparticipa">PARTICIPA:</legend>
@@ -311,9 +311,8 @@ select {
     });
 
      // Escuchar cuando el usuario selecciona un nombre
-  function grupoFaceta() {
-    var name = document.getElementById('nombre').value;
-    const selectedName = name;
+  function grupoFaceta(name) {
+    const selectedName = this.value;
 
     // Realizar la consulta para obtener grupo y faceta basados en el nombre
     fetch(`https://script.google.com/macros/s/AKfycbwslF2yXRFI5bdQjxh7mhFiFrtwL6l-rVtSkaEb5Cez1WrjLrUZ-MODKFuczu_HAP17/exec?nombre=${selectedName}`)
@@ -323,10 +322,6 @@ select {
         grupo = data.grupo;
         faceta = data.faceta;
 
-        //Mostrar resultado en formualrio
-        document.getElementById('grupo').textContent = data.grupo;
-        document.getElementById('faceta').textContent = data.faceta;
-
         // Para comprobar que se guardaron correctamente:
         console.log("Grupo:", grupo);
         console.log("Faceta:", faceta);
@@ -334,22 +329,7 @@ select {
         // Aquí no se actualiza el HTML, solo se guardan en variables
         
       });
-      checkFaceta(faceta);
   }  
-
-  function checkFaceta(namefacet) {
-        console.log("nameFacet:", namefacet)
-      if (namefacet === 'PUB') {
-        document.getElementById('horasContainer').classList.add('hidden');
-        document.getElementById('creditoContainer').classList.add('hidden');
-        } else {
-        document.getElementById('horasContainer').classList.remove('hidden');  
-        document.getElementById('creditoContainer').classList.remove('hidden');  
-        document.getElementById('estudiosContainer').classList.remove('hidden');
-        document.getElementById('comentariosContainer').classList.remove('hidden');
-      }
-    }
-
 
 
 /*
