@@ -321,10 +321,13 @@ select {
         grupo = data.grupo;
         faceta = data.faceta;
 
+        // Para mostra en el formulario en etiquetas span:
+        document.getElementById('grupo').textContent = data.grupo;
+        document.getElementById('faceta').textContent = data.faceta;
+
         // Para comprobar que se guardaron correctamente:
         console.log("Grupo:", grupo);
         console.log("Faceta:", faceta);
-
         // Aquí no se actualiza el HTML, solo se guardan en variables
       });
   });
