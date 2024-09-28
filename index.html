@@ -312,7 +312,8 @@ select {
 
      // Escuchar cuando el usuario selecciona un nombre
   function grupoFaceta() {
-    const selectedName = this.value;
+    var name = document.getElementById('nombre').value;
+    const selectedName = name;
 
     // Realizar la consulta para obtener grupo y faceta basados en el nombre
     fetch(`https://script.google.com/macros/s/AKfycbwslF2yXRFI5bdQjxh7mhFiFrtwL6l-rVtSkaEb5Cez1WrjLrUZ-MODKFuczu_HAP17/exec?nombre=${selectedName}`)
