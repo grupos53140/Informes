@@ -246,7 +246,7 @@ select {
         <legend>INFORME DE SERVICIO</legend>
         <div class="form-group">
           <label for="nombre">NOMBRE:</label>
-          <select id="nombre" name="nombre" onchange="checkFaceta()">
+          <select id="nombre" name="nombre">
             <option value="" disabled selected>Elige aquí tu nombre</option>
             <!-- Los nombres se llenarán aquí -->
           </select>
@@ -292,30 +292,47 @@ select {
     </div>
   </footer>
   <script>
-    //CONSULTA NOMBRES PARA LISTAR EN EL DROPDOWN
-    fetch('https://script.google.com/macros/s/AKfycbxlmZlcecKD-RFN26ACZUlX9KbO3nkwrNRna23g__t9xqGY_vSJY58LzldL6H2rIvyA/exec')
+    
+  // Variables para guardar los valores de grupo y faceta
+  let grupo = "";
+  let faceta = "";
+
+  // Obtener y llenar el dropdown con los nombres
+  fetch('https://script.google.com/macros/s/AKfycbxlmZlcecKD-RFN26ACZUlX9KbO3nkwrNRna23g__t9xqGY_vSJY58LzldL6H2rIvyA/exec')
     .then(response => response.json())
     .then(data => {
       const dropdown = document.getElementById('nombre');
       data.forEach(nombre => {
         let option = document.createElement('option');
         option.text = nombre;
+        option.value = nombre; // Aseguramos que el valor sea el nombre seleccionado
         dropdown.add(option);
       });
-      checkFaceta();
     });
 
-    // Escuchar cuando el usuario elige un nombre
-   
-      document.getElementById('nombre').addEventListener('change', function() {
-        const selectedName = this.value;
-        fetch(`https://script.google.com/macros/s/AKfycbxlmZlcecKD-RFN26ACZUlX9KbO3nkwrNRna23g__t9xqGY_vSJY58LzldL6H2rIvyA/exec?nombre=${selectedName}`)
-          .then(response => response.json())
-          .then(data => {
-            document.getElementById('grupo').textContent = data.grupo;
-            document.getElementById('faceta').textContent = data.faceta;
-          });
+  // Escuchar cuando el usuario selecciona un nombre
+  document.getElementById('nombre').addEventListener('change', function() {
+    const selectedName = this.value;
+
+    // Realizar la consulta para obtener grupo y faceta basados en el nombre
+    fetch(`https://script.google.com/macros/s/AKfycbxlmZlcecKD-RFN26ACZUlX9KbO3nkwrNRna23g__t9xqGY_vSJY58LzldL6H2rIvyA/exec?nombre=${selectedName}`)
+      .then(response => response.json())
+      .then(data => {
+        // Guardar los valores de grupo y faceta en las variables
+        grupo = data.grupo;
+        faceta = data.faceta;
+
+        // Para comprobar que se guardaron correctamente:
+        console.log("Grupo:", grupo);
+        console.log("Faceta:", faceta);
+
+        // Aquí no se actualiza el HTML, solo se guardan en variables
+        // Para comprobar que se guardaron correctamente:
+      console.log("Grupo:", grupo);
+      console.log("Faceta:", faceta);
       });
+  });
+
 
       function checkFaceta() {
       var name = document.getElementById('nombre').value;
