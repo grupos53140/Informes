@@ -129,6 +129,12 @@
       gap: 15px; /* Espacio entre los campos */
       margin-bottom: 5px;
     }
+    .form-group-textarea {
+      display: flex;
+      flex-direction: column; /* Para que los contenedores de cada campo queden uno debajo de otro */
+      gap: 15px; /* Espacio entre los campos */
+      margin-bottom: 5px;
+    }
     .form-item {
       display: flex;
       align-items: center; /* Alinea las etiquetas con los campos verticalmente */
@@ -286,7 +292,7 @@ select {
           <label for="credito">CREDITO:</label>
           <input type="text" id="credito" name="credito" placeholder="Creditos">
         </div>
-        <div class="form-group">
+        <div class="form-group-textarea">
           <label for="comentarios">COMENTARIOS:</label>
           <textarea id="comentarios" name="comentarios" rows="4" placeholder="Ingresa tus comentarios"></textarea>
         </div>
