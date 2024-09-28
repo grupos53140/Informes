@@ -322,6 +322,10 @@ select {
         // Guardar los valores de grupo y faceta en las variables
         grupo = data.grupo;
         faceta = data.faceta;
+        
+        //Mostrar resultado en formualrio
+        document.getElementById('grupo').textContent = data.grupo;
+        document.getElementById('faceta').textContent = data.faceta;
 
         // Para comprobar que se guardaron correctamente:
         console.log("Grupo:", grupo);
