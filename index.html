@@ -288,77 +288,35 @@ select {
     </div>
   </footer>
   <script>
-    const CLIENT_ID = '983691052042-a2qptmidlqpoukom207520nb1daedmfn.apps.googleusercontent.com';//TU_CLIENT_ID
-    const REDIRECT_URI = 'https://grupos53140.github.io/informes';
-    const SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+    const URL_WEB='https://script.google.com/macros/s/AKfycbzm2NOg82xVogG5QClyUCuTb-H7TbvJT2P2togPqRD8xpInPMbIpQGLZdowbSmcG52m/exec';
+   document.getElementById('myInform').addEventListener('submit', function(e) {
+  e.preventDefault(); // Evitar el envío normal del formulario
 
-    function authenticate() {
-      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=token&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}`;
-      window.location.href = authUrl;
+  const formData = {
+    nombre: document.getElementById('nombre').value,
+    estudios: document.getElementById('estudios').value,
+    horas: document.getElementById('horas').value,
+    credito: document.getElementById('credito').value,
+    comentarios: document.getElementById('comentarios').value,
+    participa: document.getElementById('participa').checked
+  };
+
+  fetch(URL_WEB, {
+    method: 'POST',
+    body: JSON.stringify(formData),
+    headers: {
+      'Content-Type': 'application/json'
     }
-
-    function getAccessToken() {
-      const hash = window.location.hash;
-      const params = new URLSearchParams(hash.substring(1));
-      return params.get('access_token');
-    }
-
-    function appendToSheet(token, values) {
-      const sheetId = '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q';
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/INFORMES!A2:G:append?valueInputOption=RAW`;
-
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          values: [values],
-        }),
-      })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error('Error:', error));
-    }
-
-    const start = () => {
-      gapi.client.init({
-        'apiKey': 'AIzaSyAtIlpym0Y0608nJq7ZglhQxfCFbgjsEmw',//'TU_API_KEY',
-        'discoveryDocs': ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-      }).then(() => {
-        document.getElementById('myInform').onsubmit = (e) => {
-          e.preventDefault();
-          const nombre = document.getElementById('nombre').value;
-          const participa = document.getElementById('participa').checked ? 'Sí' : 'No';
-          const estudios = document.getElementById('estudios').value;
-          const horas = document.getElementById('horas').value;
-          const credito = document.getElementById('credito').value;
-          const comentarios = document.getElementById('comentarios').value;
-          const data = [nombre, participa, estudios, horas, credito, comentarios];
-
-          // Añadir datos a la hoja de cálculo
-          gapi.client.sheets.spreadsheets.values.append({
-            spreadsheetId: '12AhQg1rVBLM7-kOrqaHYK7wrA7ewgZNL_qNpSsXUy3Q',
-            range: 'INFORMES!A2:G',
-            valueInputOption: 'RAW',
-            resource: {
-              values: [data],
-            },
-          }).then((response) => {
-            const result = response.result;
-            document.getElementById('response').innerText = `${result.updates.updatedCells} celdas actualizadas.`;
-          }, (err) => {
-            console.error(err);
-            document.getElementById('response').innerText = 'Error al enviar los datos.';
-          });
-        };
-      }).catch((err) => {
-        console.error('Error al inicializar la API:', err);
-      });
-    };
-
-    gapi.load('client', start);
+  })
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('response').innerText = data;
+    document.getElementById('myInform').reset(); // Reiniciar el formulario
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+});
   </script>
 </body>
 </html>
