@@ -289,12 +289,14 @@ select {
   </footer>
   <script>
     const URL_WEB='https://script.google.com/macros/s/AKfycbycYtnXceuY5GdIQbqTupJZuHW-ENIgxLLJdhkBe1n9npmh__k0xPFT6iM_LtcxgB_B/exec';
-   
+    const dropDownURL='https://script.google.com/macros/s/AKfycby-tP4T2AG3obkBWKuQXAblW_BKhq1qQWfLP_yc41s7ffZOOexqYIurajKWYjtt-0fU/exec';
+
+    let selectedGrupo = '';
+    let selectedFaceta = '';
 
     document.addEventListener('DOMContentLoaded', function() {
-      const dropDown='https://script.google.com/macros/s/AKfycby-tP4T2AG3obkBWKuQXAblW_BKhq1qQWfLP_yc41s7ffZOOexqYIurajKWYjtt-0fU/exec';
-      // Llenar el dropdown de nombres
-      fetch(dropDown)
+      // Fill dropdown
+      fetch(dropDownURL)
         .then(response => response.json())
         .then(data => {
           let nombreSelect = document.getElementById('nombre');
@@ -306,60 +308,54 @@ select {
           });
         });
 
-      // Actualizar grupo y faceta al seleccionar nombre
+      // Update grupo and faceta on dropdown change
       document.getElementById('nombre').addEventListener('change', function() {
         const selectedName = this.value;
 
-        fetch(dropDown)
+        fetch(dropDownURL)
           .then(response => response.json())
           .then(data => {
             const selectedData = data.find(item => item.NOMBRE === selectedName);
             if (selectedData) {
-              document.getElementById('grupo').value = selectedData.GRUPO;
-              document.getElementById('faceta').value = selectedData.FACETA;
+              selectedGrupo = selectedData.GRUPO;  // Store grupo in a variable
+              selectedFaceta = selectedData.FACETA; // Store faceta in a variable
             }
           });
       });
-
-
     });
-    /*
-    // Cargar los nombres al dropdown al cargar la página
-        window.onload = function() {
-          fetch(dropDown)
-            .then(response => response.json())
-            .then(data => {
-              const nombreSelect = document.getElementById('nombre');
-              data.forEach(nombre => {
-                const option = document.createElement('option');
-                option.value = nombre;
-                option.textContent = nombre;
-                nombreSelect.appendChild(option);
-              });
-            })
-            .catch(error => console.error('Error al cargar nombres:', error));
-        };
 
-   */
     document.getElementById('myInform').onsubmit = function(event) {
-      event.preventDefault(); // Evita el envío normal del formulario
-      
-      // Obtener los datos del formulario
-      var formData = new FormData(this);
-      
-      // Hacer una solicitud POST al script de Google Apps
+      event.preventDefault(); // Prevent default form submission
+
+      const formData = {
+        nombre: document.getElementById('nombre').value,
+        estudios: document.getElementById('estudios').value,
+        horas: document.getElementById('horas').value,
+        credito: document.getElementById('credito').value,
+        comentarios: document.getElementById('comentarios').value,
+        participa: document.getElementById('participa').checked,
+        grupo: selectedGrupo,  // Send the grupo variable
+        faceta: selectedFaceta // Send the faceta variable
+      };
+
+      // POST request
       fetch(URL_WEB, {
         method: 'POST',
-        body: formData
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
       .then(response => response.text())
       .then(data => {
-        document.getElementById('response').innerText = data; // Mostrar respuesta en el div
+        document.getElementById('response').innerText = data;
+        document.getElementById('myInform').reset(); // Reset form
       })
       .catch(error => {
         console.error('Error:', error);
       });
     };
-  </script>
+</script>
+
 </body>
 </html>
