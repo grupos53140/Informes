@@ -288,35 +288,25 @@ select {
     </div>
   </footer>
   <script>
-    const URL_WEB='https://script.google.com/macros/s/AKfycbzm2NOg82xVogG5QClyUCuTb-H7TbvJT2P2togPqRD8xpInPMbIpQGLZdowbSmcG52m/exec';
-   document.getElementById('myInform').addEventListener('submit', function(e) {
-  e.preventDefault(); // Evitar el envío normal del formulario
-
-  const formData = {
-    nombre: document.getElementById('nombre').value,
-    estudios: document.getElementById('estudios').value,
-    horas: document.getElementById('horas').value,
-    credito: document.getElementById('credito').value,
-    comentarios: document.getElementById('comentarios').value,
-    participa: document.getElementById('participa').checked
-  };
-
-  fetch(URL_WEB, {
-    method: 'POST',
-    body: JSON.stringify(formData),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('response').innerText = data;
-    document.getElementById('myInform').reset(); // Reiniciar el formulario
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-});
+    document.getElementById('myInform').onsubmit = function(event) {
+      event.preventDefault(); // Evita el envío normal del formulario
+      
+      // Obtener los datos del formulario
+      var formData = new FormData(this);
+      
+      // Hacer una solicitud POST al script de Google Apps
+      fetch('TU_URL_DEL_SCRIPT', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('response').innerText = data; // Mostrar respuesta en el div
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    };
   </script>
 </body>
 </html>
