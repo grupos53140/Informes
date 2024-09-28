@@ -310,13 +310,14 @@ select {
       });
     });
 
-     // Escuchar cuando el usuario selecciona un nombre
-  function grupoFaceta(name) {
-    const selectedName = this.value;
+    // Escuchar cuando el usuario selecciona un nombre
+  document.getElementById('nombreDropdown').addEventListener('change', function() {
+      const selectedName = this.value;
+
 
     // Realizar la consulta para obtener grupo y faceta basados en el nombre
     fetch(`https://script.google.com/macros/s/AKfycbwslF2yXRFI5bdQjxh7mhFiFrtwL6l-rVtSkaEb5Cez1WrjLrUZ-MODKFuczu_HAP17/exec?nombre=${selectedName}`)
-      .then(response => response.json())
+    .then(response => response.json())
       .then(data => {
         // Guardar los valores de grupo y faceta en las variables
         grupo = data.grupo;
@@ -326,12 +327,14 @@ select {
         console.log("Grupo:", grupo);
         console.log("Faceta:", faceta);
 
+        // Para comprobar que se guardaron correctamente:
+        console.log("Grupo:", grupo);
+        console.log("Faceta:", faceta);
+
         // Aquí no se actualiza el HTML, solo se guardan en variables
-        
       });
-  }  
-
-
+  });
+        
 /*
   // Escuchar cuando el usuario selecciona un nombre
   document.getElementById('nombre').addEventListener('change', function() {
