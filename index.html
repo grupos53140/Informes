@@ -288,6 +288,19 @@ select {
     </div>
   </footer>
   <script>
+    //CONSULTA NOMBRES PARA LISTAR EN EL DROPDOWN
+    fetch('https://script.google.com/macros/s/AKfycbytPqeBpQaARawReUw5dMM6Ypexod2jCjScnjupiw8N1d4e39Yu0CXlTibbsCfjYUqr/exec')
+    .then(response => response.json())
+    .then(data => {
+      const dropdown = document.getElementById('nombre');
+      data.forEach(nombre => {
+        let option = document.createElement('option');
+        option.text = nombre;
+        dropdown.add(option);
+      });
+    });
+
+/*
     document.getElementById('myInform').onsubmit = function(event) {
       event.preventDefault(); // Evita el envío normal del formulario
       
@@ -307,6 +320,8 @@ select {
         console.error('Error:', error);
       });
     };
+    */
+
   </script>
     
 </body>
