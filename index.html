@@ -289,7 +289,7 @@ select {
   </footer>
   <script>
     const URL_WEB='https://script.google.com/macros/s/AKfycbycYtnXceuY5GdIQbqTupJZuHW-ENIgxLLJdhkBe1n9npmh__k0xPFT6iM_LtcxgB_B/exec';
-    const dropDownURL='https://script.google.com/macros/s/AKfycbza0Yew86VM6safBOGg6IFeCX57aiEAbcVTb1OkxaS-eBPiQ3L6idLGA8W7mWiyagw8/exec';
+    //const dropDownURL='https://script.google.com/macros/s/AKfycbza0Yew86VM6safBOGg6IFeCX57aiEAbcVTb1OkxaS-eBPiQ3L6idLGA8W7mWiyagw8/exec';
 
     let selectedGrupo = '';
     let selectedFaceta = '';
@@ -312,7 +312,7 @@ select {
       document.getElementById('nombre').addEventListener('change', function() {
         const selectedName = this.value;
 
-        fetch(dropDownURL)
+        fetch('https://script.google.com/macros/s/AKfycbza0Yew86VM6safBOGg6IFeCX57aiEAbcVTb1OkxaS-eBPiQ3L6idLGA8W7mWiyagw8/exec')
           .then(response => response.json())
           .then(data => {
             const selectedData = data.find(item => item.NOMBRE === selectedName);
