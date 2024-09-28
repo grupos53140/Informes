@@ -289,10 +289,10 @@ select {
   </footer>
   <script>
     const URL_WEB='https://script.google.com/macros/s/AKfycbwSWJUiuxpT67MJd6mEUjraDo2jN46H_7nSpqWHnRCczISBuuoChtps5SjNmkRvJPs1/exec';
-/*
+    const dropDown='https://script.google.com/macros/s/AKfycbxaYOc18XSewL2YBtOKdE5PS4PxU2cdTJnTWlZ8_244y6zmn-5SHN5fd2fPeUVGoNEE/exec';
 // Cargar los nombres al dropdown al cargar la página
         window.onload = function() {
-          fetch('https://script.google.com/macros/s/AKfycbwSWJUiuxpT67MJd6mEUjraDo2jN46H_7nSpqWHnRCczISBuuoChtps5SjNmkRvJPs1/exec')
+          fetch(dropDown)
             .then(response => response.json())
             .then(data => {
               const nombreSelect = document.getElementById('nombre');
@@ -306,7 +306,7 @@ select {
             .catch(error => console.error('Error al cargar nombres:', error));
         };
 
-   */ 
+   
     document.getElementById('myInform').onsubmit = function(event) {
       event.preventDefault(); // Evita el envío normal del formulario
       
