@@ -246,7 +246,7 @@ select {
         <legend>INFORME DE SERVICIO</legend>
         <div class="form-group">
           <label for="nombre">NOMBRE:</label>
-          <select id="nombre" name="nombre" onchange="grupoFaceta('nombre')">
+          <select id="nombre" name="nombre" onchange="grupoFaceta()">
             <option value="" disabled selected>Elige aquí tu nombre</option>
             <!-- Los nombres se llenarán aquí -->
           </select>
@@ -311,7 +311,7 @@ select {
     });
 
      // Escuchar cuando el usuario selecciona un nombre
-  function grupoFaceta(nombre) {
+  function grupoFaceta() {
     const selectedName = this.value;
 
     // Realizar la consulta para obtener grupo y faceta basados en el nombre
