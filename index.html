@@ -289,6 +289,24 @@ select {
   </footer>
   <script>
     const URL_WEB='https://script.google.com/macros/s/AKfycbxW6l5hcTi6hhAsgFgq-Mc0AAGRWhlY91RUkSm3VCvxCI-Uiv3Lo35sSEAxRsI8oi4P/exec';
+
+// Cargar los nombres al dropdown al cargar la página
+        window.onload = function() {
+          fetch(URL_WEB)
+            .then(response => response.json())
+            .then(data => {
+              const nombreSelect = document.getElementById('nombre');
+              data.forEach(nombre => {
+                const option = document.createElement('option');
+                option.value = nombre;
+                option.textContent = nombre;
+                nombreSelect.appendChild(option);
+              });
+            })
+            .catch(error => console.error('Error al cargar nombres:', error));
+        };
+
+    
     document.getElementById('myInform').onsubmit = function(event) {
       event.preventDefault(); // Evita el envío normal del formulario
       
