@@ -298,7 +298,7 @@ select {
   let faceta = "";
 
   // Obtener y llenar el dropdown con los nombres
-  fetch('https://script.google.com/macros/s/AKfycbxlmZlcecKD-RFN26ACZUlX9KbO3nkwrNRna23g__t9xqGY_vSJY58LzldL6H2rIvyA/exec')
+  fetch('https://script.google.com/macros/s/AKfycbwslF2yXRFI5bdQjxh7mhFiFrtwL6l-rVtSkaEb5Cez1WrjLrUZ-MODKFuczu_HAP17/exec')
     .then(response => response.json())
     .then(data => {
       const dropdown = document.getElementById('nombre');
@@ -315,7 +315,7 @@ select {
     const selectedName = this.value;
 
     // Realizar la consulta para obtener grupo y faceta basados en el nombre
-    fetch(`https://script.google.com/macros/s/AKfycbxlmZlcecKD-RFN26ACZUlX9KbO3nkwrNRna23g__t9xqGY_vSJY58LzldL6H2rIvyA/exec?nombre=${selectedName}`)
+    fetch(`https://script.google.com/macros/s/AKfycbwslF2yXRFI5bdQjxh7mhFiFrtwL6l-rVtSkaEb5Cez1WrjLrUZ-MODKFuczu_HAP17/exec?nombre=${selectedName}`)
       .then(response => response.json())
       .then(data => {
         // Guardar los valores de grupo y faceta en las variables
@@ -331,22 +331,7 @@ select {
       console.log("Grupo:", grupo);
       console.log("Faceta:", faceta);
       });
-  });
-
-
-      function checkFaceta() {
-      var name = document.getElementById('nombre').value;
-      if (facetas[name] === 'PUB') {
-        document.getElementById('horasContainer').classList.add('hidden');
-        document.getElementById('creditoContainer').classList.add('hidden');
-        } else {
-        document.getElementById('horasContainer').classList.remove('hidden');  
-        document.getElementById('creditoContainer').classList.remove('hidden');  
-        document.getElementById('estudiosContainer').classList.remove('hidden');
-        document.getElementById('comentariosContainer').classList.remove('hidden');
-      }
-    }
-  
+  });  
 
 /*
     document.getElementById('myInform').onsubmit = function(event) {
