@@ -288,7 +288,7 @@ select {
     </div>
   </footer>
   <script>
-    const URL_WEB='https://script.google.com/macros/s/AKfycbz1Yvce5SRGUn-ScEz0nl9nxxH9XK6q6bHFZvU3x-mWWStS2ydiAcaRgBm9tE1iLoqX/exec';
+    const URL_WEB='https://script.google.com/macros/s/AKfycbz0EV2amvI1dz-d3U6YJvR5jU68G_IyoHSSt1UTw1cgSm2NoaMbBUbCFYisLoNX3wf1/exec';
     //const dropDownURL='https://script.google.com/macros/s/AKfycbza0Yew86VM6safBOGg6IFeCX57aiEAbcVTb1OkxaS-eBPiQ3L6idLGA8W7mWiyagw8/exec';
 
     let selectedGrupo = '';
@@ -307,12 +307,12 @@ select {
             nombreSelect.appendChild(option);
           });
         });
-        
+
       // Update grupo and faceta on dropdown change
       document.getElementById('nombre').addEventListener('change', function() {
         const selectedName = this.value;
 
-        fetch('https://script.google.com/macros/s/AKfycbza0Yew86VM6safBOGg6IFeCX57aiEAbcVTb1OkxaS-eBPiQ3L6idLGA8W7mWiyagw8/exec')
+        fetch('https://script.google.com/macros/s/AKfycbz0EV2amvI1dz-d3U6YJvR5jU68G_IyoHSSt1UTw1cgSm2NoaMbBUbCFYisLoNX3wf1/exec')
           .then(response => response.json())
           .then(data => {
             const selectedData = data.find(item => item.NOMBRE === selectedName);
