@@ -293,7 +293,7 @@ select {
   </footer>
   <script>
     //CONSULTA NOMBRES PARA LISTAR EN EL DROPDOWN
-    fetch('https://script.google.com/macros/s/AKfycbwHCx_RtZYwuf5GmPO9I4hz6luGJIEF0zGrn56sOKniQN4CQNqRhwY7JS19kRh8J8wY/exec')
+    fetch('https://script.google.com/macros/s/AKfycbxIz8mrXC-5XnhrWf-cm7Ez4xQsUifsLhQrwECKZRaUaYY2mSoo8qvG_EybJEGMQnyW/exec')
     .then(response => response.json())
     .then(data => {
       const dropdown = document.getElementById('nombre');
@@ -307,7 +307,7 @@ select {
     // Escuchar cuando el usuario elige un nombre
     document.getElementById('nombre').addEventListener('change', function() {
       const selectedName = this.value;
-      fetch(`https://script.google.com/macros/s/AKfycbwHCx_RtZYwuf5GmPO9I4hz6luGJIEF0zGrn56sOKniQN4CQNqRhwY7JS19kRh8J8wY/exec?nombre=${selectedName}`)
+      fetch(`https://script.google.com/macros/s/AKfycbxIz8mrXC-5XnhrWf-cm7Ez4xQsUifsLhQrwECKZRaUaYY2mSoo8qvG_EybJEGMQnyW/exec?nombre=${selectedName}`)
         .then(response => response.json())
         .then(data => {
           document.getElementById('grupo').textContent = data.grupo;
