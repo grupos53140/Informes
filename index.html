@@ -344,11 +344,11 @@ select {
           <label for="credito">CREDITO:</label>
           <input type="text" id="credito" name="credito" placeholder="Creditos">
         </div>
-        <div class="form-group-textarea hidden">
+        <div class="form-group-textarea hidden" id="comentariosContainer">
           <label for="comentarios">COMENTARIOS:</label>
           <textarea id="comentarios" name="comentarios" rows="4" placeholder="Ingresa tus comentarios"></textarea>
         </div>
-        <div class="form-group hidden" id="enviarContainer">
+        <div class="form-group hidden" id="submitBtnContainer">
           <input type="submit" id="submitBtn" value="Enviar">
         </div>
       </fieldset>      
@@ -429,13 +429,13 @@ select {
         document.getElementById('creditoContainer').classList.add('hidden');
         document.getElementById('estudiosContainer').classList.remove('hidden');
         document.getElementById('comentariosContainer').classList.remove('hidden');
-        document.getElementById('enviarContainer').classList.remove('hidden');
+        document.getElementById('submitBtnContainer').classList.remove('hidden');
         } else {
         document.getElementById('horasContainer').classList.remove('hidden');  
         document.getElementById('creditoContainer').classList.remove('hidden');  
         document.getElementById('estudiosContainer').classList.remove('hidden');
         document.getElementById('comentariosContainer').classList.remove('hidden');
-        document.getElementById('enviarContainer').classList.remove('hidden');
+        document.getElementById('submitBtnContainer').classList.remove('hidden');
 
       }
     }
