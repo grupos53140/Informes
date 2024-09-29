@@ -325,7 +325,6 @@ select {
     <div id="thankYouMessage" style="display: none; text-align: center;">
       <img src="../Informes/img/Group 1OK.png" alt="Chulito Azul" style="width: 100px; height: 100px;">
       <h2>¡Recibimos tu informe!</h2>
-      <p>GRACIAS!.</p>
     </div>
     <div id="response"></div>
   </div>
@@ -427,11 +426,19 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
       'comentarios': comentarios,
     })
   })
+
+  //MENSAJE RESPUESTA DEL APPSCRIPT DE GOOGLE SHEET
   .then(response => response.text())  // Leer la respuesta del AppScript
   .then(result => {
     console.log(result);  // Mostrar el resultado en la consola
-    document.getElementById('response').textContent = result;  // Mostrar mensaje de éxito en la página
-
+    document.getElementById('response').textContent = result&"...Gracias!" ;  // Mostrar mensaje de éxito en la página
+    document.getElementById('response').style.display='flex';
+    document.getElementById('response').style.justifyContent='center';
+    document.getElementById('response').style.flexDirection='row-reverse';
+    document.getElementById('response').style.flexWrap='wrap';
+    document.getElementById('response').style.alignItems='flex-start';
+    document.getElementById('response').style.padding='20px';
+   
     // Limpiar el formulario
     //document.getElementById('myInform').reset();  // Esto limpia todos los campos del formulario
     // Ocultar el formulario y mostrar el mensaje de agradecimiento
