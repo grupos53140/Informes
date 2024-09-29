@@ -408,13 +408,15 @@ select {
     fetch(`https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec?nombre=${selectedName}`)
     .then(response => response.json())
       .then(data => {
+         // Finalizar la barra de progreso
+         finalizarBarraProgreso();
+            mostrarMensaje("...");
+
         // Guardar los valores de grupo y faceta en las variables
         grupo = data.grupo;
         faceta = data.faceta;
         
-         // Finalizar la barra de progreso
-         finalizarBarraProgreso();
-            mostrarMensaje("...");
+        
 
         // Para mostra en el formulario en etiquetas span:
         document.getElementById('grupo').textContent = data.grupo;
