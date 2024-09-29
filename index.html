@@ -239,6 +239,7 @@
       background-size: 18px; /* Tamaño de la flecha */
  }
 
+
 /* Ajusta el tamaño de la flecha y la posición del padding para que no se superponga al texto */
 select:focus {
   border-color: var(--color-blue-100); //* Color del borde al enfocar */
@@ -269,17 +270,16 @@ select {
     justify-content: space-evenly;
     align-items: center;
   }
+  .response{
+  display: flex;
+  flex-direction: column;
+ }
   </style>
   <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
   <div class="form-container">
-    <form id="myInform">
-      <div id="thankYouMessage" style="display: none; text-align: center;">
-        <img src="../Informes/img/Group 1OK.png" alt="Chulito Azul" style="width: 100px; height: 100px;">
-        <h2>¡Recibimos tu informe!</h2>
-        <p>GRACIAS!.</p>
-      </div>
+    <form id="myInform">      
       <fieldset>
         <legend>INFORME DE SERVICIO</legend>
         <div class="form-group">
@@ -320,6 +320,11 @@ select {
         </div>
       </fieldset>      
     </form>
+    <div id="thankYouMessage" style="display: none; text-align: center;">
+      <img src="../Informes/img/Group 1OK.png" alt="Chulito Azul" style="width: 100px; height: 100px;">
+      <h2>¡Recibimos tu informe!</h2>
+      <p>GRACIAS!.</p>
+    </div>
     <div id="response"></div>
   </div>
  
