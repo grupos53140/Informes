@@ -264,15 +264,17 @@ select {
     }
   .thankYouMessage{    
     display: flex;
-    text-align: center;
     flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-wrap: nowrap;
     align-items: center;
   }
   .response{
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 20px;
  }
   </style>
   <script src="https://apis.google.com/js/api.js"></script>
