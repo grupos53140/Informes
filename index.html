@@ -431,7 +431,7 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
   .then(response => response.text())  // Leer la respuesta del AppScript
   .then(result => {
     console.log(result);  // Mostrar el resultado en la consola
-    document.getElementById('response').textContent = result&"...Gracias!" ;  // Mostrar mensaje de éxito en la página
+    document.getElementById('response').textContent = result + "...Gracias!" ;  // Mostrar mensaje de éxito en la página
     document.getElementById('response').style.display='flex';
     document.getElementById('response').style.justifyContent='center';
     document.getElementById('response').style.flexDirection='row-reverse';
