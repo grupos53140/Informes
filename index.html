@@ -261,9 +261,13 @@ select {
   .hidden {
       display: none;
     }
-  .thankYouMessage{
+  .thankYouMessage{    
     display: flex;
-    justify-content:flex-start;
+    text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
   }
   </style>
   <script src="https://apis.google.com/js/api.js"></script>
@@ -425,7 +429,7 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
     //document.getElementById('myInform').reset();  // Esto limpia todos los campos del formulario
     // Ocultar el formulario y mostrar el mensaje de agradecimiento
     document.getElementById('myInform').style.display = 'none';
-    document.getElementById('thankYouMessage').style.display=CSSTransition;
+    document.getElementById('thankYouMessage').style.display ='flex';
 
   })
   
