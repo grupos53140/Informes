@@ -373,8 +373,10 @@ select {
 
     function checkFaceta(faceta) {
       if (faceta === 'PUB') {
+        
         document.getElementById('horasContainer').classList.add('hidden');
         document.getElementById('creditoContainer').classList.add('hidden');
+        document.getElementById('estudiosContainer').classList.remove('hidden');
         } else {
         document.getElementById('horasContainer').classList.remove('hidden');  
         document.getElementById('creditoContainer').classList.remove('hidden');  
