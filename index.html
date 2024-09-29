@@ -262,6 +262,29 @@ select {
   .hidden {
       display: none;
     }
+
+    /* Estilos para la barra de progreso */
+#progress-container {
+    position: relative;
+    width: 100%;
+    height: 4px; /* Línea angosta */
+    background-color:var(--color-blue-50); /* Color de fondo claro */
+    margin-top: 10px;
+}
+
+#progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: var(--color-blue-500); /* Azul cielo */
+    transition: width 0.4s ease;
+}
+
+/* Para el mensaje de resultado */
+#status-message {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
   .thankYouMessage{    
     display: flex;
     flex-direction: column;
@@ -289,8 +312,16 @@ select {
           <select id="nombre" name="nombre" autocomplete="name">
             <option value="" disabled selected>Elige aquí tu nombre</option>
             <!-- Los nombres se llenarán aquí -->
-          </select>
+          </select>            
         </div>
+
+        <!-- Barra de progreso -->
+          <div id="progress-container">
+            <div id="progress-bar"></div>
+          </div>
+        <!-- Mensaje de resultado -->
+          <div id="status-message"></div>
+
         <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
         <div class="form-group-faceta">
           <label>GRUPO: <span id="grupo"></span></label><label>FACETA: <span id="faceta"></span></label>
@@ -313,11 +344,11 @@ select {
           <label for="credito">CREDITO:</label>
           <input type="text" id="credito" name="credito" placeholder="Creditos">
         </div>
-        <div class="form-group-textarea">
+        <div class="form-group-textarea hidden">
           <label for="comentarios">COMENTARIOS:</label>
           <textarea id="comentarios" name="comentarios" rows="4" placeholder="Ingresa tus comentarios"></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group hidden">
           <input type="submit" id="submitBtn" value="Enviar">
         </div>
       </fieldset>      
@@ -361,6 +392,10 @@ select {
   document.getElementById('nombre').addEventListener('change', function() {
       const selectedName = this.value;
 
+     // Iniciar la barra de progreso
+     iniciarBarraProgreso();
+    mostrarMensaje("Consultando...");
+
     // Realizar la consulta para obtener grupo y faceta basados en el nombre
     fetch(`https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec?nombre=${selectedName}`)
     .then(response => response.json())
@@ -369,6 +404,10 @@ select {
         grupo = data.grupo;
         faceta = data.faceta;
         
+         // Finalizar la barra de progreso
+         finalizarBarraProgreso();
+            mostrarMensaje("Datos obtenidos correctamente... ¡Gracias!");
+
         // Para mostra en el formulario en etiquetas span:
         document.getElementById('grupo').textContent = data.grupo;
         document.getElementById('faceta').textContent = data.faceta;
@@ -377,6 +416,8 @@ select {
         console.log("Grupo:", grupo);
         console.log("Faceta:", faceta);
         // Aquí no se actualiza el HTML, solo se guardan en variables
+
+        finalizarBarraProgreso(); // Asegurarse que la barra llega al 100%
         checkFaceta(faceta);
       });
   });
@@ -387,6 +428,7 @@ select {
         document.getElementById('horasContainer').classList.add('hidden');
         document.getElementById('creditoContainer').classList.add('hidden');
         document.getElementById('estudiosContainer').classList.remove('hidden');
+        document.getElementById('comentariosContainer').classList.remove('hidden');
         } else {
         document.getElementById('horasContainer').classList.remove('hidden');  
         document.getElementById('creditoContainer').classList.remove('hidden');  
@@ -394,6 +436,44 @@ select {
         document.getElementById('comentariosContainer').classList.remove('hidden');
       }
     }
+
+
+ //////////////////////////////////////////////////////////////////////////////////////////////////////
+ //BARRA DE TIEMPO DE ESPERA PARA LA CONSUTA DE GRUPO Y FACETA
+ /////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+ // Función para iniciar la barra de progreso
+function iniciarBarraProgreso() {
+    const progressBar = document.getElementById('progress-bar');
+    let progreso = 0;
+    const intervalo = 100; // Intervalo en milisegundos (0.1 segundo)
+
+    // Crear un intervalo para aumentar progresivamente el ancho de la barra
+    const idIntervalo = setInterval(() => {
+        progreso += 5; // Incremento del 5% cada 0.1 segundos
+        progressBar.style.width = `${progreso}%`;
+
+        // Si la barra alcanza el 95%, detener el avance (esperar respuesta real)
+        if (progreso >= 95) {
+            clearInterval(idIntervalo);
+        }
+    }, intervalo);
+}
+
+// Función para finalizar la barra de progreso al 100%
+function finalizarBarraProgreso() {
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.transition = 'width 0.5s ease';
+    progressBar.style.width = '100%';
+}
+
+// Mensaje de estado
+function mostrarMensaje(mensaje) {
+    const statusMessage = document.getElementById('status-message');
+    statusMessage.textContent = mensaje;
+}
+
+
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ENVIAR LOS DATOS DEL FORMULARIO
