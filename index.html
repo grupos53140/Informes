@@ -108,6 +108,10 @@
     form{
       /*padding: 10px;*/
       border-radius: 15px;
+    }    
+    .form-item {
+      display: flex;
+      align-items: center; /* Alinea las etiquetas con los campos verticalmente */
     }
    .form-container {
       background-color: white;
@@ -126,7 +130,7 @@
       display: flex;
       flex-direction: row; /* Para que los contenedores de cada campo queden uno debajo de otro */
       gap: 15px; /* Espacio entre los campos */
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
     .form-group-faceta {      
     display: flex;
@@ -135,12 +139,21 @@
     .form-group-textarea {
       display: flex;
       flex-direction: column; /* Para que los contenedores de cada campo queden uno debajo de otro */
-      gap: 15px; /* Espacio entre los campos */
+      gap: 5px; /* Espacio entre los campos */
       margin-bottom: 5px;
     }
-    .form-item {
+    .form-group-inline {
       display: flex;
-      align-items: center; /* Alinea las etiquetas con los campos verticalmente */
+      align-items: center;
+      margin: 15px;
+      flex-direction: column; 
+      text-align: center;	
+    }
+    .form-group-inline label {
+      margin: 0;
+    }
+    .form-group-inline {
+      margin-left: 10px;
     }
     label {
       display: block;
@@ -181,19 +194,7 @@
     input[type="checkbox"]:checked {
     accent-color: var(--color-blue-500); /* Cambia el color del check */
     }
-    .form-group-inline {
-      display: flex;
-      align-items: center;
-      margin: 10px;
-      flex-direction: column; 
-      text-align: center;	
-    }
-    .form-group-inline label {
-      margin: 0;
-    }
-    .form-group-inline {
-      margin-left: 10px;
-    }
+   
     input[type="submit"] {
       width: 100%;
       background-color: var(--color-blue-500);
