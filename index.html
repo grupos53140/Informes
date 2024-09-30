@@ -308,11 +308,13 @@ select {
  }
   </style>
   <script src="https://apis.google.com/js/api.js"></script>
-  <!-- Choices CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  
+<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-<!-- Choices JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<!-- Select2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 </head>
 <body>
@@ -557,16 +559,18 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
 
   </script>
 
-    <!-- Inicialización de Choices.js -->
-  <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const nombreSelect = document.getElementById('nombre');
-            const choices = new Choices(nombreSelect, {
-                searchEnabled: true, // Habilitar búsqueda
-                placeholderValue: "Elige un nombre",
-                noResultsText: "No se encontraron resultados",
-            });
+   <!-- Select2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- Inicialización -->
+<script>
+    $(document).ready(function() {
+        $('#nombre').select2({
+            placeholder: "Elige un nombre",
+            allowClear: true
         });
-  </script>
+    });
+</script>
+
 </body>
 </html>
