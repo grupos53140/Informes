@@ -344,59 +344,71 @@ h3{
 
 
 </head>
-<body>
-          
+<body>          
   <div class="form-container">
       <!-- Barra de progreso -->
       <div id="progress-container">
         <div id="progress-bar"></div>
       </div><!-- END Barra de progreso -->  
-    <form id="myInform"> 
-      <div class="barhead">  
-        <fieldset>  
-          <legend><h3>MI INFORME</h3>
-          <!-- Mensaje de resultado -->
-            <div id="status-message"></div> 
-          <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
-            <div class="form-group-faceta">
-            <label class="GF" id="grupo"><span> </span></label><label class="GF" id="faceta"><span > </span></label>
-          </div>  </legend>             
-      </div>  
+    <form id="myInform">        
+        <fieldset> 
+          <div class="barhead">
+            <legend><h3>MI INFORME</h3>
+              <!-- Mensaje de resultado -->
+                <div id="status-message"></div> 
+                <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
+                <div class="form-group-faceta">
+                  <label class="GF" id="grupo"><span> </span></label><label class="GF" id="faceta"><span > </span></label>
+                </div>  
+            </legend>             
+          </div>  
 
-        <div class="form-group">
-          <label for="nombre">NOMBRE:</label>
-          <select id="nombre" name="nombre" >
-            <option value="" selected>Elige aquí tu nombre</option>
-            <!-- Los nombres se llenarán aquí -->
-          </select>            
-        </div>
+          //CAMPO NOMBRE
+          <div class="form-group">
+            <label for="nombre">NOMBRE:</label>
+              <select id="nombre" name="nombre" >
+                <option value="" selected>Elige aquí tu nombre</option>
+                <!-- Los nombres se llenarán aquí -->
+              </select>            
+          </div>
 
-        <div class="form-group-inline">
-          <fieldset id="fparticipa">
-            <legend id="lparticipa">PARTICIPA:</legend>
-            <input type="checkbox" name="participa" id="participa">
-          </fieldset>
-        </div>
-        <div class="form-group hidden" id="estudiosContainer" >
-          <label for="estudios">ESTUDIOS:</label>
-          <input type="text" id="estudios" name="estudios" placeholder="Ingresa tus estudios" maxlength="5">
-        </div>
-        <div class="form-group hidden" id="horasContainer">
-          <label for="horas">HORAS:</label>
-          <input type="text" id="horas" name="horas" placeholder="Ingresa las horas" maxlength="5">
-        </div>
-        <div class="form-group hidden" id="creditoContainer">
-          <label for="credito">CREDITO:</label>
-          <input type="text" id="credito" name="credito" placeholder="Creditos">
-        </div>
-        <div class="form-group-textarea hidden" id="comentariosContainer">
-          <label for="comentarios">COMENTARIOS:</label>
-          <textarea id="comentarios" name="comentarios" rows="4" placeholder="Ingresa tus comentarios"></textarea>
-        </div>
-        <div class="form-group hidden" id="submitBtnContainer">
-          <input type="submit" id="submitBtn" value="Enviar">
-        </div>
-      </fieldset>      
+          //CAMPO CHECKBOX PARTICIPA
+          <div class="form-group-inline">
+            <fieldset id="fparticipa">
+              <legend id="lparticipa">PARTICIPA:</legend>
+                <input type="checkbox" name="participa" id="participa">
+            </fieldset>
+          </div>
+
+          //CAMPO ESTUDIOS
+          <div class="form-group hidden" id="estudiosContainer" >
+            <label for="estudios">ESTUDIOS:</label>
+              <input type="text" id="estudios" name="estudios" placeholder="Ingresa tus estudios" maxlength="5">
+          </div>
+
+          //CAMPO HORAS
+          <div class="form-group hidden" id="horasContainer">
+            <label for="horas">HORAS:</label>
+              <input type="text" id="horas" name="horas" placeholder="Ingresa las horas" maxlength="5">
+          </div>
+
+          //CAMPO CREDITO
+          <div class="form-group hidden" id="creditoContainer">
+            <label for="credito">CREDITO:</label>
+              <input type="text" id="credito" name="credito" placeholder="Creditos">
+          </div>
+
+          //CAMPO COMENTARIOS
+          <div class="form-group-textarea hidden" id="comentariosContainer">
+            <label for="comentarios">COMENTARIOS:</label>
+              <textarea id="comentarios" name="comentarios" rows="4" placeholder="Ingresa tus comentarios"></textarea>
+          </div>
+
+          //CAMPO BOTON SUBMIT ENVIAR
+          <div class="form-group hidden" id="submitBtnContainer">
+            <input type="submit" id="submitBtn" value="Enviar">
+          </div>
+        </fieldset>
     </form>
     <div id="thankYouMessage" style="display: none; text-align: center;">
       <img src="../Informes/img/MIGracias180.png" alt="Chulito Azul" style="width: 100px; height: 100px;">
