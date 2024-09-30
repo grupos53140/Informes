@@ -309,11 +309,7 @@ select {
   </style>
   <script src="https://apis.google.com/js/api.js"></script>
   
- <!-- Choices.js CSS -->
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
- <!-- Choices.js JavaScript -->
- <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-
+ 
 </head>
 <body>
           
@@ -557,20 +553,5 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
 
   </script>
 
-
- <!-- Choices.js JavaScript -->
- <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-
- <!-- Inicialización de Choices.js -->
- <script>
-     document.addEventListener('DOMContentLoaded', function () {
-         const nombreSelect = document.getElementById('nombre');
-         const choices = new Choices(nombreSelect, {
-             searchEnabled: true, // Habilitar búsqueda
-             placeholderValue: "Elige un nombre",
-             noResultsText: "No se encontraron resultados",
-         });
-     });
- </script>
 </body>
 </html>
