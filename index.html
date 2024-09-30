@@ -307,7 +307,8 @@ select {
     padding: 20px;
  }
   </style>
-   
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
           
@@ -413,7 +414,7 @@ select {
       .then(data => {
          // Finalizar la barra de progreso
          finalizarBarraProgreso();
-            mostrarMensaje("...");
+            mostrarMensaje("", true);
 
         // Guardar los valores de grupo y faceta en las variables
         grupo = data.grupo;
