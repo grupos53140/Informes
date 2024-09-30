@@ -524,7 +524,7 @@ function finalizarBarraProgreso() {
 function mostrarMensaje(mensaje, isSuccess = false) {
     const statusMessage = document.getElementById('status-message');
     if (isSuccess) {
-        statusMessage.innerHTML = `<span style="color: dodgerblue;">${mensaje} <i class="fas fa-check-circle"></i></span>`;
+        statusMessage.innerHTML = `<span style="color: var(--color-blue-500);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
     } else {
         statusMessage.textContent = mensaje;
     }
