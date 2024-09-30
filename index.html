@@ -319,7 +319,7 @@
       min-width: fit-content;
       font-size: smaller;
     }
-    .barhead{
+    #encabezado{
       border-bottom: solid 1px var(--color-gray-200);
     } 
 </style>
@@ -336,15 +336,18 @@
 
 <body>          
   <div class="form-container">
-      <!-- Barra de progreso -->
+      <!-- BARRA DE PROGRESO -->
       <div id="progress-container">
         <div id="progress-bar"></div>
-      </div><!-- END Barra de progreso -->  
+      </div>
+      <!-- END BARRA DE PROGRESO -->  
+
     <form id="myInform">        
       <fieldset>          
         <legend><h3>MI INFORME</h3></legend>
-        <!-- ENCABEZADO CONSUTA Y RESULTADO-->
-        <div class="barhead">
+
+        <!-- ENCABEZADO RESULTADO CONSULTA DE GRUPO Y FACETA-->
+        <div id="encabezado">
           <!-- Mensaje de resultado -->
             <div id="status-message"></div> 
 
@@ -352,8 +355,7 @@
             <div class="form-group-faceta">
               <label class="GF" id="grupo"><span> </span></label><label class="GF" id="faceta"><span > </span></label>
             </div>  
-        </div>        
-           
+        </div>              
 
         <!--CAMPO NOMBRE -->
         <div class="form-group">
@@ -408,7 +410,10 @@
       <img src="../Informes/img/MIGracias180.png" alt="Chulito Azul" style="width: 100px; height: 100px;">
       <h2>¡Recibimos tu informe!</h2>
     </div>
+
+    <!-- MUESTRA RESPUESTA DE HABER RECIBIDO EL REGISTRO DESDE APPSCRIPT -->
     <div id="response"></div>
+
   </div>
 
   <!-- FOOTER- PIE DE PAGINA-->
@@ -419,7 +424,7 @@
       <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
     </div>
   </footer>
-  
+
 <!-- SECCION DE JAVASCRIPT-->
   <script>    
   // Variables para guardar los valores de grupo y faceta
