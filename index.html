@@ -321,7 +321,11 @@
     }
     #encabezado{
       border-bottom: solid 1px var(--color-gray-200);
-    } 
+    }
+    #headline{
+      border-bottom: solid 1px var(--color-gray-200);
+    }
+    
 </style>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -343,20 +347,21 @@
       <!-- END BARRA DE PROGRESO -->  
 
     <form id="myInform">        
-      <fieldset>          
-        <legend><h3>MI INFORME</h3></legend>
+      <fieldset>
+        <div id="headline">          
+          <legend><h3>MI INFORME</h3></legend>
 
-        <!-- ENCABEZADO RESULTADO CONSULTA DE GRUPO Y FACETA-->
-        <div id="encabezado">
-          <!-- Mensaje de resultado -->
-            <div id="status-message"></div> 
+          <!-- ENCABEZADO RESULTADO CONSULTA DE GRUPO Y FACETA-->
+          <div id="encabezado">
+            <!-- Mensaje de resultado -->
+              <div id="status-message"></div> 
 
-          <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
-            <div class="form-group-faceta">
-              <label class="GF" id="grupo"><span> </span></label><label class="GF" id="faceta"><span > </span></label>
-            </div>  
-        </div>              
-
+            <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
+              <div class="form-group-faceta">
+                <label class="GF" id="grupo"><span> </span></label><label class="GF" id="faceta"><span > </span></label>
+              </div>  
+          </div>              
+        </div>
         <!--CAMPO NOMBRE -->
         <div class="form-group">
           <label for="nombre">NOMBRE:</label>
