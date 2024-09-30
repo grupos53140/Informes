@@ -131,7 +131,6 @@
     .form-group-faceta {      
     display: flex;
     flex-direction: row-reverse;
-    gap: 10px;
     margin-bottom: 5px;
     }
     .form-group-textarea {
@@ -357,11 +356,10 @@
           <legend><h3>MI INFORME</h3></legend>
 
           <!-- ENCABEZADO RESULTADO CONSULTA DE GRUPO Y FACETA-->
+           <!-- Mensaje de resultado -->
+           <div id="status-message"></div>
           <div id="encabezado">
-            <!-- Mensaje de resultado -->
-              <div id="status-message"></div> 
-
-            <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
+          <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
               <div class="form-group-faceta">
                 <label class="GF" id="grupo"><span> </span></label><label class="GF" id="faceta"><span > </span></label>
               </div>  
