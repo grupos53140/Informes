@@ -308,7 +308,8 @@ select {
  }
   </style>
   <script src="https://apis.google.com/js/api.js"></script>
-  
+   <!-- Select2 CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
  
 </head>
 <body>
@@ -380,6 +381,25 @@ select {
       <a href="#">Política de privacidad</a>
     </div>
   </footer>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Select2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- Inicialización -->
+<script>
+  $(document).ready(function() {
+      $('#nombre').select2({
+          placeholder: "Elige un nombre",
+          allowClear: true
+      });
+  });
+</script>
+
+
+
+
+
   <script>
     
   // Variables para guardar los valores de grupo y faceta
