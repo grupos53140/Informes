@@ -386,6 +386,27 @@
   visibility: visible;
   opacity: 1;
 }
+/* MOSTRAR MODAL PROCESAMIENTO*/
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed; /* Fijo en la pantalla */
+  z-index: 1000; /* Por encima de todo */
+  left: 0;
+  top: 0;
+  width: 100%; /* Ocupa toda la pantalla */
+  height: 100%; /* Ocupa toda la pantalla */
+  overflow: auto; /* Permite el desplazamiento si es necesario */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+}
+
+.modal-content {
+  background-color: white; /* Fondo blanco */
+  margin: 15% auto; /* Centrado verticalmente */
+  padding: 20px; /* Espaciado interno */
+  border: 1px solid #888; /* Borde del modal */
+  width: 300px; /* Ancho del modal */
+  text-align: center; /* Centrar texto */
+}
 
     
 </style>
@@ -476,6 +497,13 @@
           <input type="submit" id="submitBtn" value="Enviar">
         </div>
       </fieldset>
+        <!-- Modal de procesamiento -->
+        <div id="processingModal" class="modal">
+          <div class="modal-content">
+            <h2>Procesando registro...</h2>
+            <p>Por favor, espera mientras se envían los datos.</p>
+          </div>
+        </div>
     </form>
 
     <!-- AGRADECIMIENTOS POR EL REGISTRO-->
@@ -574,7 +602,7 @@
 
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////
- //BARRA DE TIEMPO DE ESPERA PARA LA CONSUTA DE GRUPO Y FACETA
+ //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
  /////////////////////////////////////////////////////////////////////////////////////////////////////
  
  // Función para iniciar la barra de progreso
@@ -620,6 +648,12 @@ function mostrarMensaje(mensaje, isSuccess = false) {
 document.getElementById('myInform').addEventListener('submit', function(event) {
   event.preventDefault(); // Evitar que el formulario se envíe de manera convencional
 
+      // Mostrar el modal
+      document.getElementById("processingModal").style.display = "block";
+
+      // Deshabilitar el botón de enviar
+      event.target.disabled = true;
+
   // Obtener los valores del formulario
   const nombre = document.getElementById('nombre').value;
   const participa = document.getElementById('participa').checked ? "TRUE" : "FALSE";
@@ -646,6 +680,12 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
     })
   })
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // MODAL PROCESANDO REGISTRO
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ 
+
   //MENSAJE RESPUESTA DEL APPSCRIPT DE GOOGLE SHEET
   .then(response => response.text())  // Leer la respuesta del AppScript
   .then(result => {
@@ -660,6 +700,13 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
    
     // Limpiar el formulario
     //document.getElementById('myInform').reset();  // Esto limpia todos los campos del formulario
+    
+    // Ocultar el modal una vez que se completa el procesamiento
+    document.getElementById("processingModal").style.display = "none"; 
+
+    // Volver a habilitar el botón de enviar
+    event.target.disabled = false;
+
     // Ocultar el formulario y mostrar el mensaje de agradecimiento
     document.getElementById('myInform').style.display = 'none';
     document.getElementById('thankYouMessage').style.display ='flex';
