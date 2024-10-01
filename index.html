@@ -329,57 +329,44 @@
     margin-bottom: 15px;
     }
  /* Estilo del icono de ayuda */
-  .help-icon {        
-    border: solid 1px var(--color-blue-400);
-    color: var(--color-blue-500);
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-color: var(--color-blue-100);
-    /* color: white; */
-    text-align: center;
-    border-radius: 35%;
-    cursor: pointer;
-    /* margin-left: 10px; */
-    font-size: 12px;
-    line-height: 20px;
-    }
+.help-icon {        
+  border: solid 1px var(--color-blue-400);
+  color: var(--color-blue-500);
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-blue-100);
+  text-align: center;
+  border-radius: 35%;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 20px;
+  position: relative; /* Añadido para posicionar el tooltip */
+}
 
-      /* Estilo del tooltip */
-      .tooltip {
-        visibility: hidden;
-        width: 200px;
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        border-radius: 5px;
-        padding: 10px;
-        position: absolute;
-        top: -10px; /* Ajusta la posición del tooltip */
-        left: 110%; /* Ajusta la distancia del tooltip respecto al icono */
-        z-index: 1;
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
+/* Estilo del tooltip */
+.tooltip {
+  visibility: hidden;
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  top: 30px; /* Ajusta la posición del tooltip */
+  left: -90px; /* Ajusta la distancia del tooltip respecto al icono */
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
 
-      /* Flecha del tooltip 
-      .tooltip::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: -5px;  Coloca la flecha al lado del icono 
-        margin-top: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: transparent #333 transparent transparent;
-      }
-      */
+/* Mostrar el tooltip al pasar sobre el icono */
+.help-icon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
 
-     /* Mostrar el tooltip al pasar sobre el icono */
-      .help-icon:hover .tooltip {
-        visibility: visible;
-        opacity: 1;
-      }
     
 </style>
 
