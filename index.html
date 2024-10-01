@@ -407,7 +407,9 @@
   width: 300px; /* Ancho del modal */
   text-align: center; /* Centrar texto */
 }
-
+#Refresh{
+  display: none;
+}
     
 </style>
 
@@ -514,7 +516,7 @@
 
     <!-- MUESTRA RESPUESTA DE HABER RECIBIDO EL REGISTRO DESDE APPSCRIPT -->
     <div id="response">
-      <a href="#" onclick="location.reload();">Nuevo Registro</a>
+      <a href="#" id="Refresh" onclick="location.reload();">Nuevo Registro</a>
     </div>
 
   </div>
@@ -715,6 +717,7 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
     document.getElementById('thankYouMessage').style.flexDirection='column';
     document.getElementById('thankYouMessage').style.flexWrap='nowrap';
     document.getElementById('thankYouMessage').style.alignItems='center';
+    document.getElementById('Refresh').style.display='block';
 
   })
   
