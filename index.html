@@ -513,7 +513,9 @@
     </div>
 
     <!-- MUESTRA RESPUESTA DE HABER RECIBIDO EL REGISTRO DESDE APPSCRIPT -->
-    <div id="response"></div>
+    <div id="response">
+      <a href="#" onclick="location.reload();">Nuevo Registro</a>
+    </div>
 
   </div>
 
@@ -700,7 +702,7 @@ document.getElementById('myInform').addEventListener('submit', function(event) {
    
     // Limpiar el formulario
     //document.getElementById('myInform').reset();  // Esto limpia todos los campos del formulario
-    
+
     // Ocultar el modal una vez que se completa el procesamiento
     document.getElementById("processingModal").style.display = "none"; 
 
