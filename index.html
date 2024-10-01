@@ -328,7 +328,8 @@
     border-bottom: solid 1px var(--color-blue-100);
     margin-bottom: 15px;
     }
- /* Estilo del icono de ayuda */
+    
+/* Estilo del icono de ayuda */
 .help-icon {        
   border: solid 1px var(--color-blue-400);
   color: var(--color-blue-500);
@@ -341,24 +342,25 @@
   cursor: pointer;
   font-size: 12px;
   line-height: 20px;
-  position: relative; /* Añadido para posicionar el tooltip */
+  position: relative;
 }
 
-/* Estilo del tooltip */
+/* Estilo del tooltip con colores de la marca */
 .tooltip {
   visibility: hidden;
   width: 200px;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--color-blue-500); /* Fondo con color de la marca */
+  color: var(--color-white); /* Texto con color blanco */
   text-align: center;
   border-radius: 5px;
   padding: 10px;
   position: absolute;
-  top: 30px; /* Ajusta la posición del tooltip */
-  left: -90px; /* Ajusta la distancia del tooltip respecto al icono */
+  top: 30px;
+  left: -90px;
   z-index: 1;
   opacity: 0;
   transition: opacity 0.3s;
+  border: 1px solid var(--color-blue-400); /* Borde con color de la marca */
 }
 
 /* Mostrar el tooltip al pasar sobre el icono */
