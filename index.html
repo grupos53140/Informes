@@ -550,7 +550,7 @@ fetch('https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mp
       listNombre = data.nombre;
 
       const dropdown = document.getElementById('nombre');
-      data.forEach(nombre => {
+      data.forEach(lisNombre => {
         let option = document.createElement('option');
         option.text = listNombre
         option.value = listNombre; // Aseguramos que el valor sea el nombre seleccionado
