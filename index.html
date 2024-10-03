@@ -441,7 +441,19 @@
     justify-content: space-between;
     width: 100%;
     padding: 0px 20px;
-}    
+}   
+
+/*ESTILOS Y COMPONENTE GOOGLE MATERIAL WEB */
+:root {
+  --md-outlined-select-text-field-outline-color: #6e7979;
+  --md-outlined-select-text-field-container-shape: 0px;
+  --md-outlined-select-text-field-input-text-color: #005353;
+  --md-outlined-select-text-field-input-text-font: system-ui;
+}
+md-outlined-select::part(menu) {
+  --md-menu-container-color: #f4fbfa;
+  --md-menu-container-shape: 0px;
+}
 </style>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -499,6 +511,17 @@
               <!-- Los nombres se llenarán aquí -->
             </select>            
         </div>
+
+        <!-- COMPONENTE CAMPO NOMBRE GOOGLE MATERIAL WEB-->
+        <md-outlined-select>
+          <md-select-option selected value="apple">
+            <div slot="headline">Apple</div>
+          </md-select-option>
+          <md-select-option value="tomato">
+            <div slot="headline">Tomato</div>
+          </md-select-option>
+        </md-outlined-select>
+
 
         <!--CAMPO CHECKBOX PARTICIPA-->
         <div class="form-group-inline">
