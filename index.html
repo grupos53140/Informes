@@ -663,7 +663,7 @@ function iniciarBarraProgreso() {
     const progressBar = document.getElementById('progress-bar');
     let progreso = 0;
     const intervalo =100; // Intervalo en milisegundos (0.1 segundo)
-    
+    progressBar.style.transition = 'width 0s';
 
     // Crear un intervalo para aumentar progresivamente el ancho de la barra
     const idIntervalo = setInterval(() => {
@@ -682,7 +682,7 @@ function finalizarBarraProgreso() {
     const progressBar = document.getElementById('progress-bar');
     progressBar.style.transition = 'width 0.5s ease';
     progressBar.style.width = '0%';
-    progressBar.style.transition = 'width 0s';
+   
 
 }
 
