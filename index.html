@@ -604,6 +604,9 @@
   document.getElementById('nombre').addEventListener('change', function() {
       const selectedName = this.value;
 
+      //Inicializar la barra de progreso
+      finalizarBarraProgreso();
+
      // Iniciar la barra de progreso
      iniciarBarraProgreso();
     mostrarMensaje("Consultando...");
@@ -682,9 +685,7 @@ function finalizarBarraProgreso() {
     const progressBar = document.getElementById('progress-bar');
     progressBar.style.transition = 'width 0.5s ease';
     progressBar.style.width = '0%';
-    progreso =0; // Finslizar a 0 progessbar
-    progressBar.style.width = `${progreso}%`;
-    
+     
 }
 
 // Mensaje de estado
