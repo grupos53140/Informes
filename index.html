@@ -614,7 +614,7 @@
       .then(data => {
          // Finalizar la barra de progreso
          finalizarBarraProgreso();
-            mostrarMensaje("Listo!", true);
+            mostrarMensaje(" ", true);
 
         // Guardar los valores de grupo y faceta en las variables
         grupo = data.grupo;
@@ -682,6 +682,8 @@ function finalizarBarraProgreso() {
     const progressBar = document.getElementById('progress-bar');
     progressBar.style.transition = 'width 0.5s ease';
     progressBar.style.width = '0%';
+    progreso =0; // Finslizar a 0 progessbar
+    progressBar.style.width = `${progreso}%`;
     
 }
 
