@@ -661,9 +661,10 @@
  // Función para iniciar la barra de progreso
 function iniciarBarraProgreso() {
     const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = '0%';
     let progreso = 0;
     const intervalo = 100; // Intervalo en milisegundos (0.1 segundo)
-    progressBar.style.width = '0%';
+    
 
     // Crear un intervalo para aumentar progresivamente el ancho de la barra
     const idIntervalo = setInterval(() => {
@@ -671,7 +672,7 @@ function iniciarBarraProgreso() {
         progressBar.style.width = `${progreso}%`;
 
         // Si la barra alcanza el 95%, detener el avance (esperar respuesta real)
-        if (progreso >= 100) {
+        if (progreso >= 95) {
             clearInterval(idIntervalo);
         }
     }, intervalo);
