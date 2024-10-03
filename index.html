@@ -548,7 +548,7 @@ fetch('https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mp
     .then(data => {
        // Guardar los valores de nombres en una lista
       listNombre = data.nombre;
-      console.log("listNombe: ",listNombre);
+      
       const dropdown = document.getElementById('nombre');
       data.forEach(listNombre => {
         let option = document.createElement('option');
@@ -556,7 +556,7 @@ fetch('https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mp
         option.value = listNombre; // Aseguramos que el valor sea el nombre seleccionado
         dropdown.add(option);
       });
-
+      console.log("listNombe: ",listNombre);
     });
 
     // Escuchar cuando el usuario selecciona un nombre
