@@ -523,7 +523,7 @@
 <!-- SECCION DE JAVASCRIPT-->
   <script>    
   // Variables para guardar los valores de grupo y faceta
-  let nombre={};
+  let listNombre={};
   let grupo = {};
   let faceta = {};
   
@@ -534,7 +534,7 @@ fetch('https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mp
       const dropdown = document.getElementById('nombre');
       data.forEach(nombre => {
         let option = document.createElement('option');
-        //option.text = nombre;
+        option.text = nombre;
         option.value = nombre; // Aseguramos que el valor sea el nombre seleccionado
         dropdown.add(option);
       });
@@ -546,11 +546,14 @@ fetch('https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mp
   fetch('https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec')
     .then(response => response.json())
     .then(data => {
+       // Guardar los valores de nombres en una lista
+      listNombre = data.nombre;
+
       const dropdown = document.getElementById('nombre');
       data.forEach(nombre => {
         let option = document.createElement('option');
-        option.text = nombre;
-        option.value = nombre; // Aseguramos que el valor sea el nombre seleccionado
+        option.text = listNombre
+        option.value = listNombre; // Aseguramos que el valor sea el nombre seleccionado
         dropdown.add(option);
       });
 
