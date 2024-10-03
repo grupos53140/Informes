@@ -584,6 +584,8 @@
   // Variables para guardar los valores de grupo y faceta
   let grupo = {};
   let faceta = {};
+    //Inicializar la barra de progreso
+    finalizarBarraProgreso();
   
 
   // Obtener y llenar el dropdown con los nombres
@@ -603,9 +605,6 @@
     // Escuchar cuando el usuario selecciona un nombre
   document.getElementById('nombre').addEventListener('change', function() {
       const selectedName = this.value;
-
-      //Inicializar la barra de progreso
-      finalizarBarraProgreso();
 
      // Iniciar la barra de progreso
      iniciarBarraProgreso();
