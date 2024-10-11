@@ -171,14 +171,26 @@
       font-size: 12px;
       box-sizing: border-box; /* Asegura que el padding no sobrepase el tamaño */
     }
-    input[type="text"], textarea {
-      flex-grow: 1; /* Para que los campos crezcan según el espacio disponible */
-      padding: 8px; /* Añadir un poco de relleno para mejorar el aspecto */
-      font-size: 12px;
-      width: -webkit-fill-available;
-      border: 1px solid #ccc;
-      height: 50px;
+    input[type="text"]{
+    flex-grow: 1;
+    padding: 8px;
+    font-size: 12px;
+    width: -webkit-fill-available;
+    border: 1px solid #ccc;
+    height: 50px;
+    max-width: 225px;
     }
+
+    textarea {
+    flex-grow: 1;
+    padding: 8px;
+    font-size: 12px;
+    width: -webkit-fill-available;
+    border: 1px solid #ccc;
+    height: 50px;
+    max-width: 20px;
+    }
+
     input[type="text"], select, textarea :focus {
       border-color: var(--color-gray-200); /* Cambia a tu color preferido */
       outline: none; /* Opcional, elimina el borde por defecto del navegador */
@@ -266,6 +278,7 @@
       background-repeat: no-repeat;
       background-position: right 10px center;
       background-size: 12px; /* Tamaño de la flecha */
+      width: 225px;
     }
 
 /* Ajusta el tamaño de la flecha y la posición del padding para que no se superponga al texto */
