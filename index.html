@@ -277,6 +277,9 @@
       text-decoration: underline;
     }
     select {
+      outline: none; /* Elimina el borde por defecto del navegador */
+      transition: border-color 0.3s ease; /* Añade una transición suave para el borde */
+
       appearance: none; /* Elimina el estilo por defecto del select */
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -292,10 +295,12 @@
       width: 225px;
       margin: 5px;
     }
-
+   
 /* Ajusta el tamaño de la flecha y la posición del padding para que no se superponga al texto */
     select:focus {
       border-color: var(--color-blue-100); //* Color del borde al enfocar */
+      outline: none; /* Asegura que no haya borde adicional */
+      box-shadow: 0 0 5px rgba(0, 170, 255, 0.5); /* Añade un pequeño resplandor (opcional) */
     }
 
 /* Asegurarse de que el padding derecho no tape la flecha */
