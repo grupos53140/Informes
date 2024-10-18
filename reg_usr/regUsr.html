@@ -8,8 +8,19 @@
     <!-- Librerías necesarias -->
     <link rel="stylesheet" type="text/css" href="../Informes/css/paleta.css">
     <link rel="stylesheet" type="text/css" href="../Informes/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="../Informes/img/MI.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../Informes/img/MI.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../Informes/img/MI180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Informes/img/MI32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Informes/img/MI16.png">
+    <link rel="manifest" href="manifest.json">
+  
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+
 </head>
 <body>
     <menu id="menucontainer">
@@ -39,7 +50,7 @@
                 <label for="username">Usuario:</label>
                 <input type="text" id="username" name="username" required><br>
             </div>
-            
+
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required><br>
 
@@ -51,7 +62,17 @@
 
                 <button type="submit">Registrar</button>
         </form>
+        
     </div>
+
+    <!-- FOOTER- PIE DE PAGINA-->
+  <footer>
+    <div>©2024 EL JARDIN TOL-53140</div>
+    <div>       
+      <a href="https://github.com/grupos53140/Informes/blob/main/CONDICIONES.md">Condiciones de uso</a> | 
+      <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
+    </div>
+  </footer>
 
     <script>
         // Generar UUID
@@ -87,6 +108,37 @@
                 .then(response => alert('¡Registro exitoso!'))
                 .catch(error => console.error('Error!', error.message));
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+ //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
+ /////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+ // Función para iniciar la barra de progreso
+function iniciarBarraProgreso() {
+    const progressBar = document.getElementById('progress-bar');
+    
+    let progreso = 0;
+    const intervalo = 100; // Intervalo en milisegundos (0.1 segundo)
+
+    // Crear un intervalo para aumentar progresivamente el ancho de la barra
+    const idIntervalo = setInterval(() => {
+        progreso += 5; // Incremento del 5% cada 0.1 segundos
+        progressBar.style.width = `${progreso}%`;
+
+        // Si la barra alcanza el 95%, detener el avance (esperar respuesta real)
+        if (progreso >= 100) {
+            clearInterval(idIntervalo);
+        }
+    }, intervalo);
+}
+
+// Función para finalizar la barra de progreso al 100%
+function finalizarBarraProgreso() {
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.transition = 'width 0.5s ease';
+    progressBar.style.width = '0%';
+     
+}
     </script>
 </body>
 </html>
