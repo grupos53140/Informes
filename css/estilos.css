@@ -1,0 +1,364 @@
+* {
+    margin: 0;
+    /*padding: 0;*/
+   /* text-indent: 5px;*/
+    
+}
+@media print {
+    #toolbar {
+        display: none; /* Oculta la barra de herramientas en la impresión */
+    }
+    input[type="text"].nombre {
+        border: none; /* Elimina el borde por defecto */
+        outline: none; /* Elimina el borde que aparece cuando se hace clic */
+        border-bottom:none;
+    } 
+}
+
+html{
+    display: flex;
+    justify-content: center;
+    
+   
+}
+
+body {
+    padding-top: 30px; /* Espacio para la barra de menú */
+    /*display: flex;
+    justify-content: center;*/
+    margin: 0 auto;
+    background-color: var(--color-gray-50);
+
+}
+
+.toolbar {
+    position: fixed; /* Fija la barra en la parte superior */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 32px; /* Altura de la barra */
+    background-color: var(--color-gray-100); /* Color de fondo */
+    border-bottom:solid 1px #d2d2d2;
+    display: flex; /* Utiliza flexbox para alinear íconos */
+    align-items: center; /* Centra verticalmente los íconos */
+    padding: 0 20px; /* Espaciado a los lados */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+    justify-content: center;
+    gap: 10px;
+}
+
+ .menu-icon {
+            width: 24px; /* Ancho del ícono */
+            height: 24px; /* Alto del ícono */
+            margin: 0 10px; /* Espaciado entre íconos */
+            cursor: pointer; /* Cambia el cursor al pasar sobre los íconos */
+        }
+
+.tarjeta{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 255mm;
+    height: 157mm;
+    background-color: #ffffff;
+    border-radius: 15px;
+    border: 1px solid #dbe5f1;
+}
+
+.title_s1{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* align-content: center; */
+    flex-wrap: nowrap;    
+}
+
+.nombre{       
+    width:95%;   
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px; 
+    background: transparent;
+
+}
+
+
+
+/* Flecha para el dropdown 
+.custom-arrow {
+    border: solid rgb(150, 150, 150);
+    border-width: 0 2px 2px 0;
+    padding: 3px;
+    transform: rotate(45deg);
+}
+*/
+
+#divide{
+    display: contents;
+    color: #d7d6d6;
+}
+
+.nom,
+.group {
+    color: black;
+    font-family: Calibri, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 12.5pt;
+    margin-right: 10px;
+    align-content: center;
+}
+/* Lista de opciones (simulando el dropdown) */
+select#group, #nom {
+    background-color: rgb(255, 255, 255); /* Cambia el color de fondo */
+    color: black;                /* Cambia el color del texto */
+    padding: 5px;                /* Añade espacio interno */
+    font-size: 12px;             /* Cambia el tamaño de la fuente */
+    border: 1px solid rgb(226, 226, 226);     /* Cambia el color y tamaño del borde */
+    border-radius: 20px;         /* Redondea las esquinas */
+   -webkit-appearance: none;    /* Elimina la apariencia nativa en algunos navegadores (como WebKit) */
+    -moz-appearance: none;       /* Elimina la apariencia nativa en Firefox */
+    appearance: none;            /* Elimina la apariencia nativa en la mayoría de los navegadores */
+}
+select#group{
+    width: 135px;
+}
+select#nom{
+    width: 250px;
+}
+
+select:focus {
+    border-color: #7898ad !important;   /* Usa !important para asegurar que se aplique */
+    outline: none;                      /* Elimina el borde de foco predeterminado */
+}
+
+/* Estilos de las opciones */
+option {
+    padding: 10px;
+}
+
+
+/* Estilo para el ícono */
+#print,
+#save{
+    cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+    border:none;
+    background: transparent;
+}
+
+#print:hover {
+    cursor: pointer;
+    border: none;
+    background: #0000000f;
+    border-radius: 30px;
+}
+   
+#save:hover {
+    cursor: pointer;
+    border: none;
+    background: #0000000f;
+    border-radius: 30px;
+}
+
+.c0138{    
+    display: flex;
+    position: relative;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+input[type="date" i] {
+    font-family: monospace;
+    padding-inline-start: 1px;
+    cursor: default;
+    margin-left: 10px;
+    border:0px;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    /*accent-color: rgb(251, 247, 247); Invertimos el color del checkbox*/
+    border: 1px solid black;
+    border-radius: 0px;
+
+}
+
+input[type="text"]{
+    background: transparent;
+    border: none; /* Elimina el borde por defecto */
+    outline: none;  /*Elimina el borde que aparece cuando se hace clic */
+  } 
+
+  input[type="text"]:focus {
+    outline: none; /* Elimina el borde del foco */
+    border: none;  /* También asegura que no haya borde */
+  }
+
+#fechnac{
+    display:flex;
+    gap: 212px;
+} 
+ 
+#fechbaut{
+    display:flex;
+    gap: 225px;
+
+}  
+
+.checkgen {
+    display: flex;
+    gap: 80px;
+}
+
+.checkbaut {
+    display: flex;
+    gap: 50px;
+}
+
+#checknac, #checkgen, #checkou {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    
+}
+
+.privilegios,
+.facetas{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.privilegios{   
+    gap: 35px;
+}
+
+.funciones{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+}
+
+.facetas{
+    gap: 35px;
+}
+
+.s1,/*TITULO*/
+.s2,/*ENCABEZADO*/
+.s3,
+.s4,
+.s5,
+.s6,
+.s7{
+    color: black;
+    font-family: Calibri, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 10.5pt;
+   
+}
+/* TITULO*/
+.s1 {   
+    font-weight:600 ;
+    font-size: 18pt;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1pt; 
+    text-align: center;
+}
+
+/*ENCABEZADO*/
+.s2{
+    font-weight:600;
+    font-size: 13.5pt;
+    margin: 0pt;
+    /*vertical-align: 2pt;*/    
+}
+.s3{
+    font-weight:bold;
+    font-size: 12pt;
+    margin: 0pt;
+    /*vertical-align: 2pt; */
+}
+
+.s4 {
+    vertical-align: 6pt;
+}
+
+.s5 {
+    font-family: Tahoma, sans-serif;
+}
+
+.s6 {
+    font-family: "Microsoft Sans Serif", sans-serif;
+}
+
+.s7 {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 14pt;
+}
+
+table, tbody {
+    vertical-align: middle;
+    overflow: visible;
+}
+
+/*BARRA DE MENU FIJA EN LA PARTE SUPERIOR*/
+.menu-bar {
+    position: fixed; /* Fija la barra en la parte superior */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 32px; /* Altura de la barra */
+    background-color: #f8f9fa; /* Color de fondo */
+    display: flex; /* Utiliza flexbox para alinear íconos */
+    align-items: center; /* Centra verticalmente los íconos */
+    padding: 0 20px; /* Espaciado a los lados */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+/* Estilo para los íconos */
+.menu-icon {
+    width: 24px; /* Ancho del ícono */
+    height: 24px; /* Alto del ícono */
+    margin: 0 10px; /* Espaciado entre íconos */
+    cursor: pointer; /* Cambia el cursor al pasar sobre los íconos */
+}
+
+.content {
+    margin-top: 60px; /* Margen superior para que el contenido no se oculte detrás de la barra de menú */
+    padding: 20px; /* Espaciado dentro del contenido */
+}
+
+
+.querynom,
+.querygroup{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0px;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 20px;
+    padding: 5px 0px 0px 0px;
+    font-size: 12px;
+}

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tarjeta Registro de Publicador de la Congregación</title>
+    <meta name="author" content="Watch Tower Bible and Tract Society of Pennsylvania" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+    <!-- Enlazar paleta.css -->
+    <link rel="stylesheet" type="text/css" href="../TOL-53140/paleta.css">
+
+
+</head>
+
+<body>
+    <!-- BARRA DE HERRMIENTAS, CONSULTA E IMPRESIÓN-->
+    <div class="toolbar" id="toolbar" >
+        <!-- CONSULTA POR NOMBRE O PUBLICADOR-->
+        <div class="querygroup">
+            <label for="group" class="group">Grupo: </label>
+                <select name="group" id="group" onchange="selectName_Group();">
+                    <option id="options">Seleccione Grupo</option>
+                    <option id="options" value="1">1</option>
+                    <option id="options">2</option>
+                    <option id="options">3</option>
+                    <option id="options">4</option>
+                    <option id="options">5</option>
+                    <option id="options">6</option>
+                    <option id="options">7</option>
+                    <option id="options">8</option>
+                    <option id="options">9</option>
+                </select>
+                
+         </div>   
+         <div class="querynom">
+            <label for="nombre" class="nom"><span id="divide">|</span> Nombre:</label>
+                <select name="nom" id="nom" disabled="true">
+                    <option>Seleccione el nombre</option>
+                   
+                </select>
+         </div>   
+         
+        <!-- ICONO IMPRIMIR-->
+        <div class="c0138">
+            <div style="position: relative;">
+                <button id="print" title="Imprimir (Ctrl+P)" onclick="imprimirTarjeta()">
+                    <span class="c0180">
+                        <div class="c0168">
+                            <div aria-hidden="true" class="c0169">
+                                <svg width="20" height="20" viewBox="0 0 20 20" class="">
+                                    <path d="M5 4.5C5 3.67 5.67 3 6.5 3h7c.83 0 1.5.67 1.5 1.5V5h.5A2.5 2.5 0 0118 7.5v5c0 .83-.67 1.5-1.5 1.5H15v1.5c0 .83-.67 1.5-1.5 1.5h-7A1.5 1.5 0 015 15.5V14H3.5A1.5 1.5 0 012 12.5v-5A2.5 2.5 0 014.5 5H5v-.5zM6 5h8v-.5a.5.5 0 00-.5-.5h-7a.5.5 0 00-.5.5V5zm-1 8v-1.5c0-.83.67-1.5 1.5-1.5h7c.83 0 1.5.67 1.5 1.5V13h1.5a.5.5 0 00.5-.5v-5c0-.83-.67-1.5-1.5-1.5h-11C3.67 6 3 6.67 3 7.5v5c0 .28.22.5.5.5H5zm1.5-2a.5.5 0 00-.5.5v4c0 .28.22.5.5.5h7a.5.5 0 00.5-.5v-4a.5.5 0 00-.5-.5h-7z" fill-rule="nonzero">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+        <div class="tarjeta">
+            <!--ENCABEZADO DE LA TARJETA--> 
+            <!--Titulo encabezado-->
+            <div class="title_s1">
+                <p class="s1" >REGISTRO DE PUBLICADOR DE LA CONGREGACIÓN</p>
+            </div>     
+            <div class="s2">    
+            <!--Campo Nombre tipo text-->               
+                <div class="s2 nombre" style="padding-top: 5pt; ">Nombre:
+                        <input type="text" class="nombre">            
+                </div>
+            <!--Campo fecha nacimiento - genero-->  
+                <div class="s2" id="fechnac" style="padding-top: 2pt;">
+                        <div class="checknac">
+                            <span id="checknac">Fecha de nacimiento:
+                                <input type="text" name="fechnac" class="fechnac">
+                            </span>
+                        </div>
+                        <div class="checkgen">
+                            <span id="checkgen">
+                            <input type="checkbox" name="genh" class="s2"> Hombre 
+                            </span>
+                            <span id="checkgen">
+                                <input type="checkbox" name="genm" class="s2"> Mujer
+                            </span>
+                        </div>
+                </div>
+            <!--Campo fecha de bautismo, otras ovejas y ungido-->              
+                <div class="s2" id="fechbaut" style="padding-top: 2pt;">
+                        <div class="checknac">
+                            <span id="checknac">Fecha de bautismo:
+                                <input type="text" class="fechbaut">
+                            </span>
+                        </div>
+                        <div class="checkbaut">
+                            <span id="checkou">
+                                <input type="checkbox" name="checkou"class="s2"> Otras ovejas 
+                            </span>
+                            <span id="checkou">
+                                <input type="checkbox" name="checku" class="s2"> Ungido
+                            </span>
+                        </div>
+                </div>
+            <!--Campos funciones, privilegios, facetas-->  
+                <div class="funciones">
+                        <div class="privilegios">
+                            <div class="ancianos">
+                                <input type="checkbox"> <span class="s2">Anciano</span>
+                            </div>
+                            <div class="siervo">
+                                <input type="checkbox"> <span class="s2">Siervo ministerial</span> 
+                            </div>
+                        </div>
+                        <div class="facetas">
+                            <div class="p_regular">    
+                                <input type="checkbox"> <span class="encabezado">Precursor regular</span>
+                            </div> 
+                            <div class="p_especial">
+                                <input type="checkbox"> <span class="encabezado">Precursor especial</span>
+                            </div> 
+                            <div class="misionero">
+                                <input type="checkbox"> <span class="encabezado">Misionero que sirve</span>
+                            </div>
+                        </div>
+                </div>
+                <div class="misionerospace">
+                        <p style="padding-left: 510pt;">en el campo</p>
+                </div>
+            </div>
+        <!--END ENCABEZADO DE LA TARJETA--> 
+
+        <!--DETALLE DE LA TARJETA-->        
+        <!--Encabezado del detalle de la tabla--> 
+            <table style="border-collapse: collapse; border: solid 2pt;" cellspacing="0">
+                <div class="Tbl_encabezado">              
+                    <tr style="height: 50pt;">
+                    <!--AÑO DE SERVICIO-->
+                        <td style="width:max-content; border: solid 1pt;">
+                            <p class="s3" style="padding-top: 9pt; padding-left: 4pt;">Año de servicio</p>
+                            <input type="text" class="date">
+                        </td>
+                    <!--PARTICIPACION-->
+                        <td style="width: 70pt; border: solid 1pt; border-bottom-width:1pt">
+                            <p class="s3" style="padding-top: 1pt; text-align: center;">Participación</p>
+                            <p class="s3" style="text-align: center;">en el ministerio</p>   
+                        </td>
+                    <!--CURSO BIBLICO-->
+                        <td style="width: 71pt; border: solid 1pt; border-bottom-width: 1pt;">
+                            <p class="s3" style="padding-left: 17pt;">Cursos bíblicos</p>
+                        </td>
+                    <!--PRECURSOR AUXILIAR-->
+                        <td style="width: 71pt; border: solid 1pt; border-bottom-width:1pt">
+                            <p class="s3" style="padding-left: 17pt;">Precursor auxiliar</p>
+                        </td>
+                    <!--HORAS-->
+                        <td style="width: 99pt; border: solid 1pt; border-bottom-width: 1pt;">
+                            <p class="s3" style="text-align: center;">Horas</p>
+                            <p class="s5" style="text-align: center;">(Si es precursor o misionero que sirve en el campo)</p>
+                        </td>
+                    <!--CREDITO-->
+                        <td style="width: 35pt; border: solid 1pt; border-bottom-width: 1pt; border-right-width: 0pt;">
+                            <p class="s5" style="padding-left: 6pt; margin-top: 50px;">...</p>
+                        </td>
+                    <!--NOTAS-->    
+                        <td style="width: 130pt; border: solid 2pt; border-bottom-width: 0pt; border-left-width: 0pt;">
+                            <p class="s3" style="padding-left: 33pt;">Notas</p>
+                        </td>
+                    </tr>
+                </div>
+    <!--END ENCABEZADO DEL DETALLE DE LA TABLA-->
+    <!-- Fila de Septiembre -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Septiembre</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_sep"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_sep" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_sep"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr"  style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr"  style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_sep" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+
+                <!-- Fila de Octubre -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Octubre</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_oct"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_oct" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_oct"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr"  style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr"  style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_oct" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+
+                <!-- Fila de Noviembre -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Noviembre</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_nov"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_nov" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_nov"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr"  style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_nov" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+
+                <!-- Fila de Diciembre -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Diciembre</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_dic"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_dic" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_dic"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr"  style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_dic" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+
+                <!-- Fila de Enero -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Enero</p>
+                            <td style="width: 70pt; border: solid 1pt;">
+                                <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_ene"></p>
+                            </td>
+                            <td style="width: 71pt; border: solid 1pt;">
+                                <p style="display: flex;justify-content: center;"><input type="text" class="curso_ene" style=" width:65pt; text-align: center;"></p>
+                            </td>
+                            <td style="width: 71pt; border: solid 1pt;">
+                                <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_ene"></p>
+                            </td>
+                            <td style="width: 99pt; border: solid 1pt;">
+                                <p style="display: flex;justify-content: center;"><input type="text" class="cantHr" style=" width:65pt; text-align: center;"></p>
+                            </td>
+                            <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                                <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                            </td>
+                            <td style="width: 130pt; border: solid 1pt;">
+                                <p style="display: flex;justify-content: center;"><input type="text" class="notas_ene" style=" width:65pt; text-align: center;"></p>
+                            </td>
+                </tr>
+
+                <!-- Fila de Febrero -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Febrero</p>
+                            <td style="width: 70pt; border: solid 1pt;">
+                                <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_feb"></p>
+                            </td>
+                            <td style="width: 71pt; border: solid 1pt;">
+                                <p style="display: flex;justify-content: center;"><input type="text" class="curso_feb" style=" width:65pt; text-align: center;"></p>
+                            </td>
+                            <td style="width: 71pt; border: solid 1pt;">
+                                <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_feb"></p>
+                            </td>
+                            <td style="width: 99pt; border: solid 1pt;">
+                                <p style="display: flex;justify-content: center;"><input type="text" class="cantHr" style=" width:65pt; text-align: center;"></p>
+                            </td>
+                            <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                                <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                            </td>
+                            <td style="width: 130pt; border: solid 1pt;">
+                                <p style="display: flex;justify-content: center;"><input type="text" class="notas_feb" style=" width:65pt; text-align: center;"></p>
+                            </td>
+                </tr>
+
+                <!-- Fila de Marzo -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Marzo</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_mar"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_mar" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_mar"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_mar" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+
+                <!-- Fila de Abril -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Abril</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_abr"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_abr" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_abr"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_abr" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+
+                <!-- Fila de Mayo -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Mayo</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_may"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_may" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_may"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_may" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+
+                <!-- Fila de Junio -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Junio</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_jun"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_jun" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_jun"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_jun" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+                <!-- Fila de Julio -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Julio</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_jul"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_jul" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_jul"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_jul" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+                <!-- Fila de Agosto -->
+                <tr style="height: 20pt;">
+                        <td style="width: 80pt; border: solid 1pt; border-left-width: 2pt;">
+                            <p class="s5" style="padding-top: 2pt; padding-left: 3pt;">Agosto</p>
+                        </td>
+                        <td style="width: 70pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="participa_ago"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="curso_ago" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 71pt; border: solid 1pt;">
+                            <p class="s7" style="text-align: center;"><input type="checkbox" class="precursoraux_ago"></p>
+                        </td>
+                        <td style="width: 99pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantHr" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 35pt; border: solid 1pt; border-right-color: transparent;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="cantCr" style=" width:40pt; text-align: center;"></p>
+                        </td>
+                        <td style="width: 130pt; border: solid 1pt;">
+                            <p style="display: flex;justify-content: center;"><input type="text" class="notas_ago" style=" width:65pt; text-align: center;"></p>
+                        </td>
+                </tr>
+                <!-- Fila de Total -->
+                <tr style="height: 18pt;">
+                        <td style="width: 296pt; border: solid 2pt; border-right-width: 2pt; border-left-color: transparent; border-bottom-color: transparent;" colspan="4">
+                            <p class="s3" style="padding-top: 3pt; padding-right: 3pt; text-align: right;">Total</p>
+                        </td>
+                        <td style="width: 99pt; border: solid 2pt; border-left-width: 2pt;">
+                            <span id="TotalHoras"></span>
+                        </td>
+                        <td style="width: 35pt; border: solid 2pt; border-right-color: transparent;">
+                            <span id="TotalCr"></span>
+                        </td>
+                        <td style="width: 130pt; border: solid 2pt;">
+                            <p></p>
+                        </td>
+                </tr>
+            </table>
+        </div>
+   
+        
+
+
+    <!--SCRIPT DEL COMPONENETE SELECT-->
+    <script>
+         document.getElementById('group').addEventListener('change', function() {
+                    const group = this.value;
+                    const nom = document.getElementById('nom');
+                    
+                    console.log("group paso 2:", group);
+                    console.log("nom paso 3:", nom);
+    
+    // Si se ha seleccionado un grupo (valor no vacío)
+                if (group) {
+                    console.log("entro a IF: ", group);
+                    nom.disabled = false;  // Habilita el segundo select
+                    nom.innerHTML = '';  // Limpia el contenido antes de cargar los nuevos nombres                    
+                    loadNames(group);  // Llama a la función para cargar los nombres según el grupo seleccionado
+                } else {
+                    nom.disabled = true;   // Si no hay grupo seleccionado, inhabilita el segundo select
+                    nom.innerHTML = '<option value="">Entré en ELSE</option>';  // Restablece las opciones
+                }
+                
+                console.log("nom paso 3:", nom);
+            });
+
+            function loadNames(group) {
+                let nom = document.getElementById('nom'); // Asegúrate de tener el select correcto
+                let options = ''; // Variable para concatenar las opciones
+                let i, num;
+                
+                // Verifica el grupo seleccionado
+                if (group == 1) {
+                    num = 20;
+                    for (i = 1; i <= num; i++) { // El ciclo va de 1 hasta num
+                        options += `<option value="${i}">${i}</option>`; // Concatenar opciones
+                    }
+                } else if (group == 2) {
+                    num = 40;
+                    for (i = 21; i <= num; i++) { // El ciclo va de 21 hasta num
+                        options += `<option value="${i}">${i}</option>`; // Concatenar opciones
+                    }
+                }
+                
+                // Establecer las opciones generadas en el select
+                nom.innerHTML = options;
+            }
+
+
+
+    function imprimirTarjeta() {
+        
+            // Esperar un breve momento antes de iniciar la impresión
+            setTimeout(() => {
+                document.querySelector('body').style.paddingTop = '0px';
+                window.print(); // Abrir el diálogo de impresión
+                document.querySelector('body').style.paddingTop = '30px';
+            }, 100);
+        }
+
+
+
+        function saveForm() {
+            window.open('file:///C:/Users/team/Desktop/', 'titulo', 'widdth=800,height=600,');
+        }
+
+
+        //CALCULAR LOS TOTALES DE LA TABLA: TOTAL HORAS Y TOTALCR
+
+        function calcularTotal() {
+        // Obtiene todas las celdas de la columna "cantidad"
+        const celdasCantidad = document.querySelectorAll('.cantHr');
+        let TotalHoras = 0;
+
+        // Recorre las celdas y suma sus valores
+        celdasCantidad.forEach(celda => {
+            TotalHoras += parseFloat(celda.textContent); // Convierte el valor a número y lo suma
+        });
+
+        // Muestra el total en el campo correspondiente
+        document.getElementById('TotalHoras').textContent = TotalHoras.toFixed(2); // Muestra el total con 2 decimales
+    }
+
+    // Llama a la función para calcular el total al cargar la página
+    window.onload = calcularTotal; 
+
+
+      </script>    
+      
+<footer>S-21-S 11/23</footer>      
+</body>
+
+</html>
