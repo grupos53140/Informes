@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../Informes/img/MI180.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Informes/img/MI32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Informes/img/MI16.png">
-    <link rel="manifest" href="manifest.json">
+    
   
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
@@ -40,27 +40,50 @@
     <div class="form-container">        
         <form id="registerForm">
             <div id="headline">          
-                <legend><h3>REGISTRESE</h3></legend>      
-                <!-- ENCABEZADO RESULTADO CONSULTA DE GRUPO Y FACETA-->
+                <legend><h3>REGISTRESE</h3></legend>
+
+            <!-- ENCABEZADO RESULTADO CONSULTA DE GRUPO Y FACETA-->
                  <!-- Mensaje de resultado -->
                  <div id="status-message"></div>
             </div>
+            
+            <!-- CAMPO USUARIO-->
             <div class="form-group">
                 <label for="username">Usuario:</label>
                 <input type="text" id="username" name="username" required><br>
-           
+            </div>
 
+            <!-- CAMPO NOMBRE-->
+            <div class="form-group" id="nombreContainer" ></div>
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required><br>
+            </div>
 
+            <!-- CAMPO CORREO-->
+            <div class="form-group" id="correoContainer" >
                 <label for="email">Correo Electrónico:</label>
                 <input type="email" id="email" name="email" required><br>
+            </div>
 
-                <label for="uuid">UUID del Dispositivo:</label>
+            <!-- CAMPO UUID HIDDEN-->
+            <div class="form-group" id="uuidContainer" > 
+                <label for="uuid hidden">UUID del Dispositivo:</label>
                 <input type="text" id="uuid" name="uuid" readonly hidden><br>
+            </div> 
 
-                <button type="submit">Registrar</button>
+            <!--CAMPO BOTON SUBMIT ENVIAR-->
+            <div class="form-group" id="submitBtnContainer">
+                <button type="submit" id="submitBtn" value="Enviar">
+            </div>            
+        
+            <!-- Modal de procesamiento -->
+            <div id="processingModal" class="modal">
+                <div class="modal-content">
+                <h2>Procesando registro...</h2>
+                <p>Por favor, espera mientras se envían los datos.</p>
+                </div>
             </div>    
+             
         </form>
 
     </div>
