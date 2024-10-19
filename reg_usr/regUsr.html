@@ -139,6 +139,7 @@
   </footer>
 
     <script>
+         finalizarBarraProgreso();
         // Generar UUID
         const uuid = uuidv4();
         document.getElementById('uuid').value = uuid;
@@ -146,7 +147,9 @@
         // Enviar datos del formulario a Google Sheets
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
+              // Iniciar la barra de progreso
+                iniciarBarraProgreso();
+                mostrarMensaje("Registrando...");
             // Obtener valores del formulario
             const username = document.getElementById('username').value;
             const nombre = document.getElementById('nombre').value;
@@ -203,6 +206,17 @@ function finalizarBarraProgreso() {
     progressBar.style.width = '0%';
      
 }
-    </script>
+
+// Mensaje de estado
+function mostrarMensaje(mensaje, isSuccess = false) {
+    const statusMessage = document.getElementById('status-message');
+    if (isSuccess) {
+        statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
+    } else {
+        statusMessage.textContent = mensaje;
+    }
+}
+
+</script>
 </body>
 </html>
