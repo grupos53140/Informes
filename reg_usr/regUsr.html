@@ -204,7 +204,7 @@ function iniciarBarraProgreso() {
         progressBar.style.width = `${progreso}%`;
 
         // Si la barra alcanza el 95%, detener el avance (esperar respuesta real)
-        if (progreso >= 100) {
+        if (progreso >= 95) {
             clearInterval(idIntervalo);
         }
     }, intervalo);
