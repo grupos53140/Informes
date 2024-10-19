@@ -110,6 +110,7 @@
             <div class="form-group hidden" id="uuidContainer" > 
                 <label for="uuid">UUID del Dispositivo:</label>
                 <input type="text" id="uuid" name="uuid"><br>
+               
             </div> 
 
             <!--CAMPO BOTON SUBMIT ENVIAR-->
@@ -176,6 +177,8 @@
                 .catch(error => console.error('Error!', error.message));
                 finalizarBarraProgreso();
                 mostrarMensaje("¡Registro exitoso!");
+
+            
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////
