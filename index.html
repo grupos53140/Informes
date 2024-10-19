@@ -50,8 +50,9 @@
     <!-- END BARRA DE PROGRESO -->
    
   </menu>        
-  <div class="form-container">
-    <form id="myInform">   
+  
+  <form id="myInform">  
+    <div class="form-container"> 
       <!-- BARRA DE PROGRESO
       <div id="progress-container">
         <div id="progress-bar"></div>
@@ -135,23 +136,25 @@
             <p>Por favor, espera mientras se envían los datos.</p>
           </div>
       </div>
-    </form>
+  
+  
+        <!-- AGRADECIMIENTOS POR EL REGISTRO-->
+        <div id="thankYouMessage" style="display: none; text-align: center;">
+          <!-- MUESTRA RESPUESTA DE HABER RECIBIDO EL REGISTRO DESDE APPSCRIPT -->
+          <div id="response"></div>
+          <img src="../Informes/img/MIGracias180.png" alt="Chulito Azul" style="width: 100px; height: 100px;">
+          <h2>¡Recibimos tu informe!</h2>
+          <div id="menumsg">
+            <a href="#" id="Refresh" onclick="location.reload();">Nuevo Registro</a>
+            <a href="#" id="Salir" onclick="window.close();">Salir</a>
+          </div>
+        </div>   
 
-    <!-- AGRADECIMIENTOS POR EL REGISTRO-->
-    <div id="thankYouMessage" style="display: none; text-align: center;">
-      <!-- MUESTRA RESPUESTA DE HABER RECIBIDO EL REGISTRO DESDE APPSCRIPT -->
-      <div id="response"></div>
-      <img src="../Informes/img/MIGracias180.png" alt="Chulito Azul" style="width: 100px; height: 100px;">
-      <h2>¡Recibimos tu informe!</h2>
-      <div id="menumsg">
-        <a href="#" id="Refresh" onclick="location.reload();">Nuevo Registro</a>
-        <a href="#" id="Salir" onclick="window.close();">Salir</a>
-      </div>
     </div>
+  
+  </form>
 
-    
-
-  </div>
+      
 
   <!-- FOOTER- PIE DE PAGINA-->
   <footer>
