@@ -159,6 +159,8 @@
 
             // Enviar a Google Sheets
             sendToGoogleSheets(username, nombre, email, uuid);
+            finalizarBarraProgreso(); 
+            mostrarMensaje(" ", true);
         });
 
         function sendToGoogleSheets(username, nombre, email, uuid) {
@@ -176,10 +178,11 @@
                 .then(response => alert('¡Registro exitoso!'))
                 .catch(error => console.error('Error!', error.message));
                 
-                finalizarBarraProgreso();    
+                   
 
                 
         }
+       
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////
  //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
