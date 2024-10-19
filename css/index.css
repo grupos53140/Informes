@@ -27,7 +27,7 @@
       display: flex;
       align-items: center; /* Alinea las etiquetas con los campos verticalmente */
     }
-
+    /*
     .form-container {
     display: flex;
     background-color: white;
@@ -38,6 +38,15 @@
     align-items: center;
     flex-wrap: nowrap;
     }
+    */
+    .form-container {
+      display: flex;
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid var(--color-blue-100);
+      flex-direction: column;
+      flex-wrap: wrap;
+  }   
 
     .form-container h2 {
       text-align: center;
