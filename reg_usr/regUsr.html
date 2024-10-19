@@ -160,8 +160,7 @@
 
             // Enviar a Google Sheets
             sendToGoogleSheets(username, nombre, email, uuid);
-            finalizarBarraProgreso(); 
-            mostrarMensaje(" ", true);
+           
         });
 
         function sendToGoogleSheets(username, nombre, email, uuid) {
@@ -174,14 +173,16 @@
             formData.append('email', email);
             formData.append('uuid', uuid);
 
+
+
             // Enviar al servidor
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => alert('¡Registro exitoso!'))
                 .catch(error => console.error('Error!', error.message));
                 
-                   
-
-                finalizarBarraProgreso();     
+                finalizarBarraProgreso(); 
+                mostrarMensaje(" ", true);             
+     
         }
        
 
