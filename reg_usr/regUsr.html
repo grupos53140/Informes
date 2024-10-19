@@ -175,10 +175,10 @@
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => alert('¡Registro exitoso!'))
                 .catch(error => console.error('Error!', error.message));
-                finalizarBarraProgreso();
+                
                 mostrarMensaje("¡Registro exitoso!");
 
-            
+                finalizarBarraProgreso();
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////
