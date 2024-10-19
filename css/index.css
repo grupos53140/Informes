@@ -99,6 +99,18 @@
     margin-top: 10px;
     }
 
+    input[type="email"]{    
+      flex-grow: 1;
+      padding: 5px;
+      font-size: 12px;
+      width: -webkit-fill-available;
+      border: 1px solid var(--color-gray-200);
+      height: 40px;
+      max-width: min-content;
+      margin-top: 10px;
+      margin-top: 10px;
+      }
+
     textarea {
     flex-grow: 1;
     padding: 5px;
