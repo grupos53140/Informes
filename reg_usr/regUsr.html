@@ -219,7 +219,7 @@ function finalizarBarraProgreso() {
 }
 
 // Mensaje de estado
-function mostrarMensaje(mensaje, isSuccess = false) {
+await function mostrarMensaje(mensaje, isSuccess = false) {
     const statusMessage = document.getElementById('status-message');
     if (isSuccess) {
         statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
