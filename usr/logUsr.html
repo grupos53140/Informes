@@ -89,9 +89,9 @@
 
             // Obtener el valor del input
             var email = document.getElementById('email').value;
-
+            scriptUrl='https://script.google.com/macros/s/AKfycbyeclACL4tAE5JDUukWOMRt67ab-mdUQBjONQeVlsJl9VBg8wsh_OXFNLBwSrn1gC2D/exec';
             // Llamar al servidor con fetch
-            fetch('https://script.google.com/macros/s/AKfycbyeclACL4tAE5JDUukWOMRt67ab-mdUQBjONQeVlsJl9VBg8wsh_OXFNLBwSrn1gC2D/exec', {
+            fetch(scriptUrl, {
                 method: 'POST',
                 body: JSON.stringify({action: 'auth', email: email }),
                 headers: { 'Content-Type': 'application/json' }
