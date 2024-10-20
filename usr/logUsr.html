@@ -96,13 +96,17 @@
                 headers: {
                         'Content-Type': 'application/json'
                     }, 
-                mode: 'no-cors',  // Esto es lo que añadimos
+                //mode: 'no-cors',  // Esto es lo que añadimos
                 body: JSON.stringify({action: 'auth', email: email })
                 
             })
             .then(response => response.text())
             .then(data => {
-                alert(data); // Mostrar la respuesta del servidor (si es correcto o no)
+                if (data) {
+                             alert('Respuesta del servidor: ' + data);
+                            } else {
+                                    alert('No se recibió una respuesta válida.');
+                                 }
             })
             .catch(error => console.error('Error:', error));
         });
