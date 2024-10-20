@@ -108,9 +108,11 @@
         // Enviar datos del formulario a Google Sheets
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-              // Iniciar la barra de progreso
-                iniciarBarraProgreso();
-                mostrarMensaje("Registrando...");
+
+            // Iniciar la barra de progreso
+            iniciarBarraProgreso();
+            mostrarMensaje("Registrando...");
+
             // Obtener valores del formulario
             const username = document.getElementById('username').value;
             const nombre = document.getElementById('nombre').value;
@@ -119,19 +121,35 @@
 
             // Enviar a Google Sheets
             sendToGoogleSheets(username, nombre, email, uuid);
+
+             // Finalizar la barra de progreso
             finalizarBarraProgreso(); 
             mostrarMensaje(" ", true);  
         });
 
         function sendToGoogleSheets(username, nombre, email, uuid) {
             const scriptURL = 'https://script.google.com/macros/s/AKfycbyePR8GjWIZDCSQwnyJXKH-R9K6pLoLWwnARJ7OvtfW3EY6o7sYVqTa-NulTWsyEFtM/exec';
-            const formData = new FormData();
-
-            // Añadir los datos al formulario
-            formData.append('username', username);
-            formData.append('nombre', nombre);
-            formData.append('email', email);
-            formData.append('uuid', uuid);
+           
+                
+          fetch(scriptURL, {method: 'POST',body: JSON.stringify({action: 'register',  // Parámetro de acción
+                username: username,
+                nombre: nombre,
+                email: email,
+                uuid: uuid
+                }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+            }) 
+            .then(response => alert('¡Registro exitoso!'))
+            .then(data => console.log(data)) // Muestra la respuesta en consola
+            .catch(error => console.error('Error!', error.message));                          
+     
+        }
+               
+// formData.append('nombre', nombre);
+           // formData.append('email', email);
+           // formData.append('uuid', uuid);
 
             // Enviar al servidor
          /*   fetch(scriptURL, { method: 'POST', body: formData })
@@ -139,22 +157,6 @@
                     .catch(error => console.error('Error!', error.message));
 
         */  
-                
-          fetch(scriptURL, {method: 'POST',body: JSON.stringify({action: 'register',  // Parámetro de acción
-               username: username,
-              nombre: nombre,
-              email: email,
-                uuid: uuid
-           }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-            }) .then(response => alert('¡Registro exitoso!'))
-            .catch(error => console.error('Error!', error.message));                          
-     
-        }
-               
-
   /////////////////////////////////////////////////////////////////////////////////////////////////////
  //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
  /////////////////////////////////////////////////////////////////////////////////////////////////////
