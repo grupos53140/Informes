@@ -101,8 +101,11 @@
                     })
                 })
                 .then(response => response.json())
-                .then(data => {
-                    alert('Respuesta del servidor: ' + JSON.stringify(data));
+                .then(data => 
+                    {
+                    // Abrir una nueva ventana y mostrar los datos
+                    window.open('data:text/html,' + encodeURIComponent('<html><body><h1>Respuesta del servidor:</h1><p>' + JSON.stringify(data) + '</p></body></html>'));
+                
                 })
                 .catch(error => console.error('Error:', error));
                 iniciarBarraProgreso();
