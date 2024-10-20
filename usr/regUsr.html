@@ -131,7 +131,10 @@
             const scriptURL = 'https://script.google.com/macros/s/AKfycbyePR8GjWIZDCSQwnyJXKH-R9K6pLoLWwnARJ7OvtfW3EY6o7sYVqTa-NulTWsyEFtM/exec';
            
                 
-          fetch(scriptURL, {method: 'POST',body: JSON.stringify({action: 'register',  // Parámetro de acción
+          fetch(scriptURL, {
+            method: 'POST', 
+            mode: 'no-cors',  // Esto es lo que añadimos
+            body: JSON.stringify({action: 'register',  // Parámetro de acción
                 username: username,
                 nombre: nombre,
                 email: email,
