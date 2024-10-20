@@ -106,24 +106,30 @@
 
         function sendToGoogleSheets(email) {
             const scriptURL = 'https://script.google.com/macros/s/AKfycbypm-BV_6ZdmU4ixHqzXhaqJL6plYbgRncI3UMmAUaAZsPSvhxm8UEynyBLKkC_vGEO/exec';
-           
-                
-          fetch(scriptURL, {
-            method: 'POST',
-            headers: {
-                        'Content-Type': 'application/json'
-                    }, 
-            mode: 'cors',  // Esto es lo que añadimos
-            body: JSON.stringify({action: 'auth',  // Parámetro de acción
-                email: email
+        
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                body: JSON.stringify({
+                    action: 'auth',  // Acción para autenticación
+                    email: email
                 })
-                    
-            }) 
-            .then(response => alert('¡Registro Encontrado!'))
-            .then(data => console.log(data)) // Muestra la respuesta en consola
+            })
+            .then(response => response.text())  // Procesamos la respuesta como texto
+            .then(data => {
+                if (data === 'Usuario autenticado') {  // Comparación directa
+                    alert('¡Usuario autenticado!');
+                } else {
+                    alert('¡Usuario no encontrado!');
+                }
+                console.log(data);  // Muestra la respuesta en consola para revisión
+            })
             .catch(error => console.error('Error!', error.message));                          
-     
         }
+
                
 // formData.append('nombre', nombre);
            // formData.append('email', email);
