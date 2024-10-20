@@ -81,49 +81,28 @@
   </footer>
 
     <script>
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Iniciar la barra de progreso
-    iniciarBarraProgreso();
-    mostrarMensaje("Consultando...");
-
-    // Obtener valores del formulario
-    const email = document.getElementById('email').value;
-
-    // Enviar a Google Sheets
-    sendToGoogleSheets(email);
-
-    // Finalizar la barra de progreso
-    finalizarBarraProgreso();
-    mostrarMensaje(" ", true);  
+           document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // Prevenir el envío estándar del formulario
+  var email = document.getElementById('email').value;
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbypm-BV_6ZdmU4ixHqzXhaqJL6plYbgRncI3UMmAUaAZsPSvhxm8UEynyBLKkC_vGEO/exec';
+  
+  fetch(scriptURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    body: JSON.stringify({
+      action: 'auth',
+      email: email
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert('Respuesta del servidor: ' + JSON.stringify(data));
+  })
+  .catch(error => console.error('Error:', error));
 });
-
-function sendToGoogleSheets(email) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx-ClwGOe5OFGnG36vl7YTgnjXECqOkkNI4SfSPSOwBiMr_SZVG8khyuEbPICuuN-VR/exec';
-
-    fetch(scriptURL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        body: JSON.stringify({
-            action: 'auth',  // Acción para autenticación
-            email: email
-        })
-    })
-    .then(response => response.json())  // Cambiamos .text() a .json()
-    .then(data => {
-        if (data.message === 'Usuario autenticado') {
-            alert('¡Usuario autenticado!');
-        } else {
-            alert('¡Usuario no encontrado!');
-        }
-        console.log(data);  // Mostrar datos en consola para revisar la respuesta
-    })
-    .catch(error => console.error('Error!', error.message));                          
-}
 
                
 // formData.append('nombre', nombre);
