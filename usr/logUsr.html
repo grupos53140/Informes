@@ -81,55 +81,49 @@
   </footer>
 
     <script>
-            finalizarBarraProgreso();
-       
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        // Enviar datos del formulario a Google Sheets
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+    // Iniciar la barra de progreso
+    iniciarBarraProgreso();
+    mostrarMensaje("Consultando...");
 
-            // Iniciar la barra de progreso
-            iniciarBarraProgreso();
-            mostrarMensaje("Consultando...");
+    // Obtener valores del formulario
+    const email = document.getElementById('email').value;
 
-            // Obtener valores del formulario
-        
-            const email = document.getElementById('email').value;
-        
-            // Enviar a Google Sheets
-            sendToGoogleSheets(email);
+    // Enviar a Google Sheets
+    sendToGoogleSheets(email);
 
-             // Finalizar la barra de progreso
-            finalizarBarraProgreso(); 
-            
-            mostrarMensaje(" ", true);  
-        });
+    // Finalizar la barra de progreso
+    finalizarBarraProgreso();
+    mostrarMensaje(" ", true);  
+});
 
-        function sendToGoogleSheets(email) {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbx-ClwGOe5OFGnG36vl7YTgnjXECqOkkNI4SfSPSOwBiMr_SZVG8khyuEbPICuuN-VR/exec';
-        
-            fetch(scriptURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                body: JSON.stringify({
-                    action: 'auth',  // Acción para autenticación
-                    email: email
-                })
-            })
-            .then(response => response.text())  // Procesamos la respuesta como texto
-            .then(data => {
-                if (data === 'Usuario autenticado') {  // Comparación directa
-                    alert('¡Usuario autenticado!');
-                } else {
-                    alert('¡Usuario no encontrado!');
-                }
-                console.log(data);  // Muestra la respuesta en consola para revisión
-            })
-            .catch(error => console.error('Error!', error.message));                          
+function sendToGoogleSheets(email) {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx-ClwGOe5OFGnG36vl7YTgnjXECqOkkNI4SfSPSOwBiMr_SZVG8khyuEbPICuuN-VR/exec';
+
+    fetch(scriptURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        body: JSON.stringify({
+            action: 'auth',  // Acción para autenticación
+            email: email
+        })
+    })
+    .then(response => response.json())  // Cambiamos .text() a .json()
+    .then(data => {
+        if (data.message === 'Usuario autenticado') {
+            alert('¡Usuario autenticado!');
+        } else {
+            alert('¡Usuario no encontrado!');
         }
+        console.log(data);  // Mostrar datos en consola para revisar la respuesta
+    })
+    .catch(error => console.error('Error!', error.message));                          
+}
 
                
 // formData.append('nombre', nombre);
