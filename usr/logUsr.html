@@ -96,7 +96,7 @@
                         headers: {
                                 'Content-Type': 'application/json'
                             }, 
-                        mode: 'no-cors',  // Esto es lo que añadimos
+                        //mode: 'cors',  // Esto es lo que añadimos
                         body: JSON.stringify({
                             action: 'auth',
                             email: email 
@@ -115,7 +115,7 @@
     
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////
- //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
+ //BARRA DE TIEMPO DE PROGRESO
  /////////////////////////////////////////////////////////////////////////////////////////////////////
  
  // Función para iniciar la barra de progreso
