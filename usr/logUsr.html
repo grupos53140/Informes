@@ -87,6 +87,9 @@
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Prevenir el envío estándar del formulario
 
+            //Inicar la barra de Progreso
+            iniciarBarraProgreso();
+            
             // Obtener el valor del input
             var email = document.getElementById('email').value;
             const scriptURL='https://script.google.com/macros/s/AKfycbyePR8GjWIZDCSQwnyJXKH-R9K6pLoLWwnARJ7OvtfW3EY6o7sYVqTa-NulTWsyEFtM/exec';
