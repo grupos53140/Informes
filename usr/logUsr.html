@@ -92,24 +92,26 @@
             const scriptURL='https://script.google.com/macros/s/AKfycbyePR8GjWIZDCSQwnyJXKH-R9K6pLoLWwnARJ7OvtfW3EY6o7sYVqTa-NulTWsyEFtM/exec';
             // Llamar al servidor con fetch
             fetch(scriptURL, {
-                method: 'POST',
-                headers: {
-                        'Content-Type': 'application/json'
-                    }, 
-                mode: 'no-cors',  // Esto es lo que añadimos
-                body: JSON.stringify({action: 'auth', email: email })
-                
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data) {
-                             alert('Respuesta del servidor: ' + data);
-                            } else {
-                                    alert('No se recibió una respuesta válida.');
-                                 }
-            })
-            .catch(error => console.error('Error:', error));
-        });
+                        method: 'POST',
+                        headers: {
+                                'Content-Type': 'application/json'
+                            }, 
+                        mode: 'no-cors',  // Esto es lo que añadimos
+                        body: JSON.stringify({
+                            action: 'auth',
+                            email: email 
+                        })
+                    })               
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data) {
+                                    alert('Respuesta del servidor: ' + data);
+                                    } else {
+                                            alert('No se recibió una respuesta válida.');
+                                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+        })
     
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////
