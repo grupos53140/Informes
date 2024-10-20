@@ -133,24 +133,24 @@
             formData.append('email', email);
             formData.append('uuid', uuid);
 
-         
-
             // Enviar al servidor
-           // fetch(scriptURL, { method: 'POST', body: formData })
-           //     .then(response => alert('¡Registro exitoso!'))
-           //     .catch(error => console.error('Error!', error.message));
+            fetch(scriptURL, { method: 'POST', body: formData })
+                    .then(response => alert('¡Registro exitoso!'))
+                    .catch(error => console.error('Error!', error.message));
+
+          
                 
-           fetch(scriptURL, {method: 'POST',body: JSON.stringify({action: 'register',  // Parámetro de acción
-                username: username,
-                nombre: nombre,
-                email: email,
-                uuid: uuid
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-            }) .then(response => alert('¡Registro exitoso!'))
-            .catch(error => console.error('Error!', error.message));                          
+          // fetch(scriptURL, {method: 'POST',body: JSON.stringify({action: 'register',  // Parámetro de acción
+          //      username: username,
+          //      nombre: nombre,
+          //      email: email,
+          //      uuid: uuid
+          //  }),
+          //  headers: {
+          //      'Content-Type': 'application/json'
+          //  }
+          //  }) .then(response => alert('¡Registro exitoso!'))
+          //  .catch(error => console.error('Error!', error.message));                          
      
         }
                
