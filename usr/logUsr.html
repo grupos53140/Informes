@@ -81,40 +81,62 @@
   </footer>
 
     <script>
-         finalizarBarraProgreso();
+            finalizarBarraProgreso();
        
-        // Función para enviar datos al servidor
+
+        // Enviar datos del formulario a Google Sheets
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevenir el envío estándar del formulario
-                var email = document.getElementById('email').value;
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbx-ClwGOe5OFGnG36vl7YTgnjXECqOkkNI4SfSPSOwBiMr_SZVG8khyuEbPICuuN-VR/exec';
-                
-                fetch(scriptURL, {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    mode: 'cors',
-                    body: JSON.stringify({
-                    action: 'auth',
-                    email: email
-                    })
-                })
-                .then(response => response.json())
-                .then(data => 
-                    {
-                    // Abrir una nueva ventana y mostrar los datos
-                    window.open('data:text/html,' + encodeURIComponent('<html><body><h1>Respuesta del servidor:</h1><p>' + JSON.stringify(data) + '</p></body></html>'));
-                
-                })
-                .catch(error => console.error('Error:', error));
-                iniciarBarraProgreso();
-            });
+            e.preventDefault();
 
-    
+            // Iniciar la barra de progreso
+            iniciarBarraProgreso();
+            mostrarMensaje("Consultando...");
 
- //////////////////////////////////////////////////////////////////////////////////////////////////////
- //BARRA DE TIEMPO DE PROGRESO
+            // Obtener valores del formulario
+        
+            const email = document.getElementById('email').value;
+        
+            // Enviar a Google Sheets
+            sendToGoogleSheets(email);
+
+             // Finalizar la barra de progreso
+            finalizarBarraProgreso(); 
+            mostrarMensaje(" ", true);  
+        });
+
+        function sendToGoogleSheets(email) {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbypm-BV_6ZdmU4ixHqzXhaqJL6plYbgRncI3UMmAUaAZsPSvhxm8UEynyBLKkC_vGEO/exec';
+           
+                
+          fetch(scriptURL, {
+            method: 'POST',
+            headers: {
+                        'Content-Type': 'application/json'
+                    }, 
+            mode: 'no-cors',  // Esto es lo que añadimos
+            body: JSON.stringify({action: 'register',  // Parámetro de acción
+                email: email
+                })
+                    
+            }) 
+            .then(response => alert('¡Registro Encontrado!'))
+            .then(data => console.log(data)) // Muestra la respuesta en consola
+            .catch(error => console.error('Error!', error.message));                          
+     
+        }
+               
+// formData.append('nombre', nombre);
+           // formData.append('email', email);
+           // formData.append('uuid', uuid);
+
+            // Enviar al servidor
+         /*   fetch(scriptURL, { method: 'POST', body: formData })
+                    .then(response => alert('¡Registro exitoso!'))
+                    .catch(error => console.error('Error!', error.message));
+
+        */  
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+ //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
  /////////////////////////////////////////////////////////////////////////////////////////////////////
  
  // Función para iniciar la barra de progreso
