@@ -85,36 +85,28 @@
        
         // Función para enviar datos al servidor
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevenir el envío estándar del formulario
-
-            //Inicar la barra de Progreso
-            iniciarBarraProgreso();
-
-            // Obtener el valor del input
-            var email = document.getElementById('email').value;
-            const scriptURL='https://script.google.com/macros/s/AKfycbypm-BV_6ZdmU4ixHqzXhaqJL6plYbgRncI3UMmAUaAZsPSvhxm8UEynyBLKkC_vGEO/exec';
-            // Llamar al servidor con fetch
-            fetch(scriptURL, {
-                        method: 'POST',
-                        headers: {
-                                'Content-Type': 'application/json'
-                            }, 
-                        mode: 'cors',  // Esto es lo que añadimos
-                        body: JSON.stringify({
-                            action: 'auth',
-                            email: email 
-                        })
-                    })               
-                    .then(response => response.text())
-                    .then(data => {
-                        if (data) {
-                                    alert('Respuesta del servidor: ' + data);
-                                    } else {
-                                            alert('No se recibió una respuesta válida.');
-                                        }
+                e.preventDefault(); // Prevenir el envío estándar del formulario
+                var email = document.getElementById('email').value;
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbypm-BV_6ZdmU4ixHqzXhaqJL6plYbgRncI3UMmAUaAZsPSvhxm8UEynyBLKkC_vGEO/exec';
+                
+                fetch(scriptURL, {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                    action: 'auth',
+                    email: email
                     })
-                    .catch(error => console.error('Error:', error));
-        })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Respuesta del servidor: ' + JSON.stringify(data));
+                })
+                .catch(error => console.error('Error:', error));
+            });
+
     
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////
