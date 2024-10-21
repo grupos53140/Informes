@@ -14,8 +14,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../Informes/img/MI180.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Informes/img/MI32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Informes/img/MI16.png">
-    
-  
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
@@ -32,51 +30,36 @@
         <!-- BARRA DE PROGRESO -->
         <div id="progress-container">
           <div id="progress-bar"></div>
-        </div>
-        <!-- END BARRA DE PROGRESO -->       
-      </menu>
+        </div>      
+    </menu>
 
-           
     <form id="registerForm">
         <div class="form-container"> 
             <div id="headline">          
                 <legend><h3>REGISTRESE</h3></legend>
-
-            <!-- ENCABEZADO RESULTADO CONSULTA DE GRUPO Y FACETA-->
-                 <!-- Mensaje de resultado -->
-                 <div id="status-message"></div>
-                 <label><span>... </span></label>
+                <div id="status-message"></div> <!-- Mensaje de estado -->
             </div>
             
-            <!-- CAMPO USUARIO-->
+            <!-- CAMPOS DEL FORMULARIO -->
             <div class="form-group">
                 <label for="username">Usuario:</label>
                 <input type="text" id="username" name="username" required><br>
             </div>
-
-            <!-- CAMPO NOMBRE-->
-            <div class="form-group" id="nombreContainer" >
+            <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required><br>
             </div>
-
-            <!-- CAMPO CORREO-->
-            <div class="form-group" id="correoContainer" >
+            <div class="form-group">
                 <label for="email">Correo:</label>
                 <input type="email" id="email" name="email" required><br>
             </div>
-
-            <!-- CAMPO UUID HIDDEN-->
-            <div class="form-group hidden" id="uuidContainer" > 
+            <div class="form-group hidden">
                 <label for="uuid">UUID del Dispositivo:</label>
                 <input type="text" id="uuid" name="uuid"><br>
-               
-            </div> 
-
-            <!--CAMPO BOTON SUBMIT ENVIAR-->
-            <div class="form-group" id="submitBtnContainer">
+            </div>
+            <div class="form-group">
                 <input type="submit" id="submitBtn" value="Enviar">
-            </div>            
+            </div>         
         
             <!-- Modal de procesamiento -->
             <div id="processingModal" class="modal">
@@ -88,120 +71,127 @@
         </div>             
     </form>
 
-    
-
-    <!-- FOOTER- PIE DE PAGINA-->
-  <footer>
-    <div>©2024 EL JARDIN TOL-53140</div>
-    <div>       
-      <a href="https://github.com/grupos53140/Informes/blob/main/CONDICIONES.md">Condiciones de uso</a> | 
-      <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
-    </div>
-  </footer>
+    <footer>
+        <div>©2024 EL JARDIN TOL-53140</div>
+        <div>       
+          <a href="https://github.com/grupos53140/Informes/blob/main/CONDICIONES.md">Condiciones de uso</a> | 
+          <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
+        </div>
+    </footer>
 
     <script>
-         finalizarBarraProgreso();
         // Generar UUID
         const uuid = uuidv4();
         document.getElementById('uuid').value = uuid;
 
-        // Enviar datos del formulario a Google Sheets
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Iniciar la barra de progreso
-            iniciarBarraProgreso();
-            mostrarMensaje("Registrando...");
-
-            // Obtener valores del formulario
+        // Función para mostrar los datos por consola
+        function logData() {
             const username = document.getElementById('username').value;
             const nombre = document.getElementById('nombre').value;
             const email = document.getElementById('email').value;
             const uuid = document.getElementById('uuid').value;
 
-            // Enviar a Google Sheets
-            sendToGoogleSheets(username, nombre, email, uuid);
+            // Mostrar los datos en la consola del navegador
+            console.log('Datos ingresados por el usuario:');
+            console.log('Usuario:', username);
+            console.log('Nombre:', nombre);
+            console.log('Correo:', email);
+            console.log('UUID:', uuid);
 
-             // Finalizar la barra de progreso
-            finalizarBarraProgreso(); 
-            mostrarMensaje(" ", true);  
+            // Validación simple
+            if (!username || !nombre || !email || !uuid) {
+                console.error('Faltan campos obligatorios.');
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+
+            console.log('Todos los campos están completos.');
+        }
+
+        // Evento para verificar los datos en la consola
+        document.getElementById('logDataBtn').addEventListener('click', function() {
+            logData();
+        });
+
+        // Enviar datos del formulario
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenir que el formulario se envíe automáticamente
+
+            logData(); // Verificar datos antes de enviarlos
+
+            iniciarBarraProgreso();
+            mostrarMensaje("Registrando...");
+
+            const username = document.getElementById('username').value;
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const uuid = document.getElementById('uuid').value;
+
+            sendToGoogleSheets(username, nombre, email, uuid);
         });
 
         function sendToGoogleSheets(username, nombre, email, uuid) {
             const scriptURL = 'https://script.google.com/macros/s/AKfycbxvqMiPfuFBxttceSlnChnx7HGVYhIQRP0YcE7oZ4DNfJ3iFaeWvl7ZbFYeWzTsacop/exec';
-           
-                
-          fetch(scriptURL, {
-            method: 'POST',
-            headers: {
-                        'Content-Type': 'application/json'
-                    }, 
-            mode: 'cors',  // Esto es lo que añadimos
-            body: JSON.stringify({action: 'register',  // Parámetro de acción
-                username: username,
-                nombre: nombre,
-                email: email,
-                uuid: uuid
+
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                body: JSON.stringify({
+                    action: 'register',
+                    username: username,
+                    nombre: nombre,
+                    email: email,
+                    uuid: uuid
                 })
-                    
-            }) 
-            .then(response => alert('¡Registro exitoso!'))
-            .then(data => console.log(data)) // Muestra la respuesta en consola
-            .catch(error => console.error('Error!', error.message));                          
-     
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error en la solicitud: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                mostrarMensaje('¡Registro exitoso!', true);
+                finalizarBarraProgreso(); // Completa la barra de progreso
+                console.log('Respuesta del servidor:', data);
+            })
+            .catch(error => {
+                mostrarMensaje(`Error: ${error.message}`);
+                finalizarBarraProgreso(); // Finaliza la barra en caso de error
+                console.error('Error:', error);
+            });
         }
-               
-// formData.append('nombre', nombre);
-           // formData.append('email', email);
-           // formData.append('uuid', uuid);
 
-            // Enviar al servidor
-         /*   fetch(scriptURL, { method: 'POST', body: formData })
-                    .then(response => alert('¡Registro exitoso!'))
-                    .catch(error => console.error('Error!', error.message));
-
-        */  
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
- //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
- /////////////////////////////////////////////////////////////////////////////////////////////////////
- 
- // Función para iniciar la barra de progreso
-function iniciarBarraProgreso() {
-    const progressBar = document.getElementById('progress-bar');
-    
-    let progreso = 0;
-    const intervalo = 100; // Intervalo en milisegundos (0.1 segundo)
-
-    // Crear un intervalo para aumentar progresivamente el ancho de la barra
-    const idIntervalo = setInterval(() => {
-        progreso += 5; // Incremento del 5% cada 0.1 segundos
-        progressBar.style.width = `${progreso}%`;
-
-        // Si la barra alcanza el 95%, detener el avance (esperar respuesta real)
-        if (progreso >= 95) {
-            clearInterval(idIntervalo);
+        function iniciarBarraProgreso() {
+            const progressBar = document.getElementById('progress-bar');
+            let progreso = 0;
+            const intervalo = 100; 
+            const idIntervalo = setInterval(() => {
+                progreso += 5;
+                progressBar.style.width = `${progreso}%`;
+                if (progreso >= 95) {
+                    clearInterval(idIntervalo);
+                }
+            }, intervalo);
         }
-    }, intervalo);
-}
 
-// Función para finalizar la barra de progreso al 100%
-function finalizarBarraProgreso() {
-    const progressBar = document.getElementById('progress-bar');
-    progressBar.style.transition = 'width 0.5s ease';
-    progressBar.style.width = '0%';
-     
-}
+        function finalizarBarraProgreso() {
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.transition = 'width 0.5s ease';
+            progressBar.style.width = '100%'; // Finaliza la barra al 100%
+        }
 
-// Mensaje de estado
-function mostrarMensaje(mensaje, isSuccess = false) {
-    const statusMessage = document.getElementById('status-message');
-    if (isSuccess) {
-        statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
-    } else {
-        statusMessage.textContent = mensaje;
-    }
-}
-
-</script>
+        function mostrarMensaje(mensaje, isSuccess = false) {
+            const statusMessage = document.getElementById('status-message');
+            if (isSuccess) {
+                statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
+            } else {
+                statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
+            }
+        }
+    </script>
 </body>
 </html>
