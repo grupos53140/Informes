@@ -89,47 +89,31 @@
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Iniciar la barra de progreso
-    iniciarBarraProgreso();
-    mostrarMensaje("Consultando...");
-
     // Obtener valores del formulario
     const email = document.getElementById('email').value;
 
-    // Enviar a Google Sheets
-    sendToGoogleSheets(email);
-});
-
-function sendToGoogleSheets(email) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbypm-BV_6ZdmU4ixHqzXhaqJL6plYbgRncI3UMmAUaAZsPSvhxm8UEynyBLKkC_vGEO/exec';
-
-    fetch(scriptURL, {
+    // Enviar los datos al backend (Google Apps Script)
+    fetch('https://script.google.com/macros/s/AKfycbzGO6r6I1Zvc66IMSpJCXNVUv9Dm2AFOjWPe2ZPE_vkkoPFpMKFQ6n4Tz0K_rWC5uM8/exec', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        mode: 'cors',
         body: JSON.stringify({
-            action: 'auth',  // Acción para autenticación
+            action: 'auth', // Acción de autenticación
             email: email
         })
     })
-    .then(response => response.json())
+    .then(response => response.json())  // Cambia .text() a .json()
     .then(data => {
-        // Aquí es donde finaliza la barra de progreso y se muestra el mensaje
-        finalizarBarraProgreso();  
         if (data.message === 'Usuario autenticado') {
             alert('¡Usuario autenticado!');
         } else {
             alert('¡Usuario no encontrado!');
         }
-        console.log(data);
     })
-    .catch(error => {
-        finalizarBarraProgreso();  // Asegúrate de detener la barra de progreso incluso en caso de error
-        console.error('Error!', error.message);
-    });
-}
+    .catch(error => console.error('Error!', error.message));
+});
+
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
  //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
