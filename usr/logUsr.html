@@ -108,7 +108,7 @@
     document.getElementById('loginForm').addEventListener('submit', function(e) {
         e.preventDefault(); // Evitar que el formulario se envíe de manera convencional
         const inputEmail = document.getElementById('email').value;
-        const URLWeb ='https://script.google.com/macros/s/AKfycbx-ClwGOe5OFGnG36vl7YTgnjXECqOkkNI4SfSPSOwBiMr_SZVG8khyuEbPICuuN-VR/exec';
+        const URLWeb ='https://script.google.com/macros/s/AKfycbzGO6r6I1Zvc66IMSpJCXNVUv9Dm2AFOjWPe2ZPE_vkkoPFpMKFQ6n4Tz0K_rWC5uM8/exec';
 
         fetch(`${URLWeb}?email=${inputEmail}`)
             .then(response => response.json())
