@@ -19,6 +19,33 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #888;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content {
+            text-align: center;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 <body>
@@ -73,7 +100,13 @@
             </div>
         </div>             
     </form>
-
+            <!-- Modal para mostrar el mensaje -->
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <p id="modal-message"></p>
+                    <button class="close-btn" id="closeModal">Cerrar</button>
+                </div>
+            </div>
     
 
     <!-- FOOTER- PIE DE PAGINA-->
@@ -86,99 +119,65 @@
     </footer>
 
     <script>
-        let nombre={};
-        let correo={};
-
-
-
-    fetch(`https://script.google.com/macros/s/AKfycbxhnsDqEyESFBQCOZaQb6obqargqURNlGxC1lxzb-63sEwwnNSM-ELQ8jzmTkkK40Jg/exec?email=${inputEmail}`)
-        .then(response => response.json())  // Cambia .text() a .json()
-            .then(data => {
-                nombre= data.nombre;
-                correo= data.email;
-                // Para mostra en el formulario en etiquetas span:
-                document.getElementById('nombre').textContent = data.nombre;
-                document.getElementById('correo').textContent = data.email;
-
-                // Para comprobar que se guardaron correctamente:
-                console.log("Nombre: ", nombre);
-                console.log("Correo: ", email);
-            });
-
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Obtener valores del formulario
-        const inputEmail = document.getElementById('email').value;
-
-        // Enviar los datos al backend (Google Apps Script)
-        fetch('https://script.google.com/macros/s/AKfycbxhnsDqEyESFBQCOZaQb6obqargqURNlGxC1lxzb-63sEwwnNSM-ELQ8jzmTkkK40Jg/exec', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            
-            /*body: JSON.stringify({
-                action: 'auth', // Acción de autenticación
-                email: email
-            })*/
-            body:new URLSearchParams({
-                'email': email
-                })
-        })
-        .then(response => response.json())  // Cambia .text() a .json()
-        .then(data => {
-            if (data.message === 'Usuario autenticado') {
-                alert('¡Usuario autenticado!');
-            } else {
-                alert('¡Usuario no encontrado!');
-            }
-        })
-        .catch(error => console.error('Error!', error.message));
-    });
-
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
- //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
- /////////////////////////////////////////////////////////////////////////////////////////////////////
- 
- // Función para iniciar la barra de progreso
-function iniciarBarraProgreso() {
-    const progressBar = document.getElementById('progress-bar');
+        // Mostrar mensaje en el modal
+        function mostrarModal(msg) {
+            const modal = document.getElementById('myModal');
+            document.getElementById('modal-message').textContent = msg;
+            modal.style.display = 'block';
     
-    let progreso = 0;
-    const intervalo = 100; // Intervalo en milisegundos (0.1 segundo)
-
-    // Crear un intervalo para aumentar progresivamente el ancho de la barra
-    const idIntervalo = setInterval(() => {
-        progreso += 5; // Incremento del 5% cada 0.1 segundos
-        progressBar.style.width = `${progreso}%`;
-
-        // Si la barra alcanza el 95%, detener el avance (esperar respuesta real)
-        if (progreso >= 95) {
-            clearInterval(idIntervalo);
+            // Cerrar el modal
+            document.getElementById('closeModal').addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
         }
-    }, intervalo);
-}
-
-// Función para finalizar la barra de progreso al 100%
-function finalizarBarraProgreso() {
-    const progressBar = document.getElementById('progress-bar');
-    progressBar.style.transition = 'width 0.5s ease';
-    progressBar.style.width = '0%';
-     
-}
-
-// Mensaje de estado
-function mostrarMensaje(mensaje, isSuccess = false) {
-    const statusMessage = document.getElementById('status-message');
-    if (isSuccess) {
-        statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
-    } else {
-        statusMessage.textContent = mensaje;
-    }
-}
-
-</script>
+    
+        // Mostrar mensaje en el HTML
+        function mostrarMensaje(msg) {
+            document.getElementById('status-message').textContent = msg;
+        }
+    
+        // Evento blur: consultar si el email existe
+        document.getElementById('email').addEventListener('blur', function() {
+            const inputEmail = this.value;
+            mostrarMensaje("Consultando...");
+    
+            fetch(`https://script.google.com/macros/s/AKfycbz2SqUEWJQP2iJMbCWPFx15tKKKU-GnEzaXvPXJ0cD5F6fDwX6O_JxKBG35vjx31KXC/exec?email=${inputEmail}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.email) {
+                    mostrarMensaje("Usuario encontrado: " + data.email);
+                } else {
+                    mostrarMensaje("Usuario no encontrado.");
+                }
+            })
+            .catch(error => console.error('Error!', error));
+        });
+    
+        // Evento submit: autenticar y registrar en log
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();  // Prevenir la recarga de la página
+    
+            const email = document.getElementById('email').value;
+    
+            fetch('https://script.google.com/macros/s/AKfycbz2SqUEWJQP2iJMbCWPFx15tKKKU-GnEzaXvPXJ0cD5F6fDwX6O_JxKBG35vjx31KXC/exec', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'email': email,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Usuario autenticado') {
+                    mostrarModal(`¡Bienvenido, ${email}!`);
+                } else {
+                    alert('¡Usuario no encontrado!');
+                }
+            })
+            .catch(error => console.error('Error!', error));
+        });
+    </script>
 </body>
 </html>
