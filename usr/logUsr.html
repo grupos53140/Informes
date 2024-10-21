@@ -192,7 +192,7 @@
             e.preventDefault();  // Prevenir la recarga de la página
     
             const email = document.getElementById('email').value || "0";
-            alert("Email a enviar: ", email);
+            alert("Email a enviar: "+email);
             fetch('https://script.google.com/macros/s/AKfycby9qfp4JVzKrbzbSEi8hAU6icdMbKLgUNg8Y1CA9wW8g_9jen_01GeVkr1KmstRYd4/exec', {
                 method: 'POST',
                 headers: {
