@@ -98,6 +98,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         headers: {
             'Content-Type': 'application/json'
         },
+        mode:'no-cors',
         body: JSON.stringify({
             action: 'auth', // Acción de autenticación
             email: email
