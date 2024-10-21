@@ -104,22 +104,8 @@
 
         */  
 
-
-
-        // Enviar los datos al AppScript usando fetch
-  fetch('https://script.google.com/macros/s/AKfycbzGO6r6I1Zvc66IMSpJCXNVUv9Dm2AFOjWPe2ZPE_vkkoPFpMKFQ6n4Tz0K_rWC5uM8/exec', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      'email': email
-    })
-  })
-
-
     // Realizar la consulta para obtener grupo y faceta basados en el nombre
-    document.getElementById('email').addEventListener('submit', function(e) {
+    document.getElementById('email').addEventListener('input', function(e) {
         e.preventDefault(); // Evitar que el formulario se envíe de manera convencional
         const inputEmail = document.getElementById('email').value;
         //const URLWeb ='https://script.google.com/macros/s/AKfycbzGO6r6I1Zvc66IMSpJCXNVUv9Dm2AFOjWPe2ZPE_vkkoPFpMKFQ6n4Tz0K_rWC5uM8/exec';
@@ -201,6 +187,21 @@ function mostrarMensaje(mensaje, isSuccess = false) {
         statusMessage.textContent = mensaje;
     }
 }
+
+
+        // Enviar los datos al AppScript usando fetch
+        fetch('https://script.google.com/macros/s/AKfycbzGO6r6I1Zvc66IMSpJCXNVUv9Dm2AFOjWPe2ZPE_vkkoPFpMKFQ6n4Tz0K_rWC5uM8/exec', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      'email': email
+    })
+  })
+
+
+
 
 </script>
 </body>
