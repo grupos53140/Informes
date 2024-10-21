@@ -119,6 +119,13 @@
     </footer>
 
     <script>
+        // Variables para guardar los valores de grupo y faceta
+            let nombre = {};
+            let email = {};
+
+                //Inicializar la barra de progreso
+                finalizarBarraProgreso();
+
         // Mostrar mensaje en el modal
         function mostrarModal(msg) {
             const modal = document.getElementById('myModal');
@@ -139,11 +146,36 @@
         // Evento blur: consultar si el email existe
         document.getElementById('email').addEventListener('blur', function() {
             const inputEmail = this.value;
-            mostrarMensaje("Consultando...");
-    
+
+             // Iniciar la barra de progreso
+                    iniciarBarraProgreso();
+                    mostrarMensaje("Consultando...");
+
             fetch(`https://script.google.com/macros/s/AKfycby9qfp4JVzKrbzbSEi8hAU6icdMbKLgUNg8Y1CA9wW8g_9jen_01GeVkr1KmstRYd4/exec?email=${inputEmail}`)
             .then(response => response.json())
             .then(data => {
+                // Finalizar la barra de progreso
+                finalizarBarraProgreso();
+                    mostrarMensaje(" ", true);
+
+                // Guardar los valores de grupo y faceta en las variables
+                nombre = data.nombre;
+                email = data.email; 
+                
+
+                // Para mostra en el formulario en etiquetas span:
+                document.getElementById('grupo').textContent = data.nombre;
+                document.getElementById('faceta').textContent = data.email;
+
+                // Para comprobar que se guardaron correctamente:
+                console.log("Nombre: ", nombre);
+                console.log("Email: ", email);
+                // Aquí no se actualiza el HTML, solo se guardan en variables
+
+                finalizarBarraProgreso(); // Asegurarse que la barra llega al 100%
+                checkFaceta(faceta);
+
+
                 if (data.email) {
                     mostrarMensaje("Usuario encontrado: " + data.email);
                 } else {
@@ -182,6 +214,48 @@
             .catch(error => console.error('Error!', error));
             
         });
+
+  
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+ //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
+ /////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+            // Función para iniciar la barra de progreso
+            function iniciarBarraProgreso() {
+                const progressBar = document.getElementById('progress-bar');
+                
+                let progreso = 0;
+                const intervalo = 100; // Intervalo en milisegundos (0.1 segundo)
+
+                // Crear un intervalo para aumentar progresivamente el ancho de la barra
+                const idIntervalo = setInterval(() => {
+                    progreso += 5; // Incremento del 5% cada 0.1 segundos
+                    progressBar.style.width = `${progreso}%`;
+
+                    // Si la barra alcanza el 95%, detener el avance (esperar respuesta real)
+                    if (progreso >= 100) {
+                        clearInterval(idIntervalo);
+                    }
+                }, intervalo);
+            }
+
+// Función para finalizar la barra de progreso al 100%
+            function finalizarBarraProgreso() {
+                const progressBar = document.getElementById('progress-bar');
+                progressBar.style.transition = 'width 0.5s ease';
+                progressBar.style.width = '0%';
+                
+            }
+
+// Mensaje de estado
+            function mostrarMensaje(mensaje, isSuccess = false) {
+                const statusMessage = document.getElementById('status-message');
+                if (isSuccess) {
+                    statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
+                } else {
+                    statusMessage.textContent = mensaje;
+                }
+            }
     </script>
 </body>
 </html>
