@@ -147,7 +147,7 @@
                 if (data.email) {
                     mostrarMensaje("Usuario encontrado: " + data.email);
                 } else {
-                    mostrarMensaje("Usuario no encontrado.");
+                    mostrarMensaje("Usuario no encontrado...Consulta blur");
                 }
                 console.log(data);
             })
@@ -175,7 +175,7 @@
                 if (data.message === 'Usuario autenticado') {
                     mostrarModal(`¡Bienvenido, ${email}!`);
                 } else {
-                    alert('¡Usuario no encontrado!');
+                    alert('¡Usuario no encontrado... loginForm!');
                 }
                 console.log(data);
             })
