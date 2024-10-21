@@ -141,7 +141,7 @@
             const inputEmail = this.value;
             mostrarMensaje("Consultando...");
     
-            fetch(`https://script.google.com/macros/s/AKfycbz2SqUEWJQP2iJMbCWPFx15tKKKU-GnEzaXvPXJ0cD5F6fDwX6O_JxKBG35vjx31KXC/exec?email=${inputEmail}`)
+            fetch(`https://script.google.com/macros/s/AKfycby9qfp4JVzKrbzbSEi8hAU6icdMbKLgUNg8Y1CA9wW8g_9jen_01GeVkr1KmstRYd4/exec?email=${inputEmail}`)
             .then(response => response.json())
             .then(data => {
                 if (data.email) {
@@ -161,7 +161,7 @@
     
             const email = document.getElementById('email').value;
     
-            fetch('https://script.google.com/macros/s/AKfycbz2SqUEWJQP2iJMbCWPFx15tKKKU-GnEzaXvPXJ0cD5F6fDwX6O_JxKBG35vjx31KXC/exec', {
+            fetch('https://script.google.com/macros/s/AKfycby9qfp4JVzKrbzbSEi8hAU6icdMbKLgUNg8Y1CA9wW8g_9jen_01GeVkr1KmstRYd4/exec', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
