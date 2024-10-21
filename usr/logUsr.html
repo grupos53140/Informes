@@ -77,43 +77,65 @@
     
 
     <!-- FOOTER- PIE DE PAGINA-->
-  <footer>
-    <div>©2024 EL JARDIN TOL-53140</div>
-    <div>       
-      <a href="https://github.com/grupos53140/Informes/blob/main/CONDICIONES.md">Condiciones de uso</a> | 
-      <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
-    </div>
-  </footer>
+    <footer>
+        <div>©2024 EL JARDIN TOL-53140</div>
+        <div>       
+            <a href="https://github.com/grupos53140/Informes/blob/main/CONDICIONES.md">Condiciones de uso</a> | 
+            <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
+        </div>
+    </footer>
 
     <script>
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+        let nombre={};
+        let correo={};
 
-    // Obtener valores del formulario
-    const email = document.getElementById('email').value;
 
-    // Enviar los datos al backend (Google Apps Script)
-    fetch('https://script.google.com/macros/s/AKfycbxhnsDqEyESFBQCOZaQb6obqargqURNlGxC1lxzb-63sEwwnNSM-ELQ8jzmTkkK40Jg/exec', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        
-        body: JSON.stringify({
-            action: 'auth', // Acción de autenticación
-            email: email
+
+    fetch(`https://script.google.com/macros/s/AKfycbxhnsDqEyESFBQCOZaQb6obqargqURNlGxC1lxzb-63sEwwnNSM-ELQ8jzmTkkK40Jg/exec?email=${inputEmail}`)
+        .then(response => response.json())  // Cambia .text() a .json()
+            .then(data => {
+                nombre= data.nombre;
+                correo= data.email;
+                // Para mostra en el formulario en etiquetas span:
+                document.getElementById('nombre').textContent = data.nombre;
+                document.getElementById('correo').textContent = data.email;
+
+                // Para comprobar que se guardaron correctamente:
+                console.log("Nombre: ", nombre);
+                console.log("Correo: ", email);
+            });
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Obtener valores del formulario
+        const inputEmail = document.getElementById('email').value;
+
+        // Enviar los datos al backend (Google Apps Script)
+        fetch('https://script.google.com/macros/s/AKfycbxhnsDqEyESFBQCOZaQb6obqargqURNlGxC1lxzb-63sEwwnNSM-ELQ8jzmTkkK40Jg/exec', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            
+            /*body: JSON.stringify({
+                action: 'auth', // Acción de autenticación
+                email: email
+            })*/
+            body:new URLSearchParams({
+                'email': email
+                })
         })
-    })
-    .then(response => response.json())  // Cambia .text() a .json()
-    .then(data => {
-        if (data.message === 'Usuario autenticado') {
-            alert('¡Usuario autenticado!');
-        } else {
-            alert('¡Usuario no encontrado!');
-        }
-    })
-    .catch(error => console.error('Error!', error.message));
-});
+        .then(response => response.json())  // Cambia .text() a .json()
+        .then(data => {
+            if (data.message === 'Usuario autenticado') {
+                alert('¡Usuario autenticado!');
+            } else {
+                alert('¡Usuario no encontrado!');
+            }
+        })
+        .catch(error => console.error('Error!', error.message));
+    });
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
