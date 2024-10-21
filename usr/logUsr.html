@@ -109,7 +109,7 @@
         const emailUsr = this.value;
         const URLweb ='https://script.google.com/macros/s/AKfycbx-ClwGOe5OFGnG36vl7YTgnjXECqOkkNI4SfSPSOwBiMr_SZVG8khyuEbPICuuN-VR/exec';
 
-        fetch(URLweb+`?email=${emailUsr}`)
+        fetch(`${URLweb}?email=${emailUsr}`)
             .then(response => response.json())
             .then(data => {
 
