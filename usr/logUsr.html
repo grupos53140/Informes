@@ -45,7 +45,12 @@
             <!-- ENCABEZADO RESULTADO CONSULTA DE GRUPO Y FACETA-->
                  <!-- Mensaje de resultado -->
                  <div id="status-message"></div>
-                 <label><span>... </span></label>
+                 <div id="encabezado">
+                    <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
+                        <div class="form-group-faceta">
+                          <label class="GF" id="nombre"><span> </span></label><label class="GF" id="email"><span > </span></label>
+                        </div>  
+                    </div>                
             </div>
             
             <!-- CAMPO CORREO-->
@@ -81,29 +86,12 @@
   </footer>
 
     <script>
-           document.getElementById('loginForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // Prevenir el envío estándar del formulario
-  var email = document.getElementById('email').value;
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbypm-BV_6ZdmU4ixHqzXhaqJL6plYbgRncI3UMmAUaAZsPSvhxm8UEynyBLKkC_vGEO/exec';
-  
-  fetch(scriptURL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    mode: 'cors',
-    body: JSON.stringify({
-      action: 'auth',
-      email: email
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    alert('Respuesta del servidor: ' + JSON.stringify(data));
-  })
-  .catch(error => console.error('Error:', error));
-});
 
+// Variables para guardar los valores de grupo y faceta
+    let email = {};
+    let nombre={};
+    //Inicializar la barra de progreso
+    finalizarBarraProgreso();  
                
 // formData.append('nombre', nombre);
            // formData.append('email', email);
@@ -115,6 +103,60 @@
                     .catch(error => console.error('Error!', error.message));
 
         */  
+
+    // Realizar la consulta para obtener grupo y faceta basados en el nombre
+    document.getElementById('email').addEventListener('submit', function() {
+        const emailUsr = this.value;
+        const URLweb ='https://script.google.com/macros/s/AKfycbx-ClwGOe5OFGnG36vl7YTgnjXECqOkkNI4SfSPSOwBiMr_SZVG8khyuEbPICuuN-VR/exec';
+
+        fetch(URLweb`?email=${emailUsr}`)
+            .then(response => response.json())
+            .then(data => {
+
+                // Finalizar la barra de progreso
+                finalizarBarraProgreso();
+                mostrarMensaje(" ", true);
+
+                // Guardar el valor del email que me llega
+                email = data.email;
+                nombre= data.nombre;
+                
+                // Para mostra en el formulario en etiquetas span:
+                document.getElementById('email').textContent = data.email;
+                document.getElementById('nombre').textContent = data.nombre;
+
+                // Para comprobar que se guardaron correctamente:
+                console.log("EMAIL: ", email);
+
+                // Aquí no se actualiza el HTML, solo se guardan en variables
+
+                finalizarBarraProgreso(); // Asegurarse que la barra llega al 100%
+                checkEmail(email);
+            });
+    });
+
+    function checkEmail(email) {
+      if (email === 'EMAIL') {
+        
+        alert("Encontramos Registro del email:", email);
+        alert("Pertenece a : ", nombre);
+       
+
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
  //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
