@@ -3,49 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login de Usuario</title>
+    <title>Registro de Usuario</title>
 
     <!-- Librerías necesarias -->
     <link rel="stylesheet" type="text/css" href="../css/paleta.css">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
     <link rel="icon" href="../Informes/img/MI.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../Informes/img/MI.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="../Informes/img/MI180.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Informes/img/MI32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Informes/img/MI16.png">
-    
-  
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <style>
-        /* Estilos para el modal */
-        .modal {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border: 1px solid #888;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .modal-content {
-            text-align: center;
-        }
-
-        .close-btn {
-            margin-top: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-    </style>
 
 </head>
 <body>
@@ -59,205 +30,160 @@
         <!-- BARRA DE PROGRESO -->
         <div id="progress-container">
           <div id="progress-bar"></div>
-        </div>
-        <!-- END BARRA DE PROGRESO -->       
-      </menu>
+        </div>      
+    </menu>
 
-           
-    <form id="loginForm">
+    <form id="registerForm">
         <div class="form-container"> 
             <div id="headline">          
                 <legend><h3>LOGIN</h3></legend>
-
-            <!-- ENCABEZADO RESULTADO CONSULTA DE GRUPO Y FACETA-->
-                 <!-- Mensaje de resultado -->
-                 <div id="status-message"></div>
-                 <div id="encabezado">
-                    <!-- Aquí podrías tener campos para mostrar el Grupo y la Faceta si lo deseas -->
-                        <div class="form-group-faceta">
-                          <label class="GF" id="nombre"><span> </span></label><label class="GF" id="email"><span > </span></label>
-                        </div>  
-                    </div>                
+                <div id="status-message"></div> <!-- Mensaje de estado -->
             </div>
             
-            <!-- CAMPO CORREO-->
+            <!-- CAMPOS DEL FORMULARIO -->
             <div class="form-group">
-                <label for="email">Correo:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" required><br>
             </div>
-
-            <!--CAMPO BOTON SUBMIT ENVIAR-->
-            <div class="form-group" id="submitBtnContainer">
+            <div class="form-group hidden">
+                <label for="uuid">UUID del Dispositivo:</label>
+                <input type="text" id="uuid" name="uuid"><br>
+            </div>
+            <div class="form-group">
+               
                 <input type="submit" id="submitBtn" value="Enviar">
-            </div>            
-        
-            <!-- Modal de procesamiento -->
-            <div id="processingModal" class="modal">
-                <div class="modal-content">
-                <h2>Procesando registro...</h2>
-                <p>Por favor, espera mientras se envían los datos.</p>
-                </div>
-            </div>
+            </div>         
         </div>             
     </form>
-            <!-- Modal para mostrar el mensaje -->
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <p id="modal-message"></p>
-                    <button class="close-btn" id="closeModal">Cerrar</button>
-                </div>
-            </div>
-    
 
-    <!-- FOOTER- PIE DE PAGINA-->
     <footer>
         <div>©2024 EL JARDIN TOL-53140</div>
         <div>       
-            <a href="https://github.com/grupos53140/Informes/blob/main/CONDICIONES.md">Condiciones de uso</a> | 
-            <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
+          <a href="https://github.com/grupos53140/Informes/blob/main/CONDICIONES.md">Condiciones de uso</a> | 
+          <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
         </div>
     </footer>
 
     <script>
-        // Variables para guardar los valores de grupo y faceta
-            //let nombre = {};
-            let email = {};
+        // Generar UUID
+        const uuid = uuidv4();
+        document.getElementById('uuid').value = uuid;
 
-                //Inicializar la barra de progreso
-                finalizarBarraProgreso();
+        finalizarBarraProgreso();
 
-        // Mostrar mensaje en el modal
-        function mostrarModal(msg) {
-            const modal = document.getElementById('myModal');
-            document.getElementById('modal-message').textContent = msg;
-            modal.style.display = 'block';
-    
-            // Cerrar el modal
-            document.getElementById('closeModal').addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-        }
-    
-        // Mostrar mensaje en el HTML
-        function mostrarMensaje(msg) {
-            document.getElementById('status-message').textContent = msg;
-        }
-    /*
-        // Evento blur: consultar si el email existe
-        document.getElementById('email').addEventListener('submit', function() {
-            const inputEmail = this.value;
+        // Enviar datos del formulario
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenir que el formulario se envíe automáticamente
 
-             // Iniciar la barra de progreso
-                    iniciarBarraProgreso();
-                    mostrarMensaje("Consultando...");
+           
 
-            fetch(`https://script.google.com/macros/s/AKfycbz1wsGCP1ww-vj4erPqp03d4c1eQG__Dj4guGMdz7wBFV_l8keD4w1E4p_IWEP_fT00/exec?email=${inputEmail}`)
-            .then(response => response.json())
-            .then(data => {
-                // Finalizar la barra de progreso
-                finalizarBarraProgreso();
-                    mostrarMensaje(" ", true);
+            iniciarBarraProgreso();
+            mostrarMensaje("Registrando...");
 
-                // Guardar los valores de grupo y faceta en las variables
-                //nombre = data.nombre;
-                email = data.email; 
-                
+            const username = document.getElementById('username').value;
+            const uuid = document.getElementById('uuid').value;
 
-                // Para mostra en el formulario en etiquetas span:
-               // document.getElementById('grupo').textContent = data.nombre;
-                document.getElementById('email').textContent = data.email;
+            sendToGoogleSheets(username, uuid);
+        });
 
-                // Para comprobar que se guardaron correctamente:
-                //console.log("Nombre: ", nombre);
-                console.log("Email: ", email);
-                // Aquí no se actualiza el HTML, solo se guardan en variables
+        function sendToGoogleSheets(username, uuid) {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxgpexn3qtH37I_6Kt---zBjlHE8f_-x-5eIYYvGjEdND5FjMYPu85DLVMEIrWy2fA/exec';
 
-                finalizarBarraProgreso(); // Asegurarse que la barra llega al 100%
-                
-
-
-                if (data.email) {
-                    mostrarMensaje("Usuario encontrado: " + data.email);
-                } else {
-                    mostrarMensaje("Usuario no encontrado...Consulta blur");
-                }
-                console.log(data);
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'no-cors',
+                body: JSON.stringify({
+                    action: 'register',
+                    username: username,
+                    uuid: uuid
+                })
             })
-            .catch(error => console.error('Error!', error));
-            
-        });
-    */
-        // Evento submit: autenticar y registrar en log
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();  // Prevenir la recarga de la página
-    
-            const email = document.getElementById('email').value || "0";
-
-            alert("Email a enviar: "+email);
-            
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            const raw = JSON.stringify({
-                                        "action": "auth",
-                                        "email": email,
-            });
-
-            const requestOptions = {
-                                    method: "POST",
-                                    headers: myHeaders,
-                                    body: raw,
-                                    redirect: "follow"
-            };
-
-            fetch("https://script.google.com/macros/s/AKfycbz1wsGCP1ww-vj4erPqp03d4c1eQG__Dj4guGMdz7wBFV_l8keD4w1E4p_IWEP_fT00/exec", requestOptions)
-            .then((response) => response.text())
-            .then((result) => console.log(result))
-            .catch((error) => console.error(error));
-        });
-
-
-  
- //////////////////////////////////////////////////////////////////////////////////////////////////////
- //BARRA DE TIEMPO DE ESPERA PARA LA CONSULTA DE GRUPO Y FACETA
- /////////////////////////////////////////////////////////////////////////////////////////////////////
- 
-            // Función para iniciar la barra de progreso
-            function iniciarBarraProgreso() {
-                const progressBar = document.getElementById('progress-bar');
-                
-                let progreso = 0;
-                const intervalo = 100; // Intervalo en milisegundos (0.1 segundo)
-
-                // Crear un intervalo para aumentar progresivamente el ancho de la barra
-                const idIntervalo = setInterval(() => {
-                    progreso += 5; // Incremento del 5% cada 0.1 segundos
-                    progressBar.style.width = `${progreso}%`;
-
-                    // Si la barra alcanza el 95%, detener el avance (esperar respuesta real)
-                    if (progreso >= 100) {
-                        clearInterval(idIntervalo);
-                    }
-                }, intervalo);
-            }
-
-// Función para finalizar la barra de progreso al 100%
-            function finalizarBarraProgreso() {
-                const progressBar = document.getElementById('progress-bar');
-                progressBar.style.transition = 'width 0.5s ease';
-                progressBar.style.width = '0%';
-                
-            }
-
-// Mensaje de estado
-            function mostrarMensaje(mensaje, isSuccess = false) {
-                const statusMessage = document.getElementById('status-message');
-                if (isSuccess) {
-                    statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
-                } else {
-                    statusMessage.textContent = mensaje;
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error en la solicitud, no response: ${response.statusText}`);
                 }
+                return response.json();
+            })
+            .then(data => {
+                mostrarMensaje('¡Registro exitoso!', true);
+                finalizarBarraProgreso(); // Completa la barra de progreso
+                console.log('Respuesta del servidor:', data);
+            })
+            .catch(error => {
+                mostrarMensaje(`Error en respuesta server no-cors: ${error.message}`);
+                finalizarBarraProgreso(); // Finaliza la barra en caso de error
+                console.error('Error:', error);
+            });
+        }
+
+        function iniciarBarraProgreso() {
+            const progressBar = document.getElementById('progress-bar');
+            let progreso = 0;
+            const intervalo = 100; 
+            const idIntervalo = setInterval(() => {
+                progreso += 5;
+                progressBar.style.width = `${progreso}%`;
+                if (progreso >= 100) {
+                    clearInterval(idIntervalo);
+                }
+            }, intervalo);
+        }
+
+        function finalizarBarraProgreso() {
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.transition = 'width 0.5s ease';
+            progressBar.style.width = '0%'; // Finaliza la barra al 100%
+        }
+
+        function mostrarMensaje(mensaje, isSuccess = false) {
+            const statusMessage = document.getElementById('status-message');
+            if (isSuccess) {
+                statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
+            } else {
+                statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
             }
+        }
+
+        // TEST DE PRUEBAS
+        
+        /*
+             logData(); // Verificar datos antes de enviarlos
+
+             <input type="button" id="logDataBtn" value="Verificar en Consola">
+
+              // Función para mostrar los datos por consola
+        function logData() {
+            const username = document.getElementById('username').value;
+            const nombre = document.getElementById('nombre').value;
+            const uuid = document.getElementById('uuid').value;
+
+            // Mostrar los datos en la consola del navegador
+            console.log('Datos ingresados por el usuario:');
+            console.log('Usuario:', username);
+            console.log('Nombre:', nombre);
+            console.log('UUID:', uuid);
+
+            // Validación simple
+            if (!username || !nombre || !uuid) {
+                console.error('Faltan campos obligatorios.');
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+
+            console.log('Todos los campos están completos.');
+        }
+
+        // Evento para verificar los datos en la consola
+        document.getElementById('logDataBtn').addEventListener('click', function() {
+            logData();
+        });
+            */
+        
+
+
     </script>
 </body>
 </html>
