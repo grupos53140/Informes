@@ -103,7 +103,7 @@
                 body:       raw,
                 redirect:   'follow'
                 };
-
+                conosole.log("RAW: ", raw);
                 fetch("https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec", requestOptions)
                 .then((response) => response.text())
                 .then((result) => console.log(result))
