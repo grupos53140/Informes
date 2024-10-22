@@ -70,7 +70,7 @@
             const uuid = uuidv4();
             document.getElementById('uuid').value = uuid;
 
-         // Variables para guardar los valores de grupo y faceta
+         // Variables para guardar los valores de nombre y username
         let QueryName = {};
         let QueryUser = {};
 
@@ -81,134 +81,96 @@
         document.getElementById('LoginForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Prevenir que el formulario se envíe automáticamente
 
-             // Iniciar la barra de progreso
-             iniciarBarraProgreso();
+            // Iniciar la barra de progreso
+            iniciarBarraProgreso();
             mostrarMensaje("Consultando...");
 
             const username = document.getElementById('username').value;
             const uuid = document.getElementById('uuid').value;
-            console.log("Datos: ",username, uuid);
+            console.log("Datos: ", username, uuid);
 
             sendToGoogleSheets(username, uuid);
         });
 
         function sendToGoogleSheets(username, uuid) {
             const myHeaders = new Headers();
-                myHeaders.append('Content-Type', 'application/json');
+            myHeaders.append('Content-Type', 'application/json');
 
-                const raw = JSON.stringify({
+            const raw = JSON.stringify({
                 "action": 'auth',
                 "username": username,
                 "uuid": uuid
-                });
+            });
 
-                const requestOptions = {
-                method:     'POST',
-                headers:    myHeaders,
-                mode:       'cors',
-                body:       raw,
-                redirect:   'follow'
-                };
-                console.log("RAW: ", raw);
-                fetch("https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec", requestOptions)
-                .then((response) => response.text("Esto es Response: ", response))
-                .then((result) => console.log("Esto es result:",result))
-                .catch((error) => console.error("Esto es Error: ",error));
-        }
+            const requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                mode: 'no-cors',  // Usar no-cors
+                body: raw,
+                redirect: 'follow'
+            };
 
-        function iniciarBarraProgreso() {
+            console.log("RAW: ", raw);
+
+            fetch("https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec", requestOptions)
+                .then(() => {
+                // Solicitud de verificación después de unos segundos
+                setTimeout(verifyRegistration, 3000, username);
+                })
+                .catch((error) => console.error("Esto es Error: ", error));
+            }
+
+            function verifyRegistration(username) {
+            const verifyURL = `https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec?username=${username}`;
+
+            fetch(verifyURL)
+                .then(response => response.json())
+                .then(data => {
+                if (data.message === 'Usuario autenticado') {
+                    mostrarMensaje(`¡Bienvenido, ${username}!`, true);
+                } else {
+                    mostrarMensaje('¡Usuario no encontrado!', false);
+                }
+                })
+                .catch(error => console.error('Error!', error));
+            }
+
+            function iniciarBarraProgreso() {
             const progressBar = document.getElementById('progress-bar');
             let progreso = 0;
-            const intervalo = 100; 
+            const intervalo = 100;
             const idIntervalo = setInterval(() => {
                 progreso += 5;
                 progressBar.style.width = `${progreso}%`;
                 if (progreso >= 100) {
-                    clearInterval(idIntervalo);
+                clearInterval(idIntervalo);
                 }
             }, intervalo);
-        }
+            }
 
-        function finalizarBarraProgreso() {
+            function finalizarBarraProgreso() {
             const progressBar = document.getElementById('progress-bar');
             progressBar.style.transition = 'width 0.5s ease';
             progressBar.style.width = '0%'; // Finaliza la barra al 100%
-        }
+            }
 
-        function mostrarMensaje(mensaje, isSuccess = false) {
+            function mostrarMensaje(mensaje, isSuccess = false) {
             const statusMessage = document.getElementById('status-message');
             if (isSuccess) {
                 statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
             } else {
                 statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
             }
-        }
-
-        // TEST DE PRUEBAS
-        
-        /*
-             logData(); // Verificar datos antes de enviarlos
-
-             <input type="button" id="logDataBtn" value="Verificar en Consola">
-
-              // Función para mostrar los datos por consola
-        function logData() {
-            const username = document.getElementById('username').value;
-            const nombre = document.getElementById('nombre').value;
-            const uuid = document.getElementById('uuid').value;
-
-            // Mostrar los datos en la consola del navegador
-            console.log('Datos ingresados por el usuario:');
-            console.log('Usuario:', username);
-            console.log('Nombre:', nombre);
-            console.log('UUID:', uuid);
-
-            // Validación simple
-            if (!username || !nombre || !uuid) {
-                console.error('Faltan campos obligatorios.');
-                alert('Por favor, completa todos los campos.');
-                return;
             }
 
-            console.log('Todos los campos están completos.');
-        }
-
-        // Evento para verificar los datos en la consola
-        document.getElementById('logDataBtn').addEventListener('click', function() {
-            logData();
-        });
-            */
-
-            /*
-            
-             // Realizar la consulta para obtener grupo y faceta basados en el nombre
-            fetch(`https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec?nombre=${inputUsername}`)
-            .then(response => response.json())
-            .then(data => {
-                // Finalizar la barra de progreso
-                finalizarBarraProgreso();
-                    mostrarMensaje(" ", true);
-
-                // Guardar los valores de nombre y username en las variables
-                QueryName = data.nombre;
-                QueryUser = data.username; 
-                
-
-                // Para mostra en el formulario en etiquetas span:
-                document.getElementById('Queryname').textContent = data.nombre;
-                document.getElementById('Queryuser').textContent = data.username;
-
-                // Para comprobar que se guardaron correctamente:
-                console.log("Quername: ", nombre);
-                console.log("Queryuser: ", username);
-                // Aquí no se actualiza el HTML, solo se guardan en variables
-
-                finalizarBarraProgreso(); // Asegurarse que la barra llega al 100%
-               
-            });
-            
-            */
-        
+            function mostrarMensaje(mensaje, isSuccess = false) {
+            const statusMessage = document.getElementById('status-message');
+            if (isSuccess) {
+                statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
+            } else {
+                statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
+            }
+        }     
 
 
     </script>
