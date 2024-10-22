@@ -88,20 +88,20 @@
 
         function sendToGoogleSheets(username, uuid) {
             const myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
+                myHeaders.append('Content-Type', 'application/json');
 
                 const raw = JSON.stringify({
-                "action": "auth",
+                "action": 'auth',
                 "username": username,
                 "uuid": uuid
                 });
 
                 const requestOptions = {
-                method: "POST",
-                headers: myHeaders,
-                mode:"no-cors",
-                body: raw,
-                redirect: "follow"
+                method:     'POST',
+                headers:    myHeaders,
+                mode:       'no-cors',
+                body:       raw,
+                redirect:   'follow'
                 };
 
                 fetch("https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec", requestOptions)
