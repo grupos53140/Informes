@@ -124,14 +124,14 @@
         });
 
         function sendToGoogleSheets(username, nombre, email, uuid) {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbxe-Nte0Z88kjVvgRf6fUIstiVaZ9MP5RxFwQeyuEjp-ycZwN27pBqJ1uJoY_VhGCQ/exec';
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwiXLbGq_AExBYMbJ4j4u-ot3ErB-AOtbTZOpyV0e9eH32cJSCa37h0g6AUHePr1lY/exec';
 
             fetch(scriptURL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                mode: 'no-cors',
+                mode: 'cors',
                 body: JSON.stringify({
                     action: 'register',
                     username: username,
