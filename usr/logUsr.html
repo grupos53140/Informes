@@ -73,19 +73,17 @@
          // Variables para guardar los valores de grupo y faceta
         let QueryName = {};
         let QueryUser = {};
-            //Inicializar la barra de progreso
-            finalizarBarraProgreso();
 
-            // Iniciar la barra de progreso
-            iniciarBarraProgreso();
-            mostrarMensaje("Consultando...");
+            //Inicializar la barra de progreso
+            finalizarBarraProgreso();          
 
         // Enviar datos del formulario
         document.getElementById('LoginForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Prevenir que el formulario se envíe automáticamente
 
-            iniciarBarraProgreso();
-            mostrarMensaje("Registrando...");
+             // Iniciar la barra de progreso
+             iniciarBarraProgreso();
+            mostrarMensaje("Consultando...");
 
             const username = document.getElementById('username').value;
             const uuid = document.getElementById('uuid').value;
