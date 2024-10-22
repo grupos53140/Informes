@@ -87,36 +87,26 @@
         });
 
         function sendToGoogleSheets(username, uuid) {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec';
+            const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
 
-            fetch(scriptURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'no-cors',
-                body: JSON.stringify({
-                    action: 'register',
-                    username: username,
-                    uuid: uuid
-                })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud, no response: ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                mostrarMensaje('¡Registro exitoso!', true);
-                finalizarBarraProgreso(); // Completa la barra de progreso
-                console.log('Respuesta del servidor:', data);
-            })
-            .catch(error => {
-                mostrarMensaje(`Error en respuesta server no-cors: ${error.message}`);
-                finalizarBarraProgreso(); // Finaliza la barra en caso de error
-                console.error('Error:', error);
-            });
+                const raw = JSON.stringify({
+                "action": "auth",
+                "username": username,
+                "uuid": uuid
+                });
+
+                const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
+                };
+
+                fetch("https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec", requestOptions)
+                .then((response) => response.text())
+                .then((result) => console.log(result))
+                .catch((error) => console.error(error));
         }
 
         function iniciarBarraProgreso() {
