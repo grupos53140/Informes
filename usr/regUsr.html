@@ -138,7 +138,7 @@
             const idIntervalo = setInterval(() => {
                 progreso += 5;
                 progressBar.style.width = `${progreso}%`;
-                if (progreso >= 95) {
+                if (progreso >= 100) {
                     clearInterval(idIntervalo);
                 }
             }, intervalo);
