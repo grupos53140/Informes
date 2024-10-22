@@ -88,6 +88,7 @@
             const username = document.getElementById('username').value;
             const uuid = document.getElementById('uuid').value;
             console.log("Datos: ",username, uuid);
+
             sendToGoogleSheets(username, uuid);
         });
 
@@ -110,7 +111,7 @@
                 };
                 console.log("RAW: ", raw);
                 fetch("https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec", requestOptions)
-                .then((response) => response.text("Estoes Response: ", response))
+                .then((response) => response.text("Esto es Response: ", response))
                 .then((result) => console.log("Esto es result:",result))
                 .catch((error) => console.error("Esto es Error: ",error));
         }
