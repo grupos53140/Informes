@@ -125,7 +125,7 @@
                 console.log('Respuesta del servidor:', data);
             })
             .catch(error => {
-                mostrarMensaje(`Error: ${error.message}`);
+                mostrarMensaje(`Error en respuesta server no-cors: ${error.message}`);
                 finalizarBarraProgreso(); // Finaliza la barra en caso de error
                 console.error('Error:', error);
             });
