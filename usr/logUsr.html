@@ -49,6 +49,7 @@
                 <label for="uuid">UUID del Dispositivo:</label>
                 <input type="text" id="uuid" name="uuid"><br>
             </div>
+            
             <div class="form-group">
                
                 <input type="submit" id="submitBtn" value="Enviar">
@@ -74,51 +75,14 @@
         let QueryUser = {};
             //Inicializar la barra de progreso
             finalizarBarraProgreso();
-        
-
-            // Escuchar cuando el usuario selecciona un nombre
-        document.getElementById('username').addEventListener('input', function() {
-            const inputUsername = this.value;
 
             // Iniciar la barra de progreso
             iniciarBarraProgreso();
             mostrarMensaje("Consultando...");
 
-            // Realizar la consulta para obtener grupo y faceta basados en el nombre
-            fetch(`https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec?nombre=${inputUsername}`)
-            .then(response => response.json())
-            .then(data => {
-                // Finalizar la barra de progreso
-                finalizarBarraProgreso();
-                    mostrarMensaje(" ", true);
-
-                // Guardar los valores de nombre y username en las variables
-                QueryName = data.nombre;
-                QueryUser = data.username; 
-                
-
-                // Para mostra en el formulario en etiquetas span:
-                document.getElementById('Queryname').textContent = data.nombre;
-                document.getElementById('Queryuser').textContent = data.username;
-
-                // Para comprobar que se guardaron correctamente:
-                console.log("Quername: ", nombre);
-                console.log("Queryuser: ", username);
-                // Aquí no se actualiza el HTML, solo se guardan en variables
-
-                finalizarBarraProgreso(); // Asegurarse que la barra llega al 100%
-               
-            });
-        });
-
-
-
-
         // Enviar datos del formulario
         document.getElementById('LoginForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Prevenir que el formulario se envíe automáticamente
-
-           
 
             iniciarBarraProgreso();
             mostrarMensaje("Registrando...");
@@ -214,6 +178,36 @@
         document.getElementById('logDataBtn').addEventListener('click', function() {
             logData();
         });
+            */
+
+            /*
+            
+             // Realizar la consulta para obtener grupo y faceta basados en el nombre
+            fetch(`https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec?nombre=${inputUsername}`)
+            .then(response => response.json())
+            .then(data => {
+                // Finalizar la barra de progreso
+                finalizarBarraProgreso();
+                    mostrarMensaje(" ", true);
+
+                // Guardar los valores de nombre y username en las variables
+                QueryName = data.nombre;
+                QueryUser = data.username; 
+                
+
+                // Para mostra en el formulario en etiquetas span:
+                document.getElementById('Queryname').textContent = data.nombre;
+                document.getElementById('Queryuser').textContent = data.username;
+
+                // Para comprobar que se guardaron correctamente:
+                console.log("Quername: ", nombre);
+                console.log("Queryuser: ", username);
+                // Aquí no se actualiza el HTML, solo se guardan en variables
+
+                finalizarBarraProgreso(); // Asegurarse que la barra llega al 100%
+               
+            });
+            
             */
         
 
