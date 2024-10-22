@@ -49,6 +49,29 @@
                 <label for="uuid">UUID del Dispositivo:</label>
                 <input type="text" id="uuid" name="uuid"><br>
             </div>
+            <script>
+            const multiSelect = CardService.newSelectionInput()
+    .setType(CardService.SelectionInputType.MULTI_SELECT)
+    .setFieldName("multiselect")
+    .setTitle("A multi select input example.")
+    .addMultiSelectItem("Contact 1", "contact-1", false,
+       "https://www.gstatic.com/images/branding/product/2x/contacts_48dp.png",
+       "Contact one description")
+    .addMultiSelectItem("Contact 2", "contact-2", false,
+       "https://www.gstatic.com/images/branding/product/2x/contacts_48dp.png",
+       "Contact two description")
+    .addMultiSelectItem("Contact 3", "contact-3", false,
+       "https://www.gstatic.com/images/branding/product/2x/contacts_48dp.png",
+       "Contact three description")
+    .addMultiSelectItem("Contact 4", "contact-4", false,
+       "https://www.gstatic.com/images/branding/product/2x/contacts_48dp.png",
+       "Contact four description")
+    .addMultiSelectItem("Contact 5", "contact-5", false,
+       "https://www.gstatic.com/images/branding/product/2x/contacts_48dp.png",
+       "Contact five description")
+    .setMultiSelectMaxSelectedItems(3)
+    .setMultiSelectMinQueryLength(1);
+</script>
             <div class="form-group">
                
                 <input type="submit" id="submitBtn" value="Enviar">
@@ -66,10 +89,53 @@
 
     <script>
         // Generar UUID
-        const uuid = uuidv4();
-        document.getElementById('uuid').value = uuid;
+            const uuid = uuidv4();
+            document.getElementById('uuid').value = uuid;
 
-        finalizarBarraProgreso();
+         // Variables para guardar los valores de grupo y faceta
+        let QueryName = {};
+        let QueryUser = {};
+            //Inicializar la barra de progreso
+            finalizarBarraProgreso();
+        
+
+            // Escuchar cuando el usuario selecciona un nombre
+        document.getElementById('username').addEventListener('input', function() {
+            const inputUsername = this.value;
+
+            // Iniciar la barra de progreso
+            iniciarBarraProgreso();
+            mostrarMensaje("Consultando...");
+
+            // Realizar la consulta para obtener grupo y faceta basados en el nombre
+            fetch(`https://script.google.com/macros/s/AKfycbxqs2vqHWcHp3zpT_89IhSoi9OhQVS7Mpy3UGfeZP2C82YxDcL9zYm5q8oNVN_lYsCz/exec?nombre=${inputUsername}`)
+            .then(response => response.json())
+            .then(data => {
+                // Finalizar la barra de progreso
+                finalizarBarraProgreso();
+                    mostrarMensaje(" ", true);
+
+                // Guardar los valores de nombre y username en las variables
+                QueryName = data.nombre;
+                QueryUser = data.username; 
+                
+
+                // Para mostra en el formulario en etiquetas span:
+                document.getElementById('Queryname').textContent = data.nombre;
+                document.getElementById('Queryuser').textContent = data.username;
+
+                // Para comprobar que se guardaron correctamente:
+                console.log("Quername: ", nombre);
+                console.log("Queryuser: ", username);
+                // Aquí no se actualiza el HTML, solo se guardan en variables
+
+                finalizarBarraProgreso(); // Asegurarse que la barra llega al 100%
+               
+            });
+        });
+
+
+
 
         // Enviar datos del formulario
         document.getElementById('LoginForm').addEventListener('submit', function(e) {
