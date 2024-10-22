@@ -120,7 +120,7 @@
 
     <script>
         // Variables para guardar los valores de grupo y faceta
-            let nombre = {};
+            //let nombre = {};
             let email = {};
 
                 //Inicializar la barra de progreso
@@ -159,21 +159,21 @@
                     mostrarMensaje(" ", true);
 
                 // Guardar los valores de grupo y faceta en las variables
-                nombre = data.nombre;
+                //nombre = data.nombre;
                 email = data.email; 
                 
 
                 // Para mostra en el formulario en etiquetas span:
-                document.getElementById('grupo').textContent = data.nombre;
-                document.getElementById('faceta').textContent = data.email;
+               // document.getElementById('grupo').textContent = data.nombre;
+                document.getElementById('email').textContent = data.email;
 
                 // Para comprobar que se guardaron correctamente:
-                console.log("Nombre: ", nombre);
+                //console.log("Nombre: ", nombre);
                 console.log("Email: ", email);
                 // Aquí no se actualiza el HTML, solo se guardan en variables
 
                 finalizarBarraProgreso(); // Asegurarse que la barra llega al 100%
-                checkFaceta(faceta);
+                
 
 
                 if (data.email) {
