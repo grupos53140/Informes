@@ -49,10 +49,6 @@
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required><br>
             </div>
-            <div class="form-group">
-                <label for="email">Correo:</label>
-                <input type="email" id="email" name="email" required><br>
-            </div>
             <div class="form-group hidden">
                 <label for="uuid">UUID del Dispositivo:</label>
                 <input type="text" id="uuid" name="uuid"><br>
@@ -90,13 +86,12 @@
 
             const username = document.getElementById('username').value;
             const nombre = document.getElementById('nombre').value;
-            const email = document.getElementById('email').value;
             const uuid = document.getElementById('uuid').value;
 
-            sendToGoogleSheets(username, nombre, email, uuid);
+            sendToGoogleSheets(username, nombre, uuid);
         });
 
-        function sendToGoogleSheets(username, nombre, email, uuid) {
+        function sendToGoogleSheets(username, nombre, uuid) {
             const scriptURL = 'https://script.google.com/macros/s/AKfycbxgpexn3qtH37I_6Kt---zBjlHE8f_-x-5eIYYvGjEdND5FjMYPu85DLVMEIrWy2fA/exec';
 
             fetch(scriptURL, {
@@ -109,7 +104,6 @@
                     action: 'register',
                     username: username,
                     nombre: nombre,
-                    email: email,
                     uuid: uuid
                 })
             })
@@ -170,18 +164,16 @@
         function logData() {
             const username = document.getElementById('username').value;
             const nombre = document.getElementById('nombre').value;
-            const email = document.getElementById('email').value;
             const uuid = document.getElementById('uuid').value;
 
             // Mostrar los datos en la consola del navegador
             console.log('Datos ingresados por el usuario:');
             console.log('Usuario:', username);
             console.log('Nombre:', nombre);
-            console.log('Correo:', email);
             console.log('UUID:', uuid);
 
             // Validación simple
-            if (!username || !nombre || !email || !uuid) {
+            if (!username || !nombre || !uuid) {
                 console.error('Faltan campos obligatorios.');
                 alert('Por favor, completa todos los campos.');
                 return;
