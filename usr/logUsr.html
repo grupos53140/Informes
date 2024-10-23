@@ -124,6 +124,8 @@
                             document.getElementById("processingModal").style.display = "none"; 
                         })
                 .catch(error => console.error('catch-Error!', error));
+                 // Ocultar el modal una vez que se completa el procesamiento
+    document.getElementById("processingModal").style.display = "none"; 
         });
 
         function iniciarBarraProgreso() {
