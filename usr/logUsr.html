@@ -51,7 +51,6 @@
             </div>
             
             <div class="form-group">
-               
                 <input type="submit" id="submitBtn" value="Enviar">
             </div>         
         </div>             
@@ -67,15 +66,11 @@
 
     <script>
         // Generar UUID
-            const uuid = uuidv4();
-            document.getElementById('uuid').value = uuid;
+        const uuid = uuidv4();
+        document.getElementById('uuid').value = uuid;
 
-         // Variables para guardar los valores de nombre y username
-        let QueryName = {};
-        let QueryUser = {};
-
-            //Inicializar la barra de progreso
-            finalizarBarraProgreso();          
+        // Inicializar la barra de progreso
+        finalizarBarraProgreso();
 
         // Enviar datos del formulario
         document.getElementById('LoginForm').addEventListener('submit', function(e) {
@@ -94,48 +89,46 @@
 
         function sendToGoogleSheets(username, uuid) {
             const myHeaders = new Headers();
-            myHeaders.append('Content-Type', 'application/json');
+            myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
 
-            const raw = JSON.stringify({
-                "action": 'auth',
-                "username": username,
-                "uuid": uuid
-            });
+            const urlencoded = new URLSearchParams();
+            urlencoded.append("action", 'auth');
+            urlencoded.append("username", username);
+            urlencoded.append("uuid", uuid);
 
             const requestOptions = {
                 method: 'POST',
                 headers: myHeaders,
-                mode: 'no-cors',  // Usar no-cors
-                body: raw,
+                body: urlencoded,
                 redirect: 'follow'
             };
 
-            console.log("RAW: ", raw);
+            console.log("URL-encoded body: ", urlencoded.toString());
 
-            fetch("https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec", requestOptions)
+            fetch("https://script.google.com/macros/s/AKfycbxk2y_xvkbTuAD2izqFa4X6-WQS5ZLMvPFe6k1zhUAsOTdNk3MMaBzD5BthSV6Pger-/exec", requestOptions)
                 .then(() => {
-                // Solicitud de verificación después de unos segundos
-                setTimeout(verifyRegistration, 3000, username);
+                    // Solicitud de verificación después de unos segundos
+                    setTimeout(verifyRegistration, 3000, username);
                 })
                 .catch((error) => console.error("Esto es Error: ", error));
-            }
+        }
 
-            function verifyRegistration(username) {
-            const verifyURL = `https://script.google.com/macros/s/AKfycbxD9pH7VFa7IseLpqcPxNCDEQ28MvimPY_nxaox_X_KbBKgJkTegJ7TL652iA6ejQ/exec?username=${username}`;
+        function verifyRegistration(username) {
+            const verifyURL = `https://script.google.com/macros/s/AKfycbxk2y_xvkbTuAD2izqFa4X6-WQS5ZLMvPFe6k1zhUAsOTdNk3MMaBzD5BthSV6Pger-/exec/exec?username=${username}`;
 
             fetch(verifyURL)
                 .then(response => response.json())
                 .then(data => {
-                if (data.message === 'Usuario autenticado') {
-                    mostrarMensaje(`¡Bienvenido, ${username}!`, true);
-                } else {
-                    mostrarMensaje('¡Usuario no encontrado!', false);
-                }
+                    if (data.message === 'Usuario autenticado') {
+                        mostrarMensaje(`¡Bienvenido, ${username}!`, true);
+                    } else {
+                        mostrarMensaje('¡Usuario no encontrado!', false);
+                    }
                 })
                 .catch(error => console.error('Error!', error));
-            }
+        }
 
-            function iniciarBarraProgreso() {
+        function iniciarBarraProgreso() {
             const progressBar = document.getElementById('progress-bar');
             let progreso = 0;
             const intervalo = 100;
@@ -143,36 +136,25 @@
                 progreso += 5;
                 progressBar.style.width = `${progreso}%`;
                 if (progreso >= 100) {
-                clearInterval(idIntervalo);
+                    clearInterval(idIntervalo);
                 }
             }, intervalo);
-            }
+        }
 
-            function finalizarBarraProgreso() {
+        function finalizarBarraProgreso() {
             const progressBar = document.getElementById('progress-bar');
             progressBar.style.transition = 'width 0.5s ease';
-            progressBar.style.width = '0%'; // Finaliza la barra al 100%
-            }
+            progressBar.style.width = '0%';
+        }
 
-            function mostrarMensaje(mensaje, isSuccess = false) {
+        function mostrarMensaje(mensaje, isSuccess = false) {
             const statusMessage = document.getElementById('status-message');
             if (isSuccess) {
                 statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
             } else {
                 statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
             }
-            }
-
-            function mostrarMensaje(mensaje, isSuccess = false) {
-            const statusMessage = document.getElementById('status-message');
-            if (isSuccess) {
-                statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
-            } else {
-                statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
-            }
-        }     
-
-
+        }
     </script>
 </body>
 </html>
