@@ -86,6 +86,7 @@
 
             sendToGoogleSheets(username, uuid);
         });
+        
 
         function sendToGoogleSheets(username, uuid) {
             const myHeaders = new Headers();
@@ -103,12 +104,11 @@
             };
 
             console.log("URL-encoded body: ", urlencoded.toString());
-                
-            const verifyURL = 'https://script.google.com/macros/s/AKfycbwB16_S9ZtD6eh9I51sDb1p89i6Wezc-K52LM1etzZVD7bE3vNkSH7-XFcv7JuGTFD8/exec';
-            fetch(verifyURL)
+
+            fetch("https://script.google.com/macros/s/AKfycbwB16_S9ZtD6eh9I51sDb1p89i6Wezc-K52LM1etzZVD7bE3vNkSH7-XFcv7JuGTFD8/exec", requestOptions)
                 .then(response => response.json())
                 .then(data => {
-                    if (data.message === 'Usuario autenticado') {
+                    if (data.message === 'Accepted') {
                         mostrarMensaje(`¡Bienvenido, ${username}!`, true);
                     } else {
                         mostrarMensaje('¡Usuario no encontrado!', false);
