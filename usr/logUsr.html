@@ -115,7 +115,8 @@
                             } else {
                                 mostrarMensaje('¡Usuario no encontrado!', false);
                             }
-                           console.log("data-mensaje: ",data.message+"response: ", response);
+                           console.log("data-mensaje: ",data.message);
+                           console.log("respuesta svr: ",checkResult.message);
                         })
                 .catch(error => console.error('catch-Error!', error));
 
