@@ -71,6 +71,20 @@
         </div>
     </footer>
 
+    <!-- Modal para ingresar los tres pares de números -->
+    <div id="tokenModal" class="modal">
+        <div class="modal-content">
+        <h4>Verificación de acceso</h4>
+        <p>Por favor ingresa los tres códigos enviados a tu correo o teléfono móvil:</p>
+        <form id="tokenForm">
+            <input type="text" id="token1" placeholder="Token 1" required>
+            <input type="text" id="token2" placeholder="Token 2" required>
+            <input type="text" id="token3" placeholder="Token 3" required>
+            <button type="submit">Verificar</button>
+        </form>
+        </div>
+    </div>
+
     <script>
         // Generar UUID
         const uuid = uuidv4();
@@ -109,7 +123,7 @@
                                 document.getElementById("responseText").innerText = data;
                                 mostrarMensaje(`¡Bienvenido, ${username}!`, true);
                                 // Redirigir a la página deseada si es Accepted
-                               window.location.href = "https://grupos53140.github.io/Informes/";
+                               
                             } else if (data === 'Not Accepted') {
                                 mostrarMensaje('¡No estás aceptado en el sistema!', false);
                             } else {
@@ -149,6 +163,31 @@
                 statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
             }
         }
+
+        document.getElementById('tokenForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var token1 = document.getElementById('token1').value;
+            var token2 = document.getElementById('token2').value;
+            var token3 = document.getElementById('token3').value;
+
+            fetch('https://tu-servidor.com/verifyTokens', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `username=${username}&token1=${token1}&token2=${token2}&token3=${token3}`
+            })
+            .then(response => response.json())
+            .then(data => {
+            if (data.message === 'Autenticación exitosa') {
+                // Redirigir al usuario a la página principal
+                window.location.href = "https://grupos53140.github.io/Informes/";
+            } else {
+                alert('Tokens incorrectos, inténtalo de nuevo.');
+            }
+            });
+        });
+
     </script>
 </body>
 </html>
