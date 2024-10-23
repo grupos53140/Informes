@@ -96,7 +96,7 @@
 
 
             
-            fetch('https://script.google.com/macros/s/AKfycbxuoXB2MWTfZa1Q6lXCi7hYeQGN2mNSwO4ggTvYtIhtM-si0ltlkhia9uWabBMppxom/exec',{
+            fetch('https://script.google.com/macros/s/AKfycbyujAvH8LDuvLMgpNEuppbWrHz4gIujrEvsG7F-fIpWvfZGl1pglJC2wfbA6c_km5jB/exec',{
                 method: 'POST',
                 headers: {
                             'Content-Type': 'application/x-www-form-urlencoded'
@@ -110,7 +110,7 @@
                                 mostrarMensaje(`¡Bienvenido, ${username}!`, true);
                                 // Redirigir a la página deseada si es Accepted
                                window.location.href = "https://grupos53140.github.io/Informes/";
-                            } else if (data === 'No Accepted') {
+                            } else if (data === 'Not Accepted') {
                                 mostrarMensaje('¡No estás aceptado en el sistema!', false);
                             } else {
                                 mostrarMensaje('¡Usuario no encontrado!', false);
