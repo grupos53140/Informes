@@ -82,14 +82,14 @@
 
             const username = document.getElementById('username').value;
             const uuid = document.getElementById('uuid').value;
-            console.log("Datos: ", username, uuid);
+            
 
             sendToGoogleSheets(username, uuid);
         });
         
 
         function sendToGoogleSheets(username, uuid) {
-            console.log("URL-encoded body: ", urlencoded.toString());
+            console.log("Datos: ", username, uuid);
 
                 fetch("https://script.google.com/macros/s/AKfycbwB16_S9ZtD6eh9I51sDb1p89i6Wezc-K52LM1etzZVD7bE3vNkSH7-XFcv7JuGTFD8/exec",{
                     method: 'POST',
