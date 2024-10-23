@@ -104,18 +104,8 @@
             };
 
             console.log("URL-encoded body: ", urlencoded.toString());
-
-            fetch("https://script.google.com/macros/s/AKfycbwB16_S9ZtD6eh9I51sDb1p89i6Wezc-K52LM1etzZVD7bE3vNkSH7-XFcv7JuGTFD8/exec", requestOptions)
-                .then(() => {
-                    // Solicitud de verificación después de unos segundos
-                    setTimeout(verifyRegistration, 3000, username);
-                })
-                .catch((error) => console.error("Esto es Error: ", error));
-        }
-
-        function verifyRegistration(username) {
-            const verifyURL = `https://script.google.com/macros/s/AKfycbwB16_S9ZtD6eh9I51sDb1p89i6Wezc-K52LM1etzZVD7bE3vNkSH7-XFcv7JuGTFD8/exec?username=${username}`;
-
+                
+            const verifyURL = 'https://script.google.com/macros/s/AKfycbwB16_S9ZtD6eh9I51sDb1p89i6Wezc-K52LM1etzZVD7bE3vNkSH7-XFcv7JuGTFD8/exec';
             fetch(verifyURL)
                 .then(response => response.json())
                 .then(data => {
@@ -126,7 +116,7 @@
                     }
                 })
                 .catch(error => console.error('Error!', error));
-        }
+        
 
         function iniciarBarraProgreso() {
             const progressBar = document.getElementById('progress-bar');
