@@ -104,12 +104,16 @@
                 })            
                 .then(response => response.json())
                 .then(data => {
-                        if (data.message === 'Accepted') {
-                            mostrarMensaje(`¡Bienvenido, ${username}!`, true);
-                        } else {
-                            mostrarMensaje('¡Usuario no encontrado!', false);
-                        }
-                })
+                            if (data.message === 'Accepted') {
+                                mostrarMensaje(`¡Bienvenido, ${username}!`, true);
+                                // Redirigir a la página deseada si es Accepted
+                                window.location.href = "https://tu-sitio.com/dashboard";
+                            } else if (data.message === 'No Accepted') {
+                                mostrarMensaje('¡No estás aceptado en el sistema!', false);
+                            } else {
+                                mostrarMensaje('¡Usuario no encontrado!', false);
+                            }
+                        })
                 .catch(error => console.error('catch-Error!', error));
             }
 
