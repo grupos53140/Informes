@@ -97,14 +97,14 @@
 
             
             fetch('https://script.google.com/macros/s/AKfycbx0bk6YDXDdbpLDn4z7HL00WDXnV9_iTOBPPmoeUZFRyrsH38XFfQko4kVv2BQEwh-s/exec',{
-                    method: 'POST',
-                    headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                    body: new URLSearchParams({                           
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({                           
                             "username": username,
                             "uuid": uuid      
-                            })
+                    })
                 })            
                 .then(response => response.text())
                 .then(data => {
