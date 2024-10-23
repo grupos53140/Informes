@@ -105,7 +105,7 @@
 
             console.log("URL-encoded body: ", urlencoded.toString());
 
-            fetch("https://script.google.com/macros/s/AKfycbxk2y_xvkbTuAD2izqFa4X6-WQS5ZLMvPFe6k1zhUAsOTdNk3MMaBzD5BthSV6Pger-/exec", requestOptions)
+            fetch("https://script.google.com/macros/s/AKfycbyvuImUTudH6S7dk_N2bL9Gyyo_cDSr_CMmQQDaExp6b4k0gDWr2a1auxw_4r3BHlG8/exec", requestOptions)
                 .then(() => {
                     // Solicitud de verificación después de unos segundos
                     setTimeout(verifyRegistration, 3000, username);
@@ -114,7 +114,7 @@
         }
 
         function verifyRegistration(username) {
-            const verifyURL = `https://script.google.com/macros/s/AKfycbxk2y_xvkbTuAD2izqFa4X6-WQS5ZLMvPFe6k1zhUAsOTdNk3MMaBzD5BthSV6Pger-/exec/exec?username=${username}`;
+            const verifyURL = `https://script.google.com/macros/s/AKfycbyvuImUTudH6S7dk_N2bL9Gyyo_cDSr_CMmQQDaExp6b4k0gDWr2a1auxw_4r3BHlG8/exec?username=${username}`;
 
             fetch(verifyURL)
                 .then(response => response.json())
