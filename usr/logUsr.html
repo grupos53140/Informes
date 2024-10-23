@@ -89,33 +89,29 @@
         
 
         function sendToGoogleSheets(username, uuid) {
-            const myHeaders = new Headers();
-            myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
-
-            const urlencoded = new URLSearchParams();
-            urlencoded.append("action", 'auth');
-            urlencoded.append("username", username);
-            urlencoded.append("uuid", uuid);
-
-            const requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: urlencoded,
-            };
-
             console.log("URL-encoded body: ", urlencoded.toString());
 
-            fetch("https://script.google.com/macros/s/AKfycbwB16_S9ZtD6eh9I51sDb1p89i6Wezc-K52LM1etzZVD7bE3vNkSH7-XFcv7JuGTFD8/exec", requestOptions)
+                fetch("https://script.google.com/macros/s/AKfycbwB16_S9ZtD6eh9I51sDb1p89i6Wezc-K52LM1etzZVD7bE3vNkSH7-XFcv7JuGTFD8/exec",{
+                    method: 'POST',
+                    headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                    body: new URLSearchParams({
+                            "action": 'auth',
+                            "username": username,
+                            "uuid": uuid      
+                            })
+                })            
                 .then(response => response.json())
                 .then(data => {
-                    if (data.message === 'Accepted') {
-                        mostrarMensaje(`¡Bienvenido, ${username}!`, true);
-                    } else {
-                        mostrarMensaje('¡Usuario no encontrado!', false);
-                    }
+                        if (data.message === 'Accepted') {
+                            mostrarMensaje(`¡Bienvenido, ${username}!`, true);
+                        } else {
+                            mostrarMensaje('¡Usuario no encontrado!', false);
+                        }
                 })
-                .catch(error => console.error('Error!', error));
-        }
+                .catch(error => console.error('catch-Error!', error));
+            }
 
         function iniciarBarraProgreso() {
             const progressBar = document.getElementById('progress-bar');
