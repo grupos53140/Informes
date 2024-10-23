@@ -52,7 +52,14 @@
             
             <div class="form-group">
                 <input type="submit" id="submitBtn" value="Enviar">
-            </div>         
+            </div> 
+             <!-- Modal de procesamiento -->
+                <div id="processingModal" class="modal">
+                    <div class="modal-content">
+                    <h2>Procesando registro...</h2>
+                    <p>Por favor, espera mientras se envían los datos.</p>
+                    </div>
+                </div>        
         </div>             
     </form>
 
@@ -72,37 +79,36 @@
         // Inicializar la barra de progreso
         finalizarBarraProgreso();
 
-        // Enviar datos del formulario
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //ENVIAR LOS DATOS DEL FORMULARIO
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
         document.getElementById('LoginForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Prevenir que el formulario se envíe automáticamente
-
+            
+            // Mostrar el modal
+            document.getElementById("processingModal").style.display = "block";
+            
             // Iniciar la barra de progreso
             iniciarBarraProgreso();
             mostrarMensaje("Consultando...");
 
+            //Obtener valores del formulario
             const username = document.getElementById('username').value;
             const uuid = document.getElementById('uuid').value;
             
 
-            sendToGoogleSheets(username, uuid);
-        });
-        
-
-        function sendToGoogleSheets(username, uuid) {
-            console.log("Datos: ", username, uuid);
-
-                fetch("https://script.google.com/macros/s/AKfycbx0bk6YDXDdbpLDn4z7HL00WDXnV9_iTOBPPmoeUZFRyrsH38XFfQko4kVv2BQEwh-s/exec",{
+            
+            fetch("https://script.google.com/macros/s/AKfycbx0bk6YDXDdbpLDn4z7HL00WDXnV9_iTOBPPmoeUZFRyrsH38XFfQko4kVv2BQEwh-s/exec",{
                     method: 'POST',
                     headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                             },
-                    body: new URLSearchParams({
-                            "action": 'auth',
+                    body: new URLSearchParams({                           
                             "username": username,
                             "uuid": uuid      
                             })
                 })            
-                .then(response => response.json())
+                .then(response => response.text())
                 .then(data => {
                             if (data.message === 'Accepted') {
                                 mostrarMensaje(`¡Bienvenido, ${username}!`, true);
@@ -113,9 +119,12 @@
                             } else {
                                 mostrarMensaje('¡Usuario no encontrado!', false);
                             }
+
+                            // Ocultar el modal una vez que se completa el procesamiento
+                            document.getElementById("processingModal").style.display = "none"; 
                         })
                 .catch(error => console.error('catch-Error!', error));
-            }
+        });
 
         function iniciarBarraProgreso() {
             const progressBar = document.getElementById('progress-bar');
