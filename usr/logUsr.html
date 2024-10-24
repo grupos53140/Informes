@@ -65,7 +65,7 @@
     </footer>
 
     <!-- Modal para ingresar los tres pares de números -->
-    <div id="tokenModal" class="modal">
+    <div id="tokenModal" class="modal" style="display: none; text-align: center;">
         <div class="modal-content">
         <h4>Verificación de acceso</h4>
         <p>Por favor ingresa los tres códigos enviados a tu correo o teléfono móvil:</p>
@@ -116,7 +116,7 @@
                                 document.getElementById("responseText").innerText = data;
                                 mostrarMensaje(`¡Bienvenido, ${username}!`, true);
                                 // Redirigir a la página deseada si es Accepted
-
+                                document.getElementById('tokenModal').style.display = 'block';
                                 document.getElementById('tokenForm').addEventListener('submit', function(event) {
                                         event.preventDefault();
                                         var token1 = document.getElementById('token1').value;
