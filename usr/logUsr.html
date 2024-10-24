@@ -117,6 +117,7 @@
                                 document.getElementById("responseText").innerText = data;
                                 mostrarMensaje(`¡Bienvenido, ${username}!`, true);
                                 // Redirigir a la página deseada si es Accepted
+                                console.log("nombre usuario: ",username);
                                 document.getElementById('LoginForm').style.display = 'none';
                                 document.getElementById('tokenModal').style.display = 'block';
                                 document.getElementById('tokenForm').addEventListener('submit', function(event) {
