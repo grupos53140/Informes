@@ -353,6 +353,7 @@
 }
 ul{
   padding:10px;
+  margin:0px;
 }
 /* Mostrar el tooltip al pasar sobre el icono */
 .help-icon:hover .tooltip {
