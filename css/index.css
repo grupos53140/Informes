@@ -320,11 +320,11 @@
   border: solid 1px var(--color-blue-400);
   color: var(--color-blue-500);
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background-color: var(--color-blue-100);
   text-align: center;
-  border-radius: 25%;
+  border-radius: 50%;
   cursor: pointer;
   font-size: 12px;
   line-height: 20px;
@@ -349,6 +349,9 @@
   transition: opacity 0.3s;
   border: 1px solid var(--color-blue-400);
   align-self: center;
+}
+ul{
+  padding:10px;
 }
 /* Mostrar el tooltip al pasar sobre el icono */
 .help-icon:hover .tooltip {
