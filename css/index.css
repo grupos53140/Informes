@@ -42,7 +42,7 @@
     .form-container {
       display: flex;
         background-color: white;
-        border-radius: 5px;
+        border-radius: 15px;
         border: 1px solid var(--color-blue-100);
         flex-direction: column;
         flex-wrap: wrap;
