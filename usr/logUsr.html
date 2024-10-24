@@ -130,9 +130,9 @@
                                         },
                                         body: `username=${username}&token1=${token1}&token2=${token2}&token3=${token3}`
                                         })
-                                        .then(response => response.json())
+                                        .then(response => response.text())
                                         .then(data => {
-                                        if (data.message === 'Autenticación exitosa') {
+                                        if (data === 'Autenticación exitosa') {
                                             // Redirigir al usuario a la página principal
                                             window.location.href = "https://grupos53140.github.io/Informes/";
                                         } else {
