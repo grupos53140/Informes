@@ -99,7 +99,10 @@
             mostrarMensaje("Consultando...");
 
             //Obtener valores del formulario
-                     
+            // Guardar el correo en sessionStorage después del login
+            var username = document.getElementById('username').value;
+            sessionStorage.setItem('username', username);
+         
             const formData = new URLSearchParams(new FormData(event.target));
 
 
@@ -126,6 +129,8 @@
                                         var token1 = document.getElementById('token1').value;
                                         var token2 = document.getElementById('token2').value;
                                         var token3 = document.getElementById('token3').value;
+                                        // Obtener el correo del usuario desde sessionStorage
+                                        var username = sessionStorage.getItem('username');
 
                                         fetch('https://script.google.com/macros/s/AKfycbzvKPiwShxAFeHD370mS9IRCyYh4uMc2RgzmKNBFFt1irzeD40NqK6NdyFPj4zTmsQl/exec', {
                                         method: 'POST',
