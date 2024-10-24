@@ -334,7 +334,8 @@
 
 .tooltip {
   visibility: hidden;
-  width: 250px;
+  width: 200px;
+  height:90px;
   background-color: var(--color-blue-100);
   color: var(--color-blue-500);
   text-align: center;
