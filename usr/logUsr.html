@@ -120,6 +120,7 @@
                                 console.log("nombre usuario: ",username);
                                 document.getElementById('LoginForm').style.display = 'none';
                                 document.getElementById('tokenModal').style.display = 'block';
+                                console.log("nombre usuario token modal: ",username);
                                 document.getElementById('tokenForm').addEventListener('submit', function(event) {
                                         event.preventDefault();
                                         var token1 = document.getElementById('token1').value;
