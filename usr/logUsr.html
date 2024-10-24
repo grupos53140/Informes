@@ -116,6 +116,7 @@
                                 document.getElementById("responseText").innerText = data;
                                 mostrarMensaje(`¡Bienvenido, ${username}!`, true);
                                 // Redirigir a la página deseada si es Accepted
+                                document.getElementById('LoginForm').style.display = 'none';
                                 document.getElementById('tokenModal').style.display = 'block';
                                 document.getElementById('tokenForm').addEventListener('submit', function(event) {
                                         event.preventDefault();
@@ -132,7 +133,7 @@
                                         })
                                         .then(response => response.text())
                                         .then(data => {
-                                        if (data === 'Autenticación exitosa') {
+                                        if (data === 'Token_Accepted') {
                                             // Redirigir al usuario a la página principal
                                             window.location.href = "https://grupos53140.github.io/Informes/";
                                         } else {
