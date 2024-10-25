@@ -152,7 +152,13 @@
                         .then(tdata => {
                             if (tdata === 'Token_Accepted') {
                                 // Redirigir al usuario a la página principal
+                                /////////////////////////////////////////////////////////////////
+                                // Aqui va el codigo cuando recibe el token de sesión.
+                                sessionStorage.setItem('sessionToken', tdata.sessionToken);
                                 window.location.href = "https://grupos53140.github.io/Informes/";
+                                
+                                /////////////////////////////////////////////////////////////////                              
+                                
                             } else {
                                 alert('Tokens incorrectos, inténtalo de nuevo.');
                             }
