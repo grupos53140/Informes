@@ -150,9 +150,9 @@
                             body: tokenData
                         })
                         .then(response => response.text())
-                        .then(tdata => {
-                            if (tdata === 'Token_Accepted') {
-                                console.log('tdata fe: ',tdata);
+                        .then(data => {
+                            if (data === 'Token_Accepted') {
+                                console.log('tdata fe: ',data);
                                 // Redirigir al usuario a la página principal
                                 /////////////////////////////////////////////////////////////////
                                 // Aqui va el codigo cuando recibe el token de sesión.
