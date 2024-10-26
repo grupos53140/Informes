@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
 
-    <!-- Librerías necesarias -->
+    <!-- Librerías necesarias 
     <link rel="stylesheet" type="text/css" href="../css/paleta.css">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
+    -->
    
     <link rel="icon" href="../Informes/img/MI.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../Informes/img/MI.ico" type="image/x-icon">
@@ -17,7 +18,13 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
+    <style>
+        /* Estilos básicos */
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        form { max-width: 400px; width: 100%; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        input[type="text"], input[type="submit"] { width: 100%; padding: 10px; margin: 10px 0; }
+        .message { color: red; font-size: 0.9em; }
+      </style>
 </head>
 <body>
     <menu id="menucontainer">
@@ -84,126 +91,90 @@
         const uuid = uuidv4();
         document.getElementById('uuid').value = uuid;
     
-        // Inicializar la barra de progreso
-        finalizarBarraProgreso();
-    
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //ENVIAR LOS DATOS DEL FORMULARIO DE LOGIN
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
-        document.getElementById('LoginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevenir que el formulario se envíe automáticamente
-    
-            // Iniciar la barra de progreso
-            iniciarBarraProgreso();
-            mostrarMensaje("Consultando...");
-    
-            // Obtener valores del formulario
-            var username = document.getElementById('username').value;
-            sessionStorage.setItem('username', username); // Guardar el correo en sessionStorage después del login
-    
-            const formData = new URLSearchParams(new FormData(e.target));
-            formData.append('action', 'login'); // Indicamos que es una solicitud de login
-    
-            // Enviar la solicitud al backend
-            fetch('https://script.google.com/macros/s/AKfycbyiM06zvZ5MlxdDkIKTb9EbX9rsEPiiTQu07VJYELNdxRfPwQ8iNnQwEkg7T1Cm6pOW/exec', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data === 'Accepted') {
-                    document.getElementById("responseText").innerText = data;
-                    mostrarMensaje(`¡Bienvenido, ${username}!`, true);
-                    console.log("nombre usuario: ", username);
-    
-                    // Ocultar el formulario de login y mostrar el modal de tokens
-                    document.getElementById('LoginForm').style.display = 'none';
-                    document.getElementById('tokenModal').style.display = 'block';
-    
-                    // Añadir event listener para el envío del formulario de tokens
-                    document.getElementById('tokenForm').addEventListener('submit', function(event) {
-                        event.preventDefault();
-                        var token1 = document.getElementById('token1').value;
-                        var token2 = document.getElementById('token2').value;
-                        var token3 = document.getElementById('token3').value;
-    
-                        // Obtener el correo del usuario desde sessionStorage
-                        var username = sessionStorage.getItem('username');
-    
-                        const tokenData = new URLSearchParams();
-                        tokenData.append('action', 'verificarToken'); // Indicamos que es una verificación de tokens
-                        tokenData.append('username', username);
-                        tokenData.append('token1', token1);
-                        tokenData.append('token2', token2);
-                        tokenData.append('token3', token3);
-    
-                        // Enviar solicitud para verificar los tokens
-                        fetch('https://script.google.com/macros/s/AKfycbyiM06zvZ5MlxdDkIKTb9EbX9rsEPiiTQu07VJYELNdxRfPwQ8iNnQwEkg7T1Cm6pOW/exec', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: tokenData
-                        })
-                        .then(response => response.text())
-                        .then(tdata => {
-                            if (tdata === 'Token_Accepted') {
-                                console.log('tdata fe: ',tdata)
-                                // Redirigir al usuario a la página principal
-                                /////////////////////////////////////////////////////////////////
-                                // Aqui va el codigo cuando recibe el token de sesión.
-                                sessionStorage.setItem('sessionToken', tdata.sessionToken);//.sessionToken
-                                window.location.href = "https://grupos53140.github.io/Informes/card/s21s.html";
-                                
-                                /////////////////////////////////////////////////////////////////                              
-                                
-                            } else {
-                                alert('Tokens incorrectos (FrontEnd), inténtalo de nuevo.');
-                            }
-                            console.log("(FE)token-mensaje: ", tdata.sessionToken);
-                        });
-                    });
-    
-                } else if (data === 'Not Accepted') {
-                    mostrarMensaje('¡No estás aceptado en el sistema!', false);
-                } else {
-                    mostrarMensaje('¡Usuario no encontrado!', false);
-                }
-                console.log("data-mensaje: ", data);
-            })
-            .catch(error => console.error('catch-Error!', error));
-        });
-    
-        function iniciarBarraProgreso() {
-            const progressBar = document.getElementById('progress-bar');
-            let progreso = 0;
-            const intervalo = 100;
-            const idIntervalo = setInterval(() => {
-                progreso += 5;
-                progressBar.style.width = `${progreso}%`;
-                if (progreso >= 100) {
-                    clearInterval(idIntervalo);
-                }
-            }, intervalo);
-        }
-    
-        function finalizarBarraProgreso() {
-            const progressBar = document.getElementById('progress-bar');
-            progressBar.style.transition = 'width 0.5s ease';
-            progressBar.style.width = '0%';
-        }
-    
-        function mostrarMensaje(mensaje, isSuccess = false) {
-            const statusMessage = document.getElementById('status-message');
-            if (isSuccess) {
-                statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
-            } else {
-                statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
-            }
-        }
+        const backendUrl = 'https://your-backend-url';
+
+////////////////////////////////////////////////////////////////////////////////
+// 1. L O G I N
+// 1.1 Maneja el evento de submit en el formulario de login
+////////////////////////////////////////////////////////////////////////////////
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const loginMessage = document.getElementById('loginMessage');
+
+  try {
+    const response = await fetch(backendUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ action: 'login', username: username, uuid: generateUUID() })
+    });
+
+    const result = await response.text();
+    loginMessage.textContent = result === 'Accepted' 
+      ? 'Login exitoso, revisa tu email para los tokens.' 
+      : 'Error: ' + result;
+
+    if (result === 'Accepted') {
+      // Si el login es exitoso, mostramos el formulario de verificación
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('verifyForm').style.display = 'block';
+    }
+  } catch (error) {
+    loginMessage.textContent = 'Error de red. Inténtalo de nuevo.';
+    console.error('Error en login:', error);
+  }
+});
+
+////////////////////////////////////////////////////////////////////////////////
+// 1.1.1 Generación de UUID para enviar al backend
+////////////////////////////////////////////////////////////////////////////////
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// 2. V E R I F I C A R   T O K E N
+// 2.1 Manejo de verificación de tokens enviados por el usuario
+////////////////////////////////////////////////////////////////////////////////
+document.getElementById('verifyForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const token1 = document.getElementById('token1').value;
+  const token2 = document.getElementById('token2').value;
+  const token3 = document.getElementById('token3').value;
+  const username = document.getElementById('username').value;
+  const verifyMessage = document.getElementById('verifyMessage');
+
+  try {
+    const response = await fetch(backendUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        action: 'verificarToken',
+        username: username,
+        token1: token1,
+        token2: token2,
+        token3: token3
+      })
+    });
+
+    const result = await response.text();
+    verifyMessage.textContent = result.includes('https') 
+      ? 'Redireccionando...' 
+      : 'Error: ' + result;
+
+    if (result.includes('https')) {
+      // Redirecciona al usuario con el token en la URL
+      window.location.href = result;
+    }
+  } catch (error) {
+    verifyMessage.textContent = 'Error de red. Inténtalo de nuevo.';
+    console.error('Error en verificación de tokens:', error);
+  }
+});
     </script>
     
 </body>
