@@ -154,15 +154,15 @@
                                 // Redirigir al usuario a la página principal
                                 /////////////////////////////////////////////////////////////////
                                 // Aqui va el codigo cuando recibe el token de sesión.
-                                sessionStorage.setItem('sessionToken', tdata);//.sessionToken
+                                sessionStorage.setItem('sessionToken', tdata.sessionToken);//.sessionToken
                                 window.location.href = "https://grupos53140.github.io/Informes/card/s21s.html";
                                 
                                 /////////////////////////////////////////////////////////////////                              
                                 
                             } else {
-                                alert('Tokens incorrectos, inténtalo de nuevo.');
+                                alert('Tokens incorrectos (FrontEnd), inténtalo de nuevo.');
                             }
-                            console.log("token-mensaje: ", tdata);
+                            console.log("(FE)token-mensaje: ", tdata.sessionToken);
                         });
                     });
     
