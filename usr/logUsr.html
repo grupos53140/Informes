@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
 
-    <!-- Librerías necesarias 
-    <link rel="stylesheet" type="text/css" href="../css/index.css"> 
-    -->
+    <!-- Librerías necesarias -->
     <link rel="stylesheet" type="text/css" href="../css/paleta.css">
-    <link rel="stylesheet" type="text/css" href="../css/index.css">     
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
    
     <link rel="icon" href="../Informes/img/MI.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../Informes/img/MI.ico" type="image/x-icon">
@@ -19,113 +17,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <style>
-        /* Estilos básicos */
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        form {
-                min-width: 350px;
-                width: 100%;
-                
-        }
-                #menucontainer {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-content: space-between;
-            align-items: flex-start;
-            width: 100%;
-            font-size: 75%;
-        }
-        menu {
-            margin-top: 0%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #f2f2f2;
-            padding: 10px 0px;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 9px;
-            color: #a7a5a5;
-            border-bottom: 1px solid #dadce0;
-        }
-        #headline {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: solid 1px var(--color-blue-100);
-    margin-bottom: 15px;
-    background: var(--color-jw-blue-700);
-    color: var(--color-blue-50);
-}
-        input[type="text"], input[type="submit"] { width: 100%; padding: 10px; margin: 10px 0; }
-        .message { color: red; font-size: 0.9em; }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-left: 15px;
-            margin-right: 15px;
-            margin-bottom: 15px;
-            align-items: flex-start;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-content: center;
-            border-radius: 5px;
-        }
 
-        input[type="submit"]:hover {
-            background-color: var(--color-blue-700);
-        }
-        input[type="text"], input[type="submit"] {
-            min-width: 75%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-        }
-        input[type="text"], input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        input[type="submit"] {
-            width: -webkit-fill-available;
-            background-color: var(--color-blue-600);
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            margin: auto;
-        }
-        .form-container {
-            display: flex;
-            background-color: white;
-            border-radius: 15px;
-            border: 1px solid var(--color-blue-100);
-            flex-wrap: nowrap;
-            flex-direction: column;
-            min-width: 350px;
-        }
-        input[type="text"], input[type="submit"] {
-            min-width: 75%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-      </style>
 </head>
 <body>
     <menu id="menucontainer">
@@ -152,7 +44,6 @@
                 <label for="username">Usuario:</label>
                 <input type="text" id="username" name="username" required><br>
             </div>
-            <div id="loginMessage"></div>
             <div class="form-group hidden">
                 <label for="uuid">UUID del Dispositivo:</label>
                 <input type="text" id="uuid" name="uuid"><br>
@@ -189,110 +80,131 @@
     </div>
     <div id="status-message"></div> <!-- Mensaje de estado -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          const backendUrl = 'https://your-backend-url';
-        
-          ////////////////////////////////////////////////////////////////////////////////
-          // 1. L O G I N
-          // 1.1 Maneja el evento de submit en el formulario de login
-          ////////////////////////////////////////////////////////////////////////////////
-          const loginForm = document.getElementById('LoginForm');
-          const loginMessage = document.getElementById('loginMessage');
-          const verifyForm = document.getElementById('tokenForm');
-        
-          if (loginForm && loginMessage) {
-            loginForm.addEventListener('submit', async (e) => {
-              e.preventDefault();
-              const username = document.getElementById('username').value;
-        
-              try {
-                const response = await fetch(backendUrl, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  body: new URLSearchParams({ action: 'login', username: username, uuid: generateUUID() })
-                });
-        
-                const result = await response.text();
-                loginMessage.textContent = result === 'Accepted' 
-                  ? 'Login exitoso, revisa tu email para los tokens.' 
-                  : 'Error: ' + result;
-        
-                if (result === 'Accepted') {
-                  // Si el login es exitoso, mostramos el formulario de verificación
-                  loginForm.style.display = 'none';
-                  verifyForm.style.display = 'block';
+        // Generar UUID
+        const uuid = uuidv4();
+        document.getElementById('uuid').value = uuid;
+    
+        // Inicializar la barra de progreso
+        finalizarBarraProgreso();
+    
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //ENVIAR LOS DATOS DEL FORMULARIO DE LOGIN
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        document.getElementById('LoginForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenir que el formulario se envíe automáticamente
+    
+            // Iniciar la barra de progreso
+            iniciarBarraProgreso();
+            mostrarMensaje("Consultando...");
+    
+            // Obtener valores del formulario
+            var username = document.getElementById('username').value;
+            sessionStorage.setItem('username', username); // Guardar el correo en sessionStorage después del login
+    
+            const formData = new URLSearchParams(new FormData(e.target));
+            formData.append('action', 'login'); // Indicamos que es una solicitud de login
+    
+            // Enviar la solicitud al backend
+            fetch('https://script.google.com/macros/s/AKfycbyiM06zvZ5MlxdDkIKTb9EbX9rsEPiiTQu07VJYELNdxRfPwQ8iNnQwEkg7T1Cm6pOW/exec', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'Accepted') {
+                    document.getElementById("responseText").innerText = data;
+                    mostrarMensaje(`¡Bienvenido, ${username}!`, true);
+                    console.log("nombre usuario: ", username);
+    
+                    // Ocultar el formulario de login y mostrar el modal de tokens
+                    document.getElementById('LoginForm').style.display = 'none';
+                    document.getElementById('tokenModal').style.display = 'block';
+    
+                    // Añadir event listener para el envío del formulario de tokens
+                    document.getElementById('tokenForm').addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        var token1 = document.getElementById('token1').value;
+                        var token2 = document.getElementById('token2').value;
+                        var token3 = document.getElementById('token3').value;
+    
+                        // Obtener el correo del usuario desde sessionStorage
+                        var username = sessionStorage.getItem('username');
+    
+                        const tokenData = new URLSearchParams();
+                        tokenData.append('action', 'verificarToken'); // Indicamos que es una verificación de tokens
+                        tokenData.append('username', username);
+                        tokenData.append('token1', token1);
+                        tokenData.append('token2', token2);
+                        tokenData.append('token3', token3);
+    
+                        // Enviar solicitud para verificar los tokens
+                        fetch('https://script.google.com/macros/s/AKfycbyiM06zvZ5MlxdDkIKTb9EbX9rsEPiiTQu07VJYELNdxRfPwQ8iNnQwEkg7T1Cm6pOW/exec', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: tokenData
+                        })
+                        .then(response => response.text())
+                        .then(tdata => {
+                            if (tdata === 'Token_Accepted') {
+                                console.log('tdata fe: ',tdata)
+                                // Redirigir al usuario a la página principal
+                                /////////////////////////////////////////////////////////////////
+                                // Aqui va el codigo cuando recibe el token de sesión.
+                                sessionStorage.setItem('sessionToken', tdata.sessionToken);//.sessionToken
+                                window.location.href = "https://grupos53140.github.io/Informes/card/s21s.html";
+                                
+                                /////////////////////////////////////////////////////////////////                              
+                                
+                            } else {
+                                alert('Tokens incorrectos (FrontEnd), inténtalo de nuevo.');
+                            }
+                            console.log("(FE)token-mensaje: ", tdata.sessionToken);
+                        });
+                    });
+    
+                } else if (data === 'Not Accepted') {
+                    mostrarMensaje('¡No estás aceptado en el sistema!', false);
+                } else {
+                    mostrarMensaje('¡Usuario no encontrado!', false);
                 }
-              } catch (error) {
-                loginMessage.textContent = 'Error de red. Inténtalo de nuevo.';
-                console.error('Error en login:', error);
-              }
-            });
-          } else {
-            console.error("Elemento con ID 'loginForm' o 'loginMessage' no encontrado en el DOM");
-          }
-        
-          ////////////////////////////////////////////////////////////////////////////////
-          // 1.1.1 Generación de UUID para enviar al backend
-          ////////////////////////////////////////////////////////////////////////////////
-          function generateUUID() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-              const r = Math.random() * 16 | 0;
-              const v = c === 'x' ? r : (r & 0x3 | 0x8);
-              return v.toString(16);
-            });
-          }
-        
-          ////////////////////////////////////////////////////////////////////////////////
-          // 2. V E R I F I C A R   T O K E N
-          // 2.1 Manejo de verificación de tokens enviados por el usuario
-          ////////////////////////////////////////////////////////////////////////////////
-          if (verifyForm) {
-            verifyForm.addEventListener('submit', async (e) => {
-              e.preventDefault();
-              const token1 = document.getElementById('token1').value;
-              const token2 = document.getElementById('token2').value;
-              const token3 = document.getElementById('token3').value;
-              const username = document.getElementById('username').value;
-              const verifyMessage = document.getElementById('verifyMessage');
-        
-              if (!verifyMessage) {
-                console.error("Elemento con ID 'verifyMessage' no encontrado en el DOM");
-                return;
-              }
-        
-              try {
-                const response = await fetch(backendUrl, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  body: new URLSearchParams({
-                    action: 'verificarToken',
-                    username: username,
-                    token1: token1,
-                    token2: token2,
-                    token3: token3
-                  })
-                });
-        
-                const result = await response.text();
-                verifyMessage.textContent = result.includes('https') 
-                  ? 'Redireccionando...' 
-                  : 'Error: ' + result;
-        
-                if (result.includes('https')) {
-                  // Redirecciona al usuario con el token en la URL
-                  window.location.href = result;
-                }
-              } catch (error) {
-                verifyMessage.textContent = 'Error de red. Inténtalo de nuevo.';
-                console.error('Error en verificación de tokens:', error);
-              }
-            });
-          } else {
-            console.error("Elemento con ID 'verifyForm' no encontrado en el DOM");
-          }
+                console.log("data-mensaje: ", data);
+            })
+            .catch(error => console.error('catch-Error!', error));
         });
-        </script>
-        
+    
+        function iniciarBarraProgreso() {
+            const progressBar = document.getElementById('progress-bar');
+            let progreso = 0;
+            const intervalo = 100;
+            const idIntervalo = setInterval(() => {
+                progreso += 5;
+                progressBar.style.width = `${progreso}%`;
+                if (progreso >= 100) {
+                    clearInterval(idIntervalo);
+                }
+            }, intervalo);
+        }
+    
+        function finalizarBarraProgreso() {
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.transition = 'width 0.5s ease';
+            progressBar.style.width = '0%';
+        }
+    
+        function mostrarMensaje(mensaje, isSuccess = false) {
+            const statusMessage = document.getElementById('status-message');
+            if (isSuccess) {
+                statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
+            } else {
+                statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
+            }
+        }
+    </script>
     
 </body>
 </html>
