@@ -188,98 +188,110 @@
     </div>
     <div id="status-message"></div> <!-- Mensaje de estado -->
     <script>
-        // Generar UUID
-        //const uuid = uuidv4();
-        //document.getElementById('uuid').value = uuid;
-    
-        const backendUrl = 'https://your-backend-url';
-
-////////////////////////////////////////////////////////////////////////////////
-// 1. L O G I N
-// 1.1 Maneja el evento de submit en el formulario de login
-////////////////////////////////////////////////////////////////////////////////
-const loginForm = document.getElementById('loginForm');
-if(loginForm){
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const username = document.getElementById('username').value;
-  const loginMessage = document.getElementById('loginMessage');
-
-  try {
-    const response = await fetch(backendUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ action: 'login', username: username, uuid: generateUUID() })
-    });
-
-    const result = await response.text();
-    loginMessage.textContent = result === 'Accepted' 
-      ? 'Login exitoso, revisa tu email para los tokens.' 
-      : 'Error: ' + result;
-
-    if (result === 'Accepted') {
-      // Si el login es exitoso, mostramos el formulario de verificación
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('verifyForm').style.display = 'block';
-    }
-  } catch (error) {
-    loginMessage.textContent = 'Error de red. Inténtalo de nuevo.';
-    console.error('Error en login:', error);
-  }
-});
-}else{ console.error("Elemento con ID 'loginForm' no encontrado en el DOM");}
-
-////////////////////////////////////////////////////////////////////////////////
-// 1.1.1 Generación de UUID para enviar al backend
-////////////////////////////////////////////////////////////////////////////////
-function generateUUID() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    const r = Math.random() * 16 | 0;
-    const v = c === 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// 2. V E R I F I C A R   T O K E N
-// 2.1 Manejo de verificación de tokens enviados por el usuario
-////////////////////////////////////////////////////////////////////////////////
-document.getElementById('verifyForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const token1 = document.getElementById('token1').value;
-  const token2 = document.getElementById('token2').value;
-  const token3 = document.getElementById('token3').value;
-  const username = document.getElementById('username').value;
-  const verifyMessage = document.getElementById('verifyMessage');
-
-  try {
-    const response = await fetch(backendUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        action: 'verificarToken',
-        username: username,
-        token1: token1,
-        token2: token2,
-        token3: token3
-      })
-    });
-
-    const result = await response.text();
-    verifyMessage.textContent = result.includes('https') 
-      ? 'Redireccionando...' 
-      : 'Error: ' + result;
-
-    if (result.includes('https')) {
-      // Redirecciona al usuario con el token en la URL
-      window.location.href = result;
-    }
-  } catch (error) {
-    verifyMessage.textContent = 'Error de red. Inténtalo de nuevo.';
-    console.error('Error en verificación de tokens:', error);
-  }
-});
-    </script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const backendUrl = 'https://your-backend-url';
+        
+          ////////////////////////////////////////////////////////////////////////////////
+          // 1. L O G I N
+          // 1.1 Maneja el evento de submit en el formulario de login
+          ////////////////////////////////////////////////////////////////////////////////
+          const loginForm = document.getElementById('loginForm');
+          const loginMessage = document.getElementById('loginMessage');
+          const verifyForm = document.getElementById('verifyForm');
+        
+          if (loginForm && loginMessage) {
+            loginForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const username = document.getElementById('username').value;
+        
+              try {
+                const response = await fetch(backendUrl, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: new URLSearchParams({ action: 'login', username: username, uuid: generateUUID() })
+                });
+        
+                const result = await response.text();
+                loginMessage.textContent = result === 'Accepted' 
+                  ? 'Login exitoso, revisa tu email para los tokens.' 
+                  : 'Error: ' + result;
+        
+                if (result === 'Accepted') {
+                  // Si el login es exitoso, mostramos el formulario de verificación
+                  loginForm.style.display = 'none';
+                  verifyForm.style.display = 'block';
+                }
+              } catch (error) {
+                loginMessage.textContent = 'Error de red. Inténtalo de nuevo.';
+                console.error('Error en login:', error);
+              }
+            });
+          } else {
+            console.error("Elemento con ID 'loginForm' o 'loginMessage' no encontrado en el DOM");
+          }
+        
+          ////////////////////////////////////////////////////////////////////////////////
+          // 1.1.1 Generación de UUID para enviar al backend
+          ////////////////////////////////////////////////////////////////////////////////
+          function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+              const r = Math.random() * 16 | 0;
+              const v = c === 'x' ? r : (r & 0x3 | 0x8);
+              return v.toString(16);
+            });
+          }
+        
+          ////////////////////////////////////////////////////////////////////////////////
+          // 2. V E R I F I C A R   T O K E N
+          // 2.1 Manejo de verificación de tokens enviados por el usuario
+          ////////////////////////////////////////////////////////////////////////////////
+          if (verifyForm) {
+            verifyForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const token1 = document.getElementById('token1').value;
+              const token2 = document.getElementById('token2').value;
+              const token3 = document.getElementById('token3').value;
+              const username = document.getElementById('username').value;
+              const verifyMessage = document.getElementById('verifyMessage');
+        
+              if (!verifyMessage) {
+                console.error("Elemento con ID 'verifyMessage' no encontrado en el DOM");
+                return;
+              }
+        
+              try {
+                const response = await fetch(backendUrl, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: new URLSearchParams({
+                    action: 'verificarToken',
+                    username: username,
+                    token1: token1,
+                    token2: token2,
+                    token3: token3
+                  })
+                });
+        
+                const result = await response.text();
+                verifyMessage.textContent = result.includes('https') 
+                  ? 'Redireccionando...' 
+                  : 'Error: ' + result;
+        
+                if (result.includes('https')) {
+                  // Redirecciona al usuario con el token en la URL
+                  window.location.href = result;
+                }
+              } catch (error) {
+                verifyMessage.textContent = 'Error de red. Inténtalo de nuevo.';
+                console.error('Error en verificación de tokens:', error);
+              }
+            });
+          } else {
+            console.error("Elemento con ID 'verifyForm' no encontrado en el DOM");
+          }
+        });
+        </script>
+        
     
 </body>
 </html>
