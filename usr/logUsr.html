@@ -198,6 +198,8 @@
 // 1. L O G I N
 // 1.1 Maneja el evento de submit en el formulario de login
 ////////////////////////////////////////////////////////////////////////////////
+const loginForm = document.getElementById('loginForm');
+if(loginForm){
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const username = document.getElementById('username').value;
@@ -225,6 +227,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     console.error('Error en login:', error);
   }
 });
+}else{ console.error("Elemento con ID 'loginForm' no encontrado en el DOM");}
 
 ////////////////////////////////////////////////////////////////////////////////
 // 1.1.1 Generación de UUID para enviar al backend
