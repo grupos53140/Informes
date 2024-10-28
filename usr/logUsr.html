@@ -5,41 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
 
-    <!-- Librerías necesarias -->
     <link rel="stylesheet" type="text/css" href="../css/paleta.css">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
-   
     <link rel="icon" href="../Informes/img/MI.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../Informes/img/MI.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="../Informes/img/MI180.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../Informes/img/MI32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../Informes/img/MI16.png">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
 </head>
 <body>
     <menu id="menucontainer">
         <div id="menutop">
-          <div id="menutopleft"><a href="../index.html"> < Atrás</a></div>
-          <div id="menutopright">       
-            <a href="#">Login</a>      
-          </div>
+            <div id="menutopleft"><a href="../index.html"> < Atrás</a></div>
+            <div id="menutopright"><a href="#">Login</a></div>
         </div>
-        <!-- BARRA DE PROGRESO -->
         <div id="progress-container">
-          <div id="progress-bar"></div>
-        </div>      
+            <div id="progress-bar"></div>
+        </div>
     </menu>
 
     <form id="LoginForm">
         <div class="form-container"> 
-            <div id="headline">          
-                <legend><h3>LOGIN</h3></legend>
-            </div>
-            
-            <!-- CAMPOS DEL FORMULARIO -->
+            <legend><h3>LOGIN</h3></legend>
             <div class="form-group">
                 <label for="username">Usuario:</label>
                 <input type="text" id="username" name="username" required><br>
@@ -48,163 +34,114 @@
                 <label for="uuid">UUID del Dispositivo:</label>
                 <input type="text" id="uuid" name="uuid"><br>
             </div>
-            
             <div class="form-group">
                 <input type="submit" id="submitBtn" value="Enviar">
             </div> 
-            
         </div>             
     </form>
     <p id="responseText"></p>
+
     <footer>
         <div>©2024 EL JARDIN TOL-53140</div>
-        <div>       
-          <a href="https://github.com/grupos53140/Informes/blob/main/CONDICIONES.md">Condiciones de uso</a> | 
-          <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
+        <div>
+            <a href="https://github.com/grupos53140/Informes/blob/main/CONDICIONES.md">Condiciones de uso</a> | 
+            <a href="https://github.com/grupos53140/Informes/blob/main/PRIVACY.md">Política de privacidad</a>
         </div>
     </footer>
 
-    <!-- Modal para ingresar los tres pares de números -->
     <div id="tokenModal" class="modal" style="display: none; text-align: center;">
         <div class="modal-content">
-        <h4>Verificación de acceso</h4>
-        <p>Por favor ingresa los tres códigos enviados a tu correo:</p>
-        <p>caducaran en 10 mns...:</p>
-        <form id="tokenForm">
-            <input type="text" id="token1" placeholder="Token 1" required>
-            <input type="text" id="token2" placeholder="Token 2" required>
-            <input type="text" id="token3" placeholder="Token 3" required>
-            <button type="submit">Verificar</button>
-        </form>
+            <h4>Verificación de acceso</h4>
+            <p>Por favor ingresa los tres códigos enviados a tu correo:</p>
+            <p>Caducan en 10 minutos:</p>
+            <form id="tokenForm">
+                <input type="text" id="token1" placeholder="Token 1" required>
+                <input type="text" id="token2" placeholder="Token 2" required>
+                <input type="text" id="token3" placeholder="Token 3" required>
+                <button type="submit">Verificar</button>
+            </form>
         </div>
     </div>
-    <div id="status-message"></div> <!-- Mensaje de estado -->
+
+    <div id="status-message"></div>
+
     <script>
-        // Generar UUID
         const uuid = uuidv4();
         document.getElementById('uuid').value = uuid;
-    
-        // Inicializar la barra de progreso
-        finalizarBarraProgreso();
-    
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //ENVIAR LOS DATOS DEL FORMULARIO DE LOGIN
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
+
         document.getElementById('LoginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevenir que el formulario se envíe automáticamente
-    
-            // Iniciar la barra de progreso
+            e.preventDefault();
             iniciarBarraProgreso();
             mostrarMensaje("Consultando...");
-    
-            // Obtener valores del formulario
-            var username = document.getElementById('username').value;
-            sessionStorage.setItem('username', username); // Guardar el correo en sessionStorage después del login
-    
+
             const formData = new URLSearchParams(new FormData(e.target));
-            formData.append('action', 'login'); // Indicamos que es una solicitud de login
-    
-            // Enviar la solicitud al backend
-            fetch('https://script.google.com/macros/s/AKfycbyiM06zvZ5MlxdDkIKTb9EbX9rsEPiiTQu07VJYELNdxRfPwQ8iNnQwEkg7T1Cm6pOW/exec', {
+            formData.append('action', 'login');
+
+            fetch('BACKEND_URL/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: formData
             })
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
-                if (data === 'Accepted') {
-                    document.getElementById("responseText").innerText = data;
-                    mostrarMensaje(`¡Bienvenido, ${username}!`, true);
-                    console.log("nombre usuario: ", username);
-    
-                    // Ocultar el formulario de login y mostrar el modal de tokens
+                if (data.status === 'Accepted') {
+                    mostrarMensaje(`¡Bienvenido, ${data.username}!`, true);
+                    sessionStorage.setItem('username', data.username);
                     document.getElementById('LoginForm').style.display = 'none';
                     document.getElementById('tokenModal').style.display = 'block';
-    
-                    // Añadir event listener para el envío del formulario de tokens
-                    document.getElementById('tokenForm').addEventListener('submit', function(event) {
-                        event.preventDefault();
-                        var token1 = document.getElementById('token1').value;
-                        var token2 = document.getElementById('token2').value;
-                        var token3 = document.getElementById('token3').value;
-    
-                        // Obtener el correo del usuario desde sessionStorage
-                        var username = sessionStorage.getItem('username');
-    
-                        const tokenData = new URLSearchParams();
-                        tokenData.append('action', 'verificarToken'); // Indicamos que es una verificación de tokens
-                        tokenData.append('username', username);
-                        tokenData.append('token1', token1);
-                        tokenData.append('token2', token2);
-                        tokenData.append('token3', token3);
-    
-                        // Enviar solicitud para verificar los tokens
-                        fetch('https://script.google.com/macros/s/AKfycbyiM06zvZ5MlxdDkIKTb9EbX9rsEPiiTQu07VJYELNdxRfPwQ8iNnQwEkg7T1Cm6pOW/exec', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: tokenData
-                        })
-                        .then(response => response.text())
-                        .then(tdata => {
-                            if (tdata === 'Token_Accepted') {
-                                console.log('tdata fe: ',tdata)
-                                // Redirigir al usuario a la página principal
-                                /////////////////////////////////////////////////////////////////
-                                // Aqui va el codigo cuando recibe el token de sesión.
-                                sessionStorage.setItem('sessionToken', tdata.sessionToken);//.sessionToken
-                                window.location.href = "https://grupos53140.github.io/Informes/card/s21s.html";
-                                
-                                /////////////////////////////////////////////////////////////////                              
-                                
-                            } else {
-                                alert('Tokens incorrectos (FrontEnd), inténtalo de nuevo.');
-                            }
-                            console.log("(FE)token-mensaje: ", tdata.sessionToken);
-                        });
-                    });
-    
-                } else if (data === 'Not Accepted') {
-                    mostrarMensaje('¡No estás aceptado en el sistema!', false);
                 } else {
-                    mostrarMensaje('¡Usuario no encontrado!', false);
+                    mostrarMensaje('¡Usuario no encontrado o no aceptado!', false);
                 }
-                console.log("data-mensaje: ", data);
             })
-            .catch(error => console.error('catch-Error!', error));
+            .catch(error => console.error('Error:', error));
         });
-    
+
+        document.getElementById('tokenForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const tokenData = new URLSearchParams();
+            tokenData.append('action', 'verificarToken');
+            tokenData.append('username', sessionStorage.getItem('username'));
+            tokenData.append('token1', document.getElementById('token1').value);
+            tokenData.append('token2', document.getElementById('token2').value);
+            tokenData.append('token3', document.getElementById('token3').value);
+
+            fetch('BACKEND_URL/verify-token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: tokenData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'Token_Accepted') {
+                    sessionStorage.setItem('sessionToken', data.sessionToken);
+                    window.location.href = "https://grupos53140.github.io/Informes/card/s21s.html";
+                } else {
+                    alert('Tokens incorrectos, inténtalo de nuevo.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
         function iniciarBarraProgreso() {
             const progressBar = document.getElementById('progress-bar');
             let progreso = 0;
-            const intervalo = 100;
             const idIntervalo = setInterval(() => {
                 progreso += 5;
                 progressBar.style.width = `${progreso}%`;
-                if (progreso >= 100) {
-                    clearInterval(idIntervalo);
-                }
-            }, intervalo);
+                if (progreso >= 100) clearInterval(idIntervalo);
+            }, 100);
         }
-    
-        function finalizarBarraProgreso() {
-            const progressBar = document.getElementById('progress-bar');
-            progressBar.style.transition = 'width 0.5s ease';
-            progressBar.style.width = '0%';
-        }
-    
+
         function mostrarMensaje(mensaje, isSuccess = false) {
             const statusMessage = document.getElementById('status-message');
-            if (isSuccess) {
-                statusMessage.innerHTML = `<span style="color: var(--color-blue-100);">${mensaje} <i class="fas fa-check-circle"></i></span>`;
-            } else {
-                statusMessage.innerHTML = `<span style="color: red;">${mensaje} <i class="fas fa-exclamation-circle"></i></span>`;
-            }
+            statusMessage.innerHTML = isSuccess
+                ? `<span style="color: blue;">${mensaje} ✔️</span>`
+                : `<span style="color: red;">${mensaje} ❌</span>`;
         }
     </script>
-    
 </body>
 </html>
