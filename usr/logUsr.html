@@ -65,6 +65,8 @@
 
     <script>
         const uuid = uuidv4();
+        const urlWeb='https://script.google.com/macros/s/AKfycby3pF-1Owa5GHO22JydV4RJHLewILfzOBojpZLPKm-DXYiMcGSNovjx3Xb1EBOWkPBc/exec';
+        
         document.getElementById('uuid').value = uuid;
 
         document.getElementById('LoginForm').addEventListener('submit', function(e) {
@@ -75,7 +77,7 @@
             const formData = new URLSearchParams(new FormData(e.target));
             formData.append('action', 'login');
 
-            fetch('BACKEND_URL/login', {
+            fetch(urlWeb, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -103,7 +105,7 @@
             tokenData.append('username', sessionStorage.getItem('username'));
             tokenData.append('token', document.getElementById('token').value);
            
-            fetch('BACKEND_URL/verify-token', {
+            fetch(urlWeb, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
