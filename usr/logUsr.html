@@ -101,7 +101,7 @@
             const tokenData = new URLSearchParams();
             tokenData.append('action', 'verificarToken');
             tokenData.append('username', sessionStorage.getItem('username'));
-            tokenData.append('token1', document.getElementById('token').value);
+            tokenData.append('token', document.getElementById('token').value);
            
             fetch('BACKEND_URL/verify-token', {
                 method: 'POST',
