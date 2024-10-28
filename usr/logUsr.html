@@ -52,12 +52,10 @@
     <div id="tokenModal" class="modal" style="display: none; text-align: center;">
         <div class="modal-content">
             <h4>Verificación de acceso</h4>
-            <p>Por favor ingresa los tres códigos enviados a tu correo:</p>
+            <p>Por favor ingresa el código enviado a tu correo:</p>
             <p>Caducan en 10 minutos:</p>
             <form id="tokenForm">
-                <input type="text" id="token1" placeholder="Token 1" required>
-                <input type="text" id="token2" placeholder="Token 2" required>
-                <input type="text" id="token3" placeholder="Token 3" required>
+                <input type="text" id="token" placeholder="Token" required>
                 <button type="submit">Verificar</button>
             </form>
         </div>
@@ -103,10 +101,8 @@
             const tokenData = new URLSearchParams();
             tokenData.append('action', 'verificarToken');
             tokenData.append('username', sessionStorage.getItem('username'));
-            tokenData.append('token1', document.getElementById('token1').value);
-            tokenData.append('token2', document.getElementById('token2').value);
-            tokenData.append('token3', document.getElementById('token3').value);
-
+            tokenData.append('token1', document.getElementById('token').value);
+           
             fetch('BACKEND_URL/verify-token', {
                 method: 'POST',
                 headers: {
