@@ -55,7 +55,7 @@
             <p>Por favor ingresa el código enviado a tu correo:</p>
             <p>Caducan en 10 minutos:</p>
             <form id="tokenForm">
-                <input type="text" id="token" placeholder="Token" required>
+                <input type="text" id="token" name="token" maxlength="6" pattern="\d{6}" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);"  />
                 <button type="submit">Verificar</button>
             </form>
         </div>
@@ -84,17 +84,18 @@
                 },
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => response.text())  // Cambiar de .json() a .text()
             .then(data => {
-                if (data.status === 'Accepted') {
-                    mostrarMensaje(`¡Bienvenido, ${data.username}!`, true);
-                    sessionStorage.setItem('username', data.username);
+                if (data === 'Accepted') {
+                    mostrarMensaje(`¡Bienvenido, ${formData.get('username')}!`, true);
+                    sessionStorage.setItem('username', formData.get('username'));
                     document.getElementById('LoginForm').style.display = 'none';
                     document.getElementById('tokenModal').style.display = 'block';
                 } else {
                     mostrarMensaje('¡Usuario no encontrado o no aceptado!', false);
                 }
             })
+
             .catch(error => console.error('Error:', error));
         });
 
@@ -112,13 +113,13 @@
                 },
                 body: tokenData
             })
-            .then(response => response.json())
+            .then(response => response.text())  // Cambiar de .json() a .text()
             .then(data => {
-                if (data.status === 'Token_Accepted') {
-                    sessionStorage.setItem('sessionToken', data.sessionToken);
+                if (data === 'Token_Accepted') {
+                    sessionStorage.setItem('sessionToken', 'sessionToken');
                     window.location.href = "https://grupos53140.github.io/Informes/card/s21s.html";
                 } else {
-                    alert('Tokens incorrectos, inténtalo de nuevo.');
+                    alert('Token incorrecto, inténtalo de nuevo.');
                 }
             })
             .catch(error => console.error('Error:', error));
